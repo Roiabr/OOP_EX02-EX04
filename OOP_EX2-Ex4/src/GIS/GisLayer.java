@@ -1,33 +1,36 @@
 package GIS;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class GisLayer implements GIS_layer {
+	HashSet<GIS_element> gte=new HashSet<GIS_element>();
+
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return gte.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return false;
+		return gte.isEmpty();
 	}
 
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
-		System.out.println("Gal");
-		return false;
+		return gte.contains(o);
 	}
 
 	@Override
 	public Iterator<GIS_element> iterator() {
 		// TODO Auto-generated method stub
-		return null;
+		return gte.iterator();
 	}
 
 	@Override
@@ -45,37 +48,39 @@ public class GisLayer implements GIS_layer {
 	@Override
 	public boolean add(GIS_element e) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		return gte.add(e);
 	}
 
 	@Override
 	public boolean remove(Object o) {
 		// TODO Auto-generated method stub
-		return false;
+
+		return gte.remove(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gte.containsAll(c);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_element> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gte.addAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gte.retainAll(c);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gte.removeAll(c);
 	}
 
 	@Override
