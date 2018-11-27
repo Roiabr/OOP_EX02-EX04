@@ -1,26 +1,28 @@
 package GIS;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class GisProject implements GIS_project {
+	HashSet<GIS_layer> gp=new HashSet<GIS_layer>();
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return gp.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.isEmpty();
 	}
 
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.contains(o);
 	}
 
 	@Override
@@ -44,43 +46,43 @@ public class GisProject implements GIS_project {
 	@Override
 	public boolean add(GIS_layer e) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.add(e);
 	}
 
 	@Override
 	public boolean remove(Object o) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.remove(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.containsAll(c);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends GIS_layer> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.addAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.retainAll(c);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		// TODO Auto-generated method stub
-		return false;
+		return gp.removeAll(c);
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-
+		gp.clear();
 	}
 
 	@Override
