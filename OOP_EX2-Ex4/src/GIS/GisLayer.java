@@ -20,6 +20,7 @@ public class GisLayer implements GIS_layer {
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
+		System.out.println("Gal");
 		return false;
 	}
 
