@@ -14,7 +14,7 @@ public class geomElement implements Geom_element {
 	public Point3D getNewpoint() {
 		return newpoint;
 	}
-
+	
 	@Override
 	public double distance3D(Point3D p) {
 		
@@ -31,6 +31,13 @@ public class geomElement implements Geom_element {
 	@Override
 	public String toString() {
 		return newpoint.x() + "," + newpoint.y();
+	}
+
+	@Override
+	public void setNewpoint(Point3D p) {
+		// TODO Auto-generated method stub
+		newpoint = p;
+		
 	}
 
 }
