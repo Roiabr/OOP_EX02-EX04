@@ -11,8 +11,8 @@ public class MyCoords implements coords_converter {
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		// TODO Auto-generated method stub
 		double radianXV = Math.asin(local_vector_in_meter.x()  / earthRadios) ;
-		double radianYV = Math.asin(local_vector_in_meter.y() / earthRadios * LonNorm);
-		double radianX = (gps.x() *Math.PI) / 180;
+		double radianYV = Math.asin(local_vector_in_meter.y() /( earthRadios * LonNorm));
+		double radianX = (gps.x() * Math.PI) / 180;
 		double radianY = (gps.y() * Math.PI) /180;
 		double sumRX = (radianX + radianXV) * 180/Math.PI;
 		double sumRY = (radianY + radianYV) * 180/Math.PI;
@@ -26,7 +26,6 @@ public class MyCoords implements coords_converter {
 		// TODO Auto-generated method stub
 		double diffLat = (gps1.x() - gps0.x());
 		double diffLon = (gps1.y() - gps0.y());
-		double diffAlt = gps1.z() - gps0.z();
 		double diff_radianX = ((diffLat * Math.PI)/180);
 		double diff_radianY = ((diffLon * Math.PI)/180);
 		double toMeterX = Math.sin(diff_radianX) * earthRadios;
@@ -64,19 +63,20 @@ public class MyCoords implements coords_converter {
 	    brng = (((double)brng + 360) % 360 );
 	    MyCoords c1 = new MyCoords();
 	    double dis = c1.distance3d(gps0, gps1);
-	    double ev = Math.atan2((gps1.z()-gps0.z()),dis);
+	    double high = gps1.z()-gps0.z();
+	    double eleveation = Math.toDegrees(Math.asin(high/dis));
 	    azi[0] = brng;
-	    azi[1] = ev;
-	    azi[2] = c1.distance3d(gps0, gps1);
+	    azi[1] = eleveation;
+	    azi[2] = dis;
 	    return azi;
 	}
 
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		return ((p.x() > -180 && p.x() < 180) && (p.y() > -90 && p.y() < 90) && (p.z()>-450));
 	}
 
 
-//	
 }

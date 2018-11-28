@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -62,9 +63,7 @@ public class CSVReader {
 
 		return Pro;
 	}
-	public static void multicsv(String name) {
-		File[] files= Directory.li
-	}
+
 	public static void Layer2Kml(GisLayer layer,String output) throws IOException {
 
 		StringBuilder sB = new StringBuilder();
