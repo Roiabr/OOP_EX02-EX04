@@ -2,25 +2,42 @@ package GIS;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.*;
+import java.sql.Timestamp;
+
+import org.json.simple.parser.ParseException;
+
+
 import Geom.Point3D;
 
 public class MetaData implements Meta_data {
 	String [] CSVfile;
 	
-
+	
 	/**
 	 * counstrctor 
 	 * @param s - the whole line that holds the infromtion
 	 */
 	public MetaData(String [] s) {
 		CSVfile = s;
-
+	
 	}
 
 	@Override
 	public long getUTC() {
-		// TODO Auto-generated method stub
-		return 1;
+	//	String s="01/12/2017 10:32:20";
+		Date d = null;
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(CSVfile[3]);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 Timestamp GA= new Timestamp(d.getTime());
+		long ts =(long)GA.getTime();
+		return ts;
 	}
 
 	/**
@@ -28,13 +45,16 @@ public class MetaData implements Meta_data {
 	 */
 	@Override
 	public String toString() {
-		return "MetaData:" +
+		MetaData mat = new MetaData(CSVfile);
+		return 
 				"BSSID: "+CSVfile[0]+"\n"+
-				"Capabilities: "+CSVfile[2]+"\n"+
-				"Frequency: "+CSVfile[4]+"\n"+
-				"RSSI: "+CSVfile[5]+"\n"+
-				"Type: " +CSVfile[10];	
-
+				"<b>Capabilities: </b>"+CSVfile[2]+"<br>"+
+				"<b>Frequency: </b>"+CSVfile[4]+"<br></br>"+
+				"<b>RSSI: </b>"+CSVfile[5]+"<br></br>"+
+				"<b>Type:</b> " +CSVfile[10]+ "<br></br>" +
+				"<b>date: </b>" + CSVfile[3]+ "<br></br>" +
+				"<b>timeStamp:</b>" + mat.getUTC();	
+				
 	}
 
 	@Override

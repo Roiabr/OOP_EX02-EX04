@@ -28,4 +28,9 @@ public class geomElement implements Geom_element {
 		return newpoint.distance2D(p);
 	}
 
+	@Override
+	public String toString() {
+		return newpoint.x() + "," + newpoint.y();
+	}
+
 }

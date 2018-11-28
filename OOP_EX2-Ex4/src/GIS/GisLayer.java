@@ -3,11 +3,24 @@ package GIS;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+
+import Geom.Geom_element;
+
 
 public class GisLayer implements GIS_layer {
 	HashSet<GIS_element> gte=new HashSet<GIS_element>();
+	String namePath;
+	public String getNamePath() {
+		return namePath;
+	}
 
+	
+	public GisLayer(String name) {
+		// TODO Auto-generated constructor stub
+		namePath = name;
+	}
+
+	
 
 	@Override
 	public int size() {
@@ -86,13 +99,19 @@ public class GisLayer implements GIS_layer {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
+		gte.clear();
 
 	}
 
 	@Override
 	public Meta_data get_Meta_data() {
-		// TODO Auto-generated method stub
+		
 		return null;
+		
+		
 	}
-
+	
+	public static void main(String[] args) {
+		
+	}
 }

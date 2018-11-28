@@ -1,11 +1,5 @@
 package GIS;
 
-
-
-
-
-
-
 import Geom.Geom_element;
 import Geom.Point3D;
 import Geom.geomElement;
@@ -15,6 +9,7 @@ public class GisToElement implements GIS_element {
 	geomElement Point;
 	MetaData data;
 	String name;
+	
 	public GisToElement(String[] a) {
 		Gis = a;
 		data = new MetaData(Gis);
@@ -36,7 +31,7 @@ public class GisToElement implements GIS_element {
 		return data;
 	}
 
-	public String getName() {
+	public String toString() {
 		return name;
 	}
 

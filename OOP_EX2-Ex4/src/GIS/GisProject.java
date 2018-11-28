@@ -4,9 +4,18 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
+
+
 public class GisProject implements GIS_project {
 	HashSet<GIS_layer> gp=new HashSet<GIS_layer>();
-
+	String path;
+	public GisProject(String a) {
+		// TODO Auto-generated constructor stub
+		path = a;
+	} 
+	public String getPath() {
+		return path;
+	}
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
@@ -28,7 +37,7 @@ public class GisProject implements GIS_project {
 	@Override
 	public Iterator<GIS_layer> iterator() {
 		// TODO Auto-generated method stub
-		return null;
+		return gp.iterator();
 	}
 
 	@Override
