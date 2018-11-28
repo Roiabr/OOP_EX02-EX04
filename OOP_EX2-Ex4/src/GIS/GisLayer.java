@@ -49,13 +49,13 @@ public class GisLayer implements GIS_layer {
 	@Override
 	public Object[] toArray() {
 		// TODO Auto-generated method stub
-		return null;
+		return gte.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
-		return null;
+		return gte.toArray(a);
 	}
 
 	@Override
@@ -111,7 +111,5 @@ public class GisLayer implements GIS_layer {
 		
 	}
 	
-	public static void main(String[] args) {
-		
-	}
+	
 }

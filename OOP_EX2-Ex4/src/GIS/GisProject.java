@@ -43,13 +43,13 @@ public class GisProject implements GIS_project {
 	@Override
 	public Object[] toArray() {
 		// TODO Auto-generated method stub
-		return null;
+		return gp.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
-		return null;
+		return gp.toArray(a);
 	}
 
 	@Override
