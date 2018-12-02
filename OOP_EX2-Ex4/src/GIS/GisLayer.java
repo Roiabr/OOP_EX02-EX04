@@ -10,16 +10,18 @@ import Geom.Geom_element;
 public class GisLayer implements GIS_layer {
 	HashSet<GIS_element> gte=new HashSet<GIS_element>();
 	String namePath;
+	MetaDataLayer layerdata;
 	public String getNamePath() {
 		return namePath;
+		
 	}
 
 	
 	public GisLayer(String name) {
 		// TODO Auto-generated constructor stub
 		namePath = name;
+		layerdata = new MetaDataLayer(name);
 	}
-
 	
 
 	@Override
@@ -103,13 +105,15 @@ public class GisLayer implements GIS_layer {
 
 	}
 
+
 	@Override
 	public Meta_data get_Meta_data() {
-		
-		return null;
-		
-		
+		// TODO Auto-generated method stub
+		return layerdata;
 	}
+
+	
+	
 	
 	
 }

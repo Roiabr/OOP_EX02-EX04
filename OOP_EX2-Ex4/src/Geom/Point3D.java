@@ -243,4 +243,10 @@ public final static int DOWN = 6, UP = 7;
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void setNewpoint(Point3D p1) {
+		// TODO Auto-generated method stub
+		
+	}
 }

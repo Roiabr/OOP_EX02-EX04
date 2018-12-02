@@ -39,11 +39,11 @@ public class GisToElement implements GIS_element {
 	@Override
 	public void translate(Point3D vec) {
 		// TODO Auto-generated method stub
-		GisToElement ele = new GisToElement(Gis);
 		MyCoords c1 = new MyCoords();
-		Point3D p1 = ele.getGeom().getNewpoint();
+		Point3D p1 = this.getGeom().getNewpoint();
 		Point3D p2 = c1.add(p1, vec);
-		ele.getGeom().setNewpoint(p2); 
+		this.getGeom().setNewpoint(p2); 
 
 	}	
+	
 }

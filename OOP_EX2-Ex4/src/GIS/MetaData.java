@@ -24,10 +24,12 @@ public class MetaData implements Meta_data {
 		CSVfile = s;
 	
 	}
-
+	/**
+	 * this is a mathod that get a data and change it to a timestamp
+	 * @return ts = the timestamp
+	 */
 	@Override
 	public long getUTC() {
-	//	String s="01/12/2017 10:32:20";
 		Date d = null;
 		try {
 			d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(CSVfile[3]);
@@ -47,12 +49,12 @@ public class MetaData implements Meta_data {
 	public String toString() {
 		MetaData mat = new MetaData(CSVfile);
 		return 
-				"BSSID: "+CSVfile[0]+"\n"+
-				"<b>Capabilities: </b>"+CSVfile[2]+"<br>"+
-				"<b>Frequency: </b>"+CSVfile[4]+"<br></br>"+
-				"<b>RSSI: </b>"+CSVfile[5]+"<br></br>"+
-				"<b>Type:</b> " +CSVfile[10]+ "<br></br>" +
-				"<b>date: </b>" + CSVfile[3]+ "<br></br>" +
+				"<b>BSSID: </b>"+CSVfile[0]+"<br></br>"+
+				"<b>Capabilities:</b>"+CSVfile[2]+"<br></br>"+"\n"+
+				"<b>Frequency: </b>"+CSVfile[4]+"<br></br>"+"\n"+
+				"<b>RSSI: </b>"+CSVfile[5]+"<br></br>"+"\n"+
+				"<b>Type:</b> " +CSVfile[10]+ "<br></br>" +"\n"+
+				"<b>date: </b>" + CSVfile[3]+ "<br></br>"+
 				"<b>timeStamp:</b>" + mat.getUTC();	
 				
 	}
