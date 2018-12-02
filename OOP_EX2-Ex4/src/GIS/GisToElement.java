@@ -23,6 +23,10 @@ public class GisToElement implements GIS_element {
 
 	}
 	
+	public String[] getGis() {
+		return Gis;
+	}
+
 	/**
 	 * the method return the geomtry things of the element
 	 */
