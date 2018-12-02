@@ -19,7 +19,7 @@ import GIS.GisToElement;
 
 
 public class CSVReader {
-//	File g;
+	//	File g;
 
 	public static GisLayer Csv2Layer(String place) {
 		String line = "";
@@ -42,13 +42,13 @@ public class CSVReader {
 			e.printStackTrace();
 
 		}
-		System.out.println("gal");
+
 		return layer;
 	}
 
 
 	public static void main(String[] args) throws IOException {
-		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04\\data"); // current directory
+		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data"); // current directory
 		project2kml(currentDir);
 	}
 	public static void project2kml(File dir) throws IOException {
@@ -56,12 +56,12 @@ public class CSVReader {
 
 		displayDirectoryContents( dir, pro);
 		Project2Kml(pro, dir.getPath());
+		System.out.println(pro.get_Meta_data());
 
 
-		
 	}
 
-	
+
 
 	public static void displayDirectoryContents(File dir, GisProject PRO) {
 		try {
@@ -128,7 +128,7 @@ public class CSVReader {
 		sB.append( "</Document>\n");
 		sB.append("</kml>");
 		PrintWriter pw = null;
-		String fileName = output + "projectKml" + ".kml";
+		String fileName = output + "ProjectKml" + ".kml";
 		try {
 			pw = new PrintWriter(new FileWriter(fileName));
 		}

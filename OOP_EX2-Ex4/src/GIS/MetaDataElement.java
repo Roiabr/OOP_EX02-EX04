@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 import Geom.Point3D;
 
-public class MetaData implements Meta_data {
+public class MetaDataElement implements Meta_data {
 	String [] CSVfile;
 	
 	
@@ -20,7 +20,7 @@ public class MetaData implements Meta_data {
 	 * counstrctor 
 	 * @param s - the whole line that holds the infromtion
 	 */
-	public MetaData(String [] s) {
+	public MetaDataElement(String [] s) {
 		CSVfile = s;
 	
 	}
@@ -47,7 +47,7 @@ public class MetaData implements Meta_data {
 	 */
 	@Override
 	public String toString() {
-		MetaData mat = new MetaData(CSVfile);
+		MetaDataElement mat = new MetaDataElement(CSVfile);
 		return 
 				"<b>BSSID: </b>"+CSVfile[0]+"<br></br>"+
 				"<b>Capabilities:</b>"+CSVfile[2]+"<br></br>"+"\n"+

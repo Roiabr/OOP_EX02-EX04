@@ -8,12 +8,12 @@ import Geom.geomElement;
 public class GisToElement implements GIS_element {
 	String[] Gis;
 	geomElement Point;
-	MetaData data;
+	MetaDataElement data;
 	String name;
 
 	public GisToElement(String[] a) {
 		Gis = a;
-		data = new MetaData(Gis);
+		data = new MetaDataElement(Gis);
 		Point = new geomElement(Gis);
 		name = Gis[1];
 

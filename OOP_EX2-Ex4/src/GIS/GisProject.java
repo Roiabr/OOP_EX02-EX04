@@ -9,9 +9,11 @@ import java.util.Iterator;
 public class GisProject implements GIS_project {
 	HashSet<GIS_layer> gp=new HashSet<GIS_layer>();
 	String path;
+	MetaDataProject projectName;
 	public GisProject(String a) {
 		// TODO Auto-generated constructor stub
 		path = a;
+		projectName = new MetaDataProject(a);
 	} 
 	public String getPath() {
 		return path;
@@ -97,7 +99,7 @@ public class GisProject implements GIS_project {
 	@Override
 	public Meta_data get_Meta_data() {
 		// TODO Auto-generated method stub
-		return null;
+		return projectName;
 	}
 
 }

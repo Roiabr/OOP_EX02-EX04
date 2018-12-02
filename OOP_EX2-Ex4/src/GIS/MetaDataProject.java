@@ -12,8 +12,7 @@ public class MetaDataProject implements Meta_data {
 	public MetaDataProject(String name) {
 		// TODO Auto-generated constructor stub
 	
-		String[] slas = name.split("\\\\");
-		this.NameProject = slas[slas.length -1];
+		this.NameProject = "ProjectKml";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();
 		this.time = dtf.format(now);
