@@ -1,17 +1,30 @@
 package GIS;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
+
+
 import Geom.Point3D;
 
 public class MetaDataLayer implements Meta_data {
 	String NameLayer;
+	String time;
 	
 	public MetaDataLayer(String name) {
 		// TODO Auto-generated constructor stub
-		this.NameLayer = name;
+	
+		String[] slas = name.split("\\\\");
+		this.NameLayer = slas[slas.length -1];
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		this.time = dtf.format(now);
 	}
 	@Override
 	public String toString() {
-		return "MetaDataLayer [NameLayer=" + NameLayer + "]";
+		return "MetaDataLayer: [NameLayer:" + NameLayer +"\n" + "time:" + time + "]";
 	}
 
 	@Override
