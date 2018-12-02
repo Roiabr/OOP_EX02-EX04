@@ -18,7 +18,7 @@ import GIS.GisProject;
 import GIS.GisToElement;
 
 
-public class CSVReader {
+public class MultiCsv {
 	//	File g;
 
 	public static GisLayer Csv2Layer(String place) {
@@ -47,10 +47,7 @@ public class CSVReader {
 	}
 
 
-	public static void main(String[] args) throws IOException {
-		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data"); // current directory
-		project2kml(currentDir);
-	}
+	
 	public static void project2kml(File dir) throws IOException {
 		GisProject pro = new GisProject(dir.getPath());
 
@@ -142,6 +139,10 @@ public class CSVReader {
 		System.out.println("done");
 
 
+	}
+	public static void main(String[] args) throws IOException {
+		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data"); // current directory
+		project2kml(currentDir);
 	}
 
 
