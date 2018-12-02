@@ -11,7 +11,7 @@ public class GisLayer implements GIS_layer {
 	HashSet<GIS_element> LayerSet=new HashSet<GIS_element>();
 	String namePath;
 	MetaDataLayer layerdata;
-	
+
 	/**
 	 * a constructor for the class
 	 * @param name - the name  for the layer(the path)
@@ -21,7 +21,7 @@ public class GisLayer implements GIS_layer {
 		namePath = name;
 		layerdata = new MetaDataLayer(name);
 	}
-	
+
 
 	@Override
 	public int size() {
@@ -62,7 +62,7 @@ public class GisLayer implements GIS_layer {
 	@Override
 	public boolean add(GIS_element e) {
 		// TODO Auto-generated method stub
-		
+
 		return LayerSet.add(e);
 	}
 
@@ -103,7 +103,7 @@ public class GisLayer implements GIS_layer {
 		LayerSet.clear();
 
 	}
-	
+
 	/**
 	 * the method return the metaDate of the layer like name
 	 * @return layerdata - the metaData
@@ -113,5 +113,5 @@ public class GisLayer implements GIS_layer {
 		// TODO Auto-generated method stub
 		return layerdata;
 	}
-	
+
 }

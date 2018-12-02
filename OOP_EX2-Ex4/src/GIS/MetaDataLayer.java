@@ -13,6 +13,10 @@ public class MetaDataLayer implements Meta_data {
 	String NameLayer;
 	String time;
 	
+	/**
+	 * a constructor for the metaDate for the layer
+	 * @param name - the name for the layer
+	 */
 	public MetaDataLayer(String name) {
 		// TODO Auto-generated constructor stub
 	
@@ -22,6 +26,8 @@ public class MetaDataLayer implements Meta_data {
 		LocalDateTime now = LocalDateTime.now();
 		this.time = dtf.format(now);
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "MetaDataLayer: [NameLayer:" + NameLayer +"\n" + "time:" + time + "]";
