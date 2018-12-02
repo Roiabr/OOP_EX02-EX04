@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="File_format.CSVReader" project="OOP_EX02-EX04 - Copy" 
-    file="/OOP_EX02-EX04 - Copy/OOP_EX2-Ex4/src/File_format/CSVReader.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="File_format.MultiCsv" project="OOP_EX02-EX04 - Copy" 
+    file="/OOP_EX02-EX04 - Copy/OOP_EX2-Ex4/src/File_format/MultiCsv.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="277" y="178"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

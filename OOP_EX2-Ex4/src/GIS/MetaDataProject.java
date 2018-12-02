@@ -9,14 +9,18 @@ public class MetaDataProject implements Meta_data {
 	String NameProject;
 	String time;
 	
+	/**
+	 * a constructor for the metaDate for the project
+	 * @param name - the name for the project
+	 */
 	public MetaDataProject(String name) {
 		// TODO Auto-generated constructor stub
-	
 		this.NameProject = "ProjectKml";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();
 		this.time = dtf.format(now);
 	}
+	
 	@Override
 	public String toString() {
 		return "MetaDataLayer: [NameLayer:" + NameProject +"\n" + "time:" + time + "]";

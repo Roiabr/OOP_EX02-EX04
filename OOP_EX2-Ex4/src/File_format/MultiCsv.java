@@ -19,8 +19,12 @@ import GIS.GisToElement;
 
 
 public class MultiCsv {
-	//	File g;
-
+	
+	/**
+	 * this method get a csv file and formet it to a leyer object
+	 * @param place - the path of the csv file
+	 * @return layer - the layer object from the csv file
+	 */
 	public static GisLayer Csv2Layer(String place) {
 		String line = "";
 		String cvsSplitBy = ",";
@@ -47,10 +51,13 @@ public class MultiCsv {
 	}
 
 
-	
-	public static void project2kml(File dir) throws IOException {
+	/**
+	 * the method get a project object with couple of layers and convert it to kml
+	 * @param dir - the project
+	 * @throws IOException - if cant find any folder
+	 */
+	public static void RecusiveFile(File dir) throws IOException {
 		GisProject pro = new GisProject(dir.getPath());
-
 		displayDirectoryContents( dir, pro);
 		Project2Kml(pro, dir.getPath());
 		System.out.println(pro.get_Meta_data());
@@ -59,7 +66,11 @@ public class MultiCsv {
 	}
 
 
-
+	/**
+	 * the method run over the folder and find all the layers and add it to project object
+	 * @param dir - the folder with files and subFolders
+	 * @param PRO - the project object 
+	 */
 	public static void displayDirectoryContents(File dir, GisProject PRO) {
 		try {
 			File[] files = dir.listFiles();
@@ -84,8 +95,13 @@ public class MultiCsv {
 	}
 
 
-
-
+	
+	/**
+	 * the method get a project with layer and covert it to one kml file
+	 * @param project - the project with layers
+	 * @param output - the place that will create a new kml file
+	 * @throws IOException - cant create the file
+	 */
 	public static void Project2Kml(GisProject project,String output) throws IOException {
 
 		StringBuilder sB = new StringBuilder();
@@ -142,7 +158,7 @@ public class MultiCsv {
 	}
 	public static void main(String[] args) throws IOException {
 		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data"); // current directory
-		project2kml(currentDir);
+		RecusiveFile(currentDir);
 	}
 
 

@@ -5,7 +5,7 @@ public class geomElement implements Geom_element {
 	Point3D newpoint;
 	
 	/**
-	 * a constrctur for geomElement
+	 * a constrctor for geomElement
 	 * @param s - an array of string that has the information for the element
 	 */
 	public geomElement(String [] s) {
@@ -31,6 +31,7 @@ public class geomElement implements Geom_element {
 		newpoint = p;
 		
 	}
+	
 	/**
 	 * this method compute the distance betwneen the element coordinates and a diffrent coordinates
 	 * @param p - a coordinats 
@@ -41,6 +42,7 @@ public class geomElement implements Geom_element {
 		
 		return newpoint.distance3D(p);
 	}
+	
 	/**
 	 * this method compute the distance in 2D betwneen the element coordinates and a diffrent coordinates
 	 * @param p - a coordinats 
@@ -51,6 +53,7 @@ public class geomElement implements Geom_element {
 	
 		return newpoint.distance2D(p);
 	}
+	
 	/**
 	 * print the x and y valus of the coordinates
 	 */

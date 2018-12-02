@@ -43,7 +43,7 @@ public class MetaDataElement implements Meta_data {
 	}
 
 	/**
-	 * print all the metadata of the line 
+	 * the method print all the metadata of the element 
 	 */
 	@Override
 	public String toString() {

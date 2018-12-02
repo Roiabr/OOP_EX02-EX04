@@ -6,6 +6,7 @@ public class MyCoords implements coords_converter {
 	
 	final double earthRadios = 6371000;
 	final double LonNorm = 0.847091174;
+	
 	/**
 	 * this methud get a point gps and a vector and return a new point gps 
 	 * @param gps - a coordinats on the map
@@ -47,7 +48,7 @@ public class MyCoords implements coords_converter {
 	 * this method get two coordinats and find the vector 
 	 * @param gps0 - a coordinats on the map
 	 * @param gps1 - a second coordinats on the map
-	 * @return vector - the vector
+	 * @return vector - the vector of two coordinats
 	 */
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
@@ -91,6 +92,7 @@ public class MyCoords implements coords_converter {
 	    AziElevDist[2] = dis;
 	    return AziElevDist;
 	}
+	
 	/**
 	 * this method check if a coordinats is valid 
 	 * @param gps0 - a coordinats on the map 
