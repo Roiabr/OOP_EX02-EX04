@@ -33,7 +33,6 @@ class Junit {
 	void testVector3D() {
 		Point3D p1 = new Point3D(32.103315, 35.209039, 670);
 		Point3D p2 = new Point3D(32.2352, 35.20225, 650);
-		Point3D p3 = new Point3D(0, 0, 0);
 		MyCoords  C1  = new MyCoords();
 		Point3D vector = C1.vector3D(p1, p2);
 		System.out.println(C1.vector3D(p1, p2));
