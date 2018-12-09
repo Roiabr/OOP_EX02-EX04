@@ -13,25 +13,28 @@ public class JFrmaeGraphics extends JPanel{
 
 
 	public void paint(Graphics g){
-		// Image image = Toolkit.getDefaultToolkit().getImage("example.jpg");
+		Image image = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Roi Abramovitch\\Desktop\\ariel1.png");
 			int w = this.getWidth();
 			int h = this.getHeight();
 			 g.setColor(Color.red);
-			 g.fillOval(w/3, h/3, w/3, h/3);
+			
 			g.setColor(Color.blue);
-			String s = " ["+w+","+h+"]";
-		    g.drawString(s, w/3, h/2);
+			
+		    g.drawImage(image, 0,0,this);
 		   
 		    
 	}
 	
 	public static void main(String[] args){
-		JFrame frame= new JFrame("JavaTutorial.net");	
+		JFrame frame= new JFrame("Gui.net");
+		
 		frame.getContentPane().add(new JFrmaeGraphics());
 		frame.setSize(300, 300);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
-		frame.setName("JFrame example");
+		
+	
+		//frame.setName("JFrame example");
 	}
 }
