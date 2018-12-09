@@ -10,9 +10,9 @@ public class geomElement implements Geom_element {
 	 */
 	public geomElement(String [] s) {
 		CSVfile = s;
-		double xP = Double.parseDouble(CSVfile[7]);
-		double yP = Double.parseDouble(CSVfile[6]);
-		double zP = Double.parseDouble(CSVfile[8]);
+		double xP = Double.parseDouble(CSVfile[2]);
+		double yP = Double.parseDouble(CSVfile[3]);
+		double zP = Double.parseDouble(CSVfile[4]);
 		newpoint = new Point3D(xP, yP, zP);
 	}
 	/**

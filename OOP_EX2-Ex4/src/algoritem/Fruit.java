@@ -9,12 +9,19 @@ import javafx.scene.paint.Color;
 
 public class Fruit {
 	boolean life=true;
-	Packman whoEat;
+	
 	Point3D pointer_fruit;
 	String type,idfruit,we;
 	Color g;
 	GIS_element gep;
+	long timeStamp;
 
+	public long getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 	public Fruit() {
 		// TODO Auto-generated constructor stub
 	}
@@ -24,6 +31,7 @@ public class Fruit {
 		this.idfruit=ele[1];
 		this.pointer_fruit=gep.getGeom().getNewpoint();
 		this.we=ele[5];
+		this.timeStamp = 0;
 
 	}
 	public Fruit(Point3D pf) {
@@ -45,12 +53,8 @@ public class Fruit {
 	public void setLife(boolean life) {
 		this.life = life;
 	}
-	public Packman getWhoEat() {
-		return whoEat;
-	}
-	public void setWhoEat(Packman whoEat) {
-		this.whoEat = whoEat;
-	}
+	
+	
 	public Point3D getPointer_fruit() {
 		return pointer_fruit;
 	}

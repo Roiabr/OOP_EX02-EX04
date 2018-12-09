@@ -16,10 +16,11 @@ import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
+import GUI.gi;
 
 
 public class MultiCsv {
-	
+
 	/**
 	 * this method get a csv file and formet it to a leyer object
 	 * @param place - the path of the csv file
@@ -95,7 +96,7 @@ public class MultiCsv {
 	}
 
 
-	
+
 	/**
 	 * the method get a project with layer and covert it to one kml file
 	 * @param project - the project with layers
@@ -156,9 +157,62 @@ public class MultiCsv {
 
 
 	}
+	public static void layer2csv(GisLayer layer,String output) {
+		String fileName = output + ".csv";
+		PrintWriter pw = null;
+
+		try 
+		{
+			pw = new PrintWriter(new File(fileName));
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+			return;
+		}
+		StringBuilder sb = new StringBuilder();
+		Iterator <GIS_element> iter = layer.iterator();
+		sb.append("id");
+		sb.append(',');
+		sb.append("Name");
+		sb.append(',');
+		sb.append("lat");
+		sb.append(',');
+		sb.append("lon");
+		sb.append(',');
+		sb.append("alt");
+		sb.append(',');
+		sb.append("Speed/Weight");
+		sb.append(',');
+		sb.append("Radius");
+		sb.append('\n');
+
+		while(iter.hasNext()) {
+			GIS_element ele = iter.next();
+
+		
+			
+			sb.append(ele.toString());
+			sb.append(',');
+			sb.append(ele.toString());
+			sb.append(',');
+			sb.append(ele.getGeom().getNewpoint().x());
+			sb.append(',');
+			sb.append(ele.getGeom().getNewpoint().y());
+			sb.append(',');
+			sb.append(ele.getGeom().getNewpoint().z());
+			sb.append(',');
+			sb.append('\n');
+		}
+		pw.write(sb.toString());
+		pw.close();
+		System.out.println("done!");
+	}
+
 	public static void main(String[] args) throws IOException {
-		File currentDir = new File("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data"); // current directory
-		RecusiveFile(currentDir);
+		//File currentDir = new File("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657"); // current directory
+		GisLayer layer = Csv2Layer("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657.csv");
+		layer2csv(layer, "C:\\Users\\Gal\\Desktop\\nykv nubjv\\data"); 
 	}
 
 

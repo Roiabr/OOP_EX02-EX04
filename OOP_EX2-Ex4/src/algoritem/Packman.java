@@ -10,11 +10,13 @@ import javafx.scene.paint.Color;
 
 public class Packman {
 
-	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
+	ArrayList<Fruit> fruiteat= new ArrayList<Fruit>();
 	String IDpack;
 	GIS_element gep;
 	Point3D pointer_packmen;
 	String speed,radiuos,type;
+	double time;
+	
 	
 
 
@@ -30,18 +32,20 @@ public class Packman {
 		this.pointer_packmen =gep.getGeom().getNewpoint();
 		this.speed=ele[5];
 		this.radiuos=ele[6];
+		time =0;
 
 	}
 	public int size() {
 		int count=0;
-		while(this.Fruit.iterator().hasNext()) {
+		while(this.fruiteat.iterator().hasNext()) {
 			count++;
 		}
 		return count;
 	}
 	
 	public void ToEat(Fruit g) {
-		this.Fruit.add(g);
+		
+		this.fruiteat.add(g);
 	}
 	
 	public static void main(String []args) {
@@ -54,10 +58,10 @@ public class Packman {
 		return pointer_packmen;
 	}
 	public ArrayList<Fruit> getFruit() {
-		return Fruit;
+		return fruiteat;
 	}
 	public void setFruit(ArrayList<Fruit> fruit) {
-		Fruit = fruit;
+		fruiteat = fruit;
 	}
 	public String getIDpack() {
 		return IDpack;

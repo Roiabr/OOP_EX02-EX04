@@ -65,7 +65,7 @@ public Example01() {
 public void paint(Graphics g) {
   //Here is how we used to draw a square with width
   //of 200, height of 200, and starting at x=50, y=50.
-  g.setColor(Color.red);
+  g.setColor(Color.BLACK);
   g.drawRect(50,50,200,200);
   Graphics2D g2d = (Graphics2D)g;
   g2d.setColor(Color.blue);

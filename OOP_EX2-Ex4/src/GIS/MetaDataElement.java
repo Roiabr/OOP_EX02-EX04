@@ -15,15 +15,15 @@ public class MetaDataElement implements Meta_data {
 	
 	
 	/**
-	 * counstrctor 
-	 * @param s - the whole line that holds the infromtion
+	 * Constructor 
+	 * @param s - the whole line that holds the information
 	 */
 	public MetaDataElement(String [] s) {
 		CSVfile = s;
 	
 	}
 	/**
-	 * this is a mathod that get a data and change it to a timestamp
+	 * this is a method that get a data and change it to a timestamp
 	 * @return ts = the timestamp
 	 */
 	@Override

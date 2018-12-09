@@ -3,21 +3,26 @@ package algoritem;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisToElement;
 import Geom.Point3D;
 
-public class Game {
+public class Game extends MultiCsv {
 	int counter;
 	ArrayList<Packman> pack= new ArrayList<Packman>();
 	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
-
 	
+	
+
+
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public Game(GIS_layer gl) {
 		Packman p = new Packman();
 		Fruit f = new Fruit();
@@ -33,7 +38,12 @@ public class Game {
 				f = new Fruit(ele);
 				Fruit.add(f);
 			}
+			else 
+				System.out.println("warnning");
 		}
+	}
+	
+	public static void main (String[] args ) {
 		
 		
 	}
