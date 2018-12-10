@@ -1,12 +1,10 @@
 package algoritem;
 
 import java.util.ArrayList;
-
-import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GisToElement;
 import Geom.Point3D;
-import javafx.scene.paint.Color;
+
 
 public class Packman {
 
@@ -19,9 +17,6 @@ public class Packman {
 	
 	
 
-
-
-
 	public Packman() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,10 +24,10 @@ public class Packman {
 		String [] ele= ((GisToElement) gep).getGis();
 		this.type= ele[0];
 		this.IDpack=ele[1];
-		this.pointer_packmen =gep.getGeom().getNewpoint();
-		this.speed=ele[5];
-		this.radiuos=ele[6];
-		time =0;
+		this.pointer_packmen = gep.getGeom().getNewpoint();
+		this.speed = ele[5];
+		this.radiuos = ele[6];
+		time = 0;
 
 	}
 	public int size() {

@@ -16,7 +16,7 @@ import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
-import GUI.gi;
+
 
 
 public class MultiCsv {
@@ -33,7 +33,6 @@ public class MultiCsv {
 
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(place));
-			br.readLine();
 			br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] userInfo = line.split(cvsSplitBy);
@@ -172,9 +171,9 @@ public class MultiCsv {
 		}
 		StringBuilder sb = new StringBuilder();
 		Iterator <GIS_element> iter = layer.iterator();
-		sb.append("id");
+		sb.append("Type");
 		sb.append(',');
-		sb.append("Name");
+		sb.append("id");
 		sb.append(',');
 		sb.append("lat");
 		sb.append(',');
@@ -189,20 +188,36 @@ public class MultiCsv {
 
 		while(iter.hasNext()) {
 			GIS_element ele = iter.next();
-
-		
-			
-			sb.append(ele.toString());
-			sb.append(',');
-			sb.append(ele.toString());
-			sb.append(',');
-			sb.append(ele.getGeom().getNewpoint().x());
-			sb.append(',');
-			sb.append(ele.getGeom().getNewpoint().y());
-			sb.append(',');
-			sb.append(ele.getGeom().getNewpoint().z());
-			sb.append(',');
-			sb.append('\n');
+			if(ele.getData().getType().equals("P")){
+				sb.append(ele.toString());
+				sb.append(',');
+				sb.append(ele.getData().getId());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().x());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().y());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().z());
+				sb.append(',');
+				sb.append(ele.getData().getSpeed_Weight());
+				sb.append(',');
+				sb.append(ele.getData().getRadius());
+				sb.append('\n');
+			}
+			else {
+				sb.append(ele.toString());
+				sb.append(',');
+				sb.append(ele.getData().getId());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().x());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().y());
+				sb.append(',');
+				sb.append(ele.getGeom().getNewpoint().z());
+				sb.append(',');
+				sb.append(ele.getData().getSpeed_Weight());
+				sb.append('\n');
+			}
 		}
 		pw.write(sb.toString());
 		pw.close();
@@ -211,8 +226,8 @@ public class MultiCsv {
 
 	public static void main(String[] args) throws IOException {
 		//File currentDir = new File("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657"); // current directory
-		GisLayer layer = Csv2Layer("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657.csv");
-		layer2csv(layer, "C:\\Users\\Gal\\Desktop\\nykv nubjv\\data"); 
+		GisLayer layer = Csv2Layer("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data\\game_1543684662657.csv");
+		layer2csv(layer, "C:\\\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data"); 
 	}
 
 
