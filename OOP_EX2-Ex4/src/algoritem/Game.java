@@ -18,8 +18,44 @@ public class Game extends MultiCsv {
 	
 
 
+	public int getCounter() {
+		return counter;
+	}
+
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+
+	public ArrayList<Packman> getPack() {
+		return pack;
+	}
+
+
+	public void setPack(ArrayList<Packman> pack) {
+		this.pack = pack;
+	}
+
+
+	public ArrayList<Fruit> getFruit() {
+		return Fruit;
+	}
+
+
+	public void setFruit(ArrayList<Fruit> fruit) {
+		Fruit = fruit;
+	}
+
+
 	public Game() {
 		// TODO Auto-generated constructor stub
+	}
+	public void packmenadd(Packman p) {
+		
+		p = new Packman();
+
+		pack.add(p);
 	}
 	
 	
