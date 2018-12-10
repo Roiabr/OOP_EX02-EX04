@@ -13,5 +13,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="jgoodies-common-1.8.0.jar" sourcepath="jgoodies-common-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="org.pushingpixels.trident_1.2.0.v20100204-1500.jar" sourcepath="org.pushingpixels.trident.source_1.2.0.v20100204-1500.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.e4.xwt_0.9.1.SNAPSHOT.jar" sourcepath="org.eclipse.e4.xwt.source_0.9.1.SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="org.eclipse.e4.xwt.forms_0.9.1.SNAPSHOT.jar" sourcepath="org.eclipse.e4.xwt.forms.source_0.9.1.SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gal/.p2/pool/plugins/org.eclipse.core.databinding_1.6.100.v20170515-1119.jar" sourcepath="C:/Users/Gal/.p2/pool/plugins/org.eclipse.core.databinding_1.6.100.v20170515-1119.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gal/.p2/pool/plugins/org.eclipse.core.databinding.observable_1.6.100.v20170515-1119.jar" sourcepath="C:/Users/Gal/.p2/pool/plugins/org.eclipse.core.databinding.observable_1.6.100.v20170515-1119.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gal/.p2/pool/plugins/org.eclipse.jface.databinding_1.8.100.v20170503-1507.jar" sourcepath="C:/Users/Gal/.p2/pool/plugins/org.eclipse.jface.databinding_1.8.100.v20170503-1507.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
