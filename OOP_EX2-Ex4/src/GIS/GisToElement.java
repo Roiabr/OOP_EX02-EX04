@@ -8,7 +8,8 @@ import Geom.geomElement;
 public class GisToElement implements GIS_element {
 	String[] Gis;
 	geomElement Point;
-	MetaDataElement data;
+	MetaDataElementPuckman data;
+	MetaDataElementFurit data1;
 	String name;
 	
 	/**
@@ -17,9 +18,14 @@ public class GisToElement implements GIS_element {
 	 */
 	public GisToElement(String[] a) {
 		Gis = a;
-		data = new MetaDataElement(Gis);
+		name = Gis[0];
+		if(name.equals("P")) {
+			data = new MetaDataElementPuckman(Gis);
+		}
+		else
+			data1 = new MetaDataElementFurit(Gis);
 		Point = new geomElement(Gis);
-		name = Gis[1];
+		
 
 	}
 	
@@ -43,7 +49,11 @@ public class GisToElement implements GIS_element {
 	@Override
 	public Meta_data getData() {
 		// TODO Auto-generated method stub
-		return data;
+		if(name.equals("P")) {
+			return data;
+		}
+		else
+			return data1;
 	}
 
 	public String toString() {

@@ -37,7 +37,7 @@ public class ShortestPathAlg extends MyCoords {
 						if(timeold>timebattle) {
 							battlepa=true;
 						}					
-						
+
 					}
 					if(battlepa==false) {
 						pkm.ToEat(fr);
@@ -49,7 +49,7 @@ public class ShortestPathAlg extends MyCoords {
 				}
 			}
 		}
-		
+
 	}
 
 }

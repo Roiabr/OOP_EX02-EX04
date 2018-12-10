@@ -12,4 +12,9 @@ public interface Meta_data {
 	 * @return the orientation: yaw, pitch and roll associated with this data;
 	 */
 	public Point3D get_Orientation();
+	double getRadius();
+	double getId();
+	double getSpeed_Weight();
+	String getType();
+	
 }

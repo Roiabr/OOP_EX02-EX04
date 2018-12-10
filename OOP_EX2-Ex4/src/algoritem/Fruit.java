@@ -1,6 +1,5 @@
 package algoritem;
 
-import java.util.ArrayList;
 
 import GIS.GIS_element;
 import GIS.GisToElement;
@@ -9,7 +8,6 @@ import javafx.scene.paint.Color;
 
 public class Fruit {
 	boolean life=true;
-	
 	Point3D pointer_fruit;
 	String type,idfruit,we;
 	Color g;
@@ -26,11 +24,11 @@ public class Fruit {
 		// TODO Auto-generated constructor stub
 	}
 	public Fruit(GIS_element gep) {
-		String [] ele= ((GisToElement) gep).getGis();
-		this.type= ele[0];
-		this.idfruit=ele[1];
-		this.pointer_fruit=gep.getGeom().getNewpoint();
-		this.we=ele[5];
+		String [] ele = ((GisToElement) gep).getGis();
+		this.type = ele[0];
+		this.idfruit = ele[1];
+		this.pointer_fruit = gep.getGeom().getNewpoint();
+		this.we = ele[5];
 		this.timeStamp = 0;
 
 	}
@@ -46,15 +44,15 @@ public class Fruit {
 			return true;
 		}
 	}
-/////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////
 	public boolean isLife() {
 		return life;
 	}
 	public void setLife(boolean life) {
 		this.life = life;
 	}
-	
-	
+
+
 	public Point3D getPointer_fruit() {
 		return pointer_fruit;
 	}
@@ -91,8 +89,4 @@ public class Fruit {
 	public void setGep(GIS_element gep) {
 		this.gep = gep;
 	}
-
-/////////////////////////////////////////////////////
-
-
 }

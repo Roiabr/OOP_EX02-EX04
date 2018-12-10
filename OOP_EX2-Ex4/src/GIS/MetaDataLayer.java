@@ -44,5 +44,33 @@ public class MetaDataLayer implements Meta_data {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public double getRadius() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public double getSpeed_Weight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
