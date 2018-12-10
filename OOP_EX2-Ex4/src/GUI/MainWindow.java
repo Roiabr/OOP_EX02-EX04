@@ -1,6 +1,9 @@
 package GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -15,12 +18,19 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import sun.awt.RepaintArea;
 
 
 public class MainWindow extends JFrame implements MouseListener , MouseMotionListener
 {
+	   private Container window;
+		private JPanel _panel;
+		private Graphics _paper;
+	        private int h, w;
+	        private boolean isGamer;
+	
 	public BufferedImage myImage;
 	ArrayList<Graphics> allDot = new ArrayList<Graphics>();
 	public MainWindow() 
@@ -37,6 +47,8 @@ public class MainWindow extends JFrame implements MouseListener , MouseMotionLis
 		MenuItem item1 = new MenuItem("newGame");
 		MenuItem item2 = new MenuItem("Save");
 		MenuItem item3 = new MenuItem("load");
+		Button button = new Button("New button");
+		//menu.add(button);
 
 
 		menuBar.add(menu);
@@ -46,7 +58,7 @@ public class MainWindow extends JFrame implements MouseListener , MouseMotionLis
 		this.setMenuBar(menuBar);
 		this.setCursor(getCursor());
 		try {
-			myImage = ImageIO.read(new File("C:\\Users\\Roi Abramovitch\\Desktop\\ariel1.png"));
+			myImage = ImageIO.read(new File("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\ariel1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
@@ -59,7 +71,15 @@ public class MainWindow extends JFrame implements MouseListener , MouseMotionLis
 	{
 		g.drawImage(myImage, 0, 0, this);
 	}
+	 public BufferedImage getMyImage() {
+		return myImage;
+	}
 
+	@Override
+//	    public void paintComponent(Graphics G) {
+//	        super.paintComponent(G);
+//	        G.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+//	    }
 
 	public void mouseClicked(MouseEvent arg) {
 		Graphics g = getGraphics();
@@ -90,13 +110,11 @@ public class MainWindow extends JFrame implements MouseListener , MouseMotionLis
 
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-repaint(0, 0, 100, 200);		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -106,7 +124,14 @@ repaint(0, 0, 100, 200);
 	}
 
 
-
+	public static void main(String[] args)
+	{
+		MainWindow window = new MainWindow();
+		window.setVisible(true);
+		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
 
 
 
