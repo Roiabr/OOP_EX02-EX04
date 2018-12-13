@@ -54,25 +54,16 @@ public class Game extends MultiCsv {
 	public ArrayList<Packman> getPack() {
 		return pack;
 	}
-
-
 	public void setPack(ArrayList<Packman> pack) {
 		this.pack = pack;
 	}
-
-
 	public ArrayList<Fruit> getFruit() {
 		return Fruit;
 	}
 
-
 	public void setFruit(ArrayList<Fruit> fruit) {
 		Fruit = fruit;
 	}
-
-
-
-
 
 	public static void main (String[] args ) {
 

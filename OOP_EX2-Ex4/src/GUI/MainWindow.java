@@ -3,12 +3,6 @@ package GUI;
 
 
 import java.awt.FileDialog;
-
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Container;
-
 import java.awt.Graphics;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -29,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 
 import File_format.*;
@@ -45,7 +38,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 	private boolean isGamer;
-	MultiCsv C;
+	
 	ArrayList<Point3D> pac = new ArrayList<Point3D>();
 	ArrayList<Point3D> fr = new ArrayList<Point3D>();
 	public BufferedImage myImage ,myImage1,myImage2;
@@ -181,7 +174,7 @@ public class MainWindow extends JFrame implements MouseListener
 		//		try read from the file
 		FileDialog fd = new FileDialog(this, "Open text file", FileDialog.LOAD);
 		fd.setFile("*.csv");
-		fd.setDirectory("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data");
+		fd.setDirectory("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data");
 		fd.setFilenameFilter(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
