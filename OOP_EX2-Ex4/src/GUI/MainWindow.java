@@ -1,7 +1,14 @@
 package GUI;
 
+<<<<<<< HEAD
 
 import java.awt.FileDialog;
+=======
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Container;
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 import java.awt.Graphics;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -22,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 import File_format.*;
@@ -34,6 +42,7 @@ import GIS.*;
 
 public class MainWindow extends JFrame implements MouseListener 
 {
+<<<<<<< HEAD
 
 	
 	private boolean isGamer;
@@ -42,6 +51,16 @@ public class MainWindow extends JFrame implements MouseListener
 	ArrayList<Point3D> fr = new ArrayList<Point3D>();
 	public BufferedImage myImage ,myImage1,myImage2;
 	
+=======
+	   private Container window;
+		private JPanel _panel;
+		private Graphics _paper;
+	        private int h, w;
+	        private boolean isGamer;
+	
+	public BufferedImage myImage;
+	ArrayList<Graphics> allDot = new ArrayList<Graphics>();
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 	public MainWindow() 
 	{
 		initGUI();		
@@ -50,6 +69,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	private void initGUI() 
 	{
+<<<<<<< HEAD
 		MenuBar menuBar = new MenuBar(); 
 		Menu menu1 = new Menu("File");
 		Menu menu2 = new Menu("Edit");
@@ -58,6 +78,15 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem item3 = new MenuItem("Load Game");
 		MenuItem item4 = new MenuItem("Add Packman");
 		MenuItem item5 = new MenuItem("Add Fruit");
+=======
+		MenuBar menuBar = new MenuBar();
+		Menu menu = new Menu("file"); 
+		MenuItem item1 = new MenuItem("newGame");
+		MenuItem item2 = new MenuItem("Save");
+		MenuItem item3 = new MenuItem("load");
+		Button button = new Button("New button");
+		//menu.add(button);
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 
 		menu1.add(item1);
 		menu1.add(item2);
@@ -107,7 +136,11 @@ public class MainWindow extends JFrame implements MouseListener
 		});
 		this.setMenuBar(menuBar);
 		try {
+<<<<<<< HEAD
 			myImage = ImageIO.read(new File("Ariel1.png"));
+=======
+			myImage = ImageIO.read(new File("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\ariel1.png"));
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
@@ -118,7 +151,16 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
+<<<<<<< HEAD
+=======
+		g.drawImage(myImage, 0, 0, this);
+	}
+	 public BufferedImage getMyImage() {
+		return myImage;
+	}
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 
+<<<<<<< HEAD
 		g.drawImage(myImage, 0, 0,getWidth(),getHeight(), this);
 		if(x!=-1 && y!=-1) {
 			try {
@@ -147,6 +189,13 @@ public class MainWindow extends JFrame implements MouseListener
 	public BufferedImage getMyImage() {
 		return myImage;
 	}
+=======
+	@Override
+//	    public void paintComponent(Graphics G) {
+//	        super.paintComponent(G);
+//	        G.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+//	    }
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 
 	public void mouseClicked(MouseEvent arg) {
 		if(isGamer) {
@@ -239,9 +288,41 @@ public class MainWindow extends JFrame implements MouseListener
 	public void mouseReleased(MouseEvent e) {
 	}
 	public void mouseDragged(MouseEvent e) {
+<<<<<<< HEAD
+=======
+		// TODO Auto-generated method stub
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
+<<<<<<< HEAD
 }
+=======
+
+	public static void main(String[] args)
+	{
+		MainWindow window = new MainWindow();
+		window.setVisible(true);
+		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+
+
+
+
+
+
+}
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git

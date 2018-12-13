@@ -15,13 +15,62 @@ public class Game extends MultiCsv {
 	ArrayList<Packman> pack= new ArrayList<Packman>();
 	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
 	
+<<<<<<< HEAD
 	public Game(GisLayer layer) {
-		// TODO Auto-generated constructor stub
-		
+=======
+	
+
+
+	public int getCounter() {
+		return counter;
 	}
 
 
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+
+	public ArrayList<Packman> getPack() {
+		return pack;
+	}
+
+
+	public void setPack(ArrayList<Packman> pack) {
+		this.pack = pack;
+	}
+
+
+	public ArrayList<Fruit> getFruit() {
+		return Fruit;
+	}
+
+
+	public void setFruit(ArrayList<Fruit> fruit) {
+		Fruit = fruit;
+	}
+
+
+	public Game() {
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
+		// TODO Auto-generated constructor stub
+		
+	}
+<<<<<<< HEAD
+
+
 	public Game(GIS_layer lay) {
+=======
+	public void packmenadd(Packman p) {
+		
+		p = new Packman();
+
+		pack.add(p);
+	}
+	
+	
+	public Game(GIS_layer gl) {
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 		Packman p = new Packman();
 		Fruit f = new Fruit();
 		while(lay.iterator().hasNext()) {
