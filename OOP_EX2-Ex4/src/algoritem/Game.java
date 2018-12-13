@@ -14,12 +14,32 @@ public class Game extends MultiCsv {
 	int counter;
 	ArrayList<Packman> pack= new ArrayList<Packman>();
 	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
-	
-<<<<<<< HEAD
-	public Game(GisLayer layer) {
-=======
-	
 
+	public Game() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Game(GIS_layer lay) {
+
+		Packman p = new Packman();
+		Fruit f = new Fruit();
+		while(lay.iterator().hasNext()) {
+			GIS_element ele = lay.iterator().next();
+			if(ele.getData().getType().equals("P")) {
+				p = new Packman(ele);
+				pack.add(p);
+			}
+			else if(ele.getData().getType().equals("F"))
+			{
+				f = new Fruit(ele);
+				Fruit.add(f);
+			}
+			else 
+				System.out.println("warning");
+		}
+
+
+	}
 
 	public int getCounter() {
 		return counter;
@@ -51,49 +71,11 @@ public class Game extends MultiCsv {
 	}
 
 
-	public Game() {
->>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
-		// TODO Auto-generated constructor stub
-		
-	}
-<<<<<<< HEAD
 
-
-	public Game(GIS_layer lay) {
-=======
-	public void packmenadd(Packman p) {
-		
-		p = new Packman();
-
-		pack.add(p);
-	}
-	
-	
-	public Game(GIS_layer gl) {
->>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
-		Packman p = new Packman();
-		Fruit f = new Fruit();
-		while(lay.iterator().hasNext()) {
-			GIS_element ele = lay.iterator().next();
-			if(ele.getData().getType().equals("P")) {
-				p = new Packman(ele);
-				pack.add(p);
-			}
-			else if(ele.getData().getType().equals("F"))
-			{
-				f = new Fruit(ele);
-				Fruit.add(f);
-			}
-			else 
-				System.out.println("warning");
-		}
-		
-
-	}
 
 
 	public static void main (String[] args ) {
-	
+
 	}
 
 }
