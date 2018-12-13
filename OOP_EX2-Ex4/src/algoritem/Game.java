@@ -1,51 +1,50 @@
 package algoritem;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
+
+
+import java.util.ArrayList;
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GisLayer;
-import GIS.GisToElement;
-import Geom.Point3D;
+
 
 public class Game extends MultiCsv {
 	int counter;
 	ArrayList<Packman> pack= new ArrayList<Packman>();
 	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
 	
-	
-
-
-	public Game() {
+	public Game(GisLayer layer) {
 		// TODO Auto-generated constructor stub
+		
 	}
-	
-	
-	public Game(GIS_layer gl) {
+
+
+	public Game(GIS_layer lay) {
 		Packman p = new Packman();
 		Fruit f = new Fruit();
-
-		while(gl.iterator().hasNext()) {
-			GIS_element ele = gl.iterator().next();
-			if(ele.toString().equals("p")) {
+		while(lay.iterator().hasNext()) {
+			GIS_element ele = lay.iterator().next();
+			if(ele.getData().getType().equals("P")) {
 				p = new Packman(ele);
 				pack.add(p);
 			}
-			else if(ele.toString().equals("f"))
+			else if(ele.getData().getType().equals("F"))
 			{
 				f = new Fruit(ele);
 				Fruit.add(f);
 			}
 			else 
-				System.out.println("warnning");
+				System.out.println("warning");
 		}
+		
+
 	}
-	
+
+
 	public static void main (String[] args ) {
-		
-		
+	
 	}
 
 }
