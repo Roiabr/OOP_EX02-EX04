@@ -13,7 +13,7 @@ public class geomElement implements Geom_element {
 		double xP = Double.parseDouble(CSVfile[2]);
 		double yP = Double.parseDouble(CSVfile[3]);
 		double zP = Double.parseDouble(CSVfile[4]);
-		newpoint = new Point3D(xP, yP, zP);
+		newpoint = new Point3D(xP, yP);
 	}
 	/**
 	 * @return newpoint - return the coordinats of the geomElement

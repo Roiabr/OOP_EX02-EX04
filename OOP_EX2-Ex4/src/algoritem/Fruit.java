@@ -9,7 +9,8 @@ import javafx.scene.paint.Color;
 public class Fruit {
 	boolean life=true;
 	Point3D pointer_fruit;
-	String type,idfruit,we;
+	String type,we;
+	int idfruit;
 	Color g;
 	GIS_element gep;
 	long timeStamp;
@@ -26,7 +27,7 @@ public class Fruit {
 	public Fruit(GIS_element gep) {
 		String [] ele = ((GisToElement) gep).getGis();
 		this.type = ele[0];
-		this.idfruit = ele[1];
+		this.idfruit = Integer.parseInt(ele[1]);
 		this.pointer_fruit = gep.getGeom().getNewpoint();
 		this.we = ele[5];
 		this.timeStamp = 0;
@@ -65,10 +66,11 @@ public class Fruit {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getIdfruit() {
+
+	public int getIdfruit() {
 		return idfruit;
 	}
-	public void setIdfruit(String idfruit) {
+	public void setIdfruit(int idfruit) {
 		this.idfruit = idfruit;
 	}
 	public String getWe() {

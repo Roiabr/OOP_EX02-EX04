@@ -9,10 +9,11 @@ import Geom.Point3D;
 public class Packman {
 
 	ArrayList<Fruit> fruiteat= new ArrayList<Fruit>();
-	String IDpack;
+	int IDpack;
 	GIS_element gep;
 	Point3D pointer_packmen;
-	String speed,radiuos,type;
+	int speed,radiuos;
+	String type;
 	double time;
 	
 	
@@ -23,10 +24,10 @@ public class Packman {
 	public Packman(GIS_element gep) {
 		String [] ele= ((GisToElement) gep).getGis();
 		this.type= ele[0];
-		this.IDpack=ele[1];
+		this.IDpack=Integer.parseInt(ele[1]);
 		this.pointer_packmen = gep.getGeom().getNewpoint();
-		this.speed = ele[5];
-		this.radiuos = ele[6];
+		this.speed = Integer.parseInt(ele[5]);
+		this.radiuos = Integer.parseInt(ele[6]);
 		time = 0;
 
 	}
@@ -43,11 +44,13 @@ public class Packman {
 		this.fruiteat.add(g);
 	}
 	
-	public static void main(String []args) {
-
-		//Packman g = new Packman(s);
-		//System.out.println(g.speed.toString());
+	public int getIDpack() {
+		return IDpack;
 	}
+	public void setIDpack(int iDpack) {
+		IDpack = iDpack;
+	}
+
 /////////////////////////////////////////////////////
 	public Point3D getPointer_packmen() {
 		return pointer_packmen;
@@ -58,29 +61,34 @@ public class Packman {
 	public void setFruit(ArrayList<Fruit> fruit) {
 		fruiteat = fruit;
 	}
-	public String getIDpack() {
-		return IDpack;
-	}
-	public void setIDpack(String iDpack) {
-		IDpack = iDpack;
-	}
+
 	public GIS_element getGep() {
 		return gep;
 	}
 	public void setGep(GIS_element gep) {
 		this.gep = gep;
 	}
-	public String getSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
-	public void setSpeed(String speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	public String getRadiuos() {
+	public int getRadiuos() {
 		return radiuos;
 	}
-	public void setRadiuos(String radiuos) {
+	public void setRadiuos(int radiuos) {
 		this.radiuos = radiuos;
+	}
+	
+	public double getTime() {
+		return time;
+	}
+	public void setTime(double time) {
+		this.time = time;
+	}
+	public ArrayList<Fruit> getFruiteat() {
+		return fruiteat;
 	}
 	public String getType() {
 		return type;
@@ -91,6 +99,10 @@ public class Packman {
 	public void setPointer_packmen(Point3D pointer_packmen) {
 		this.pointer_packmen = pointer_packmen;
 	}
-	
+	public static void main(String []args) {
+
+		//Packman g = new Packman(s);
+		//System.out.println(g.speed.toString());
+	}
 /////////////////////////////////////////////////////
 }
