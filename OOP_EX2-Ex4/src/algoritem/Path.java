@@ -5,13 +5,14 @@ import java.util.Iterator;
 
 import Coords.MyCoords;
 import GIS.GisLayer;
+import GUI.MainWindow;
 import Geom.Point3D;
 
 
 public class Path extends MyCoords {
 		
 	ArrayList<Point3D> eat = new ArrayList<Point3D>();
-
+	MainWindow window = new MainWindow();
 	
 	public Path() {
 		// TODO Auto-generated constructor stub
@@ -21,14 +22,15 @@ public class Path extends MyCoords {
 		Iterator<Fruit> f = p.getFruit().iterator();
 		while(f.hasNext()) {
 			Fruit d = f.next();
-			Point3D G = new Point3D(Map.gpsToPix(d.getPointer_fruit().y(),d.getPointer_fruit().x()));
+			Point3D g = new Point3D(Map.ConvertorToScreen(d.getPointer_fruit().x(),d.getPointer_fruit().y(),window.getHeight(),window.getWidth()));
 			//p.getGep().translate(p);
-			eat.add(G);
+			eat.add(g);
 		}
+		
 	
 	}
 	public void startPath(Packman p) {
-		Point3D g = new Point3D(Map.gpsToPix(p.getPointer_packmen().y(),p.getPointer_packmen().x()));
+		Point3D g = new Point3D(Map.ConvertorToScreen(p.getPointer_packmen().x(),p.getPointer_packmen().y(),window.getHeight(),window.getWidth()));
 		eat.add(g);
 	}
 	public ArrayList<Point3D> getEat() {

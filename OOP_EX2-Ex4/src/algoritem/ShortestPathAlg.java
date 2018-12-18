@@ -9,7 +9,6 @@ import Coords.MyCoords;
 
 public class ShortestPathAlg extends MyCoords {
 
-	ArrayList<Fruit> eat = new ArrayList<Fruit>();
 
 	public ShortestPathAlg() {
 		// TODO Auto-generated constructor stub

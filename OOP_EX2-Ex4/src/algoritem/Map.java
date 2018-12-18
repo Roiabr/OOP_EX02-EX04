@@ -36,63 +36,29 @@ public class Map {
 
 	}
 
-	public static Point3D getgps(double x1, double y1)
-	{
-		double y=(y1/mapHeight)*mapLatitude;
-		double x=(x1/mapWidth)*mapLongitude;
-		double longitude=x+mapLongitudeStart;
-		double latitude=mapLatitudeStart-y;
-		return new Point3D (longitude,latitude);
-	}
-
-
-	public static Point3D getPositionOnScreen(double longitude, double latitude){
-
-		double x=  longitude - mapLongitudeStart;
-
-		double y = mapLatitudeStart-latitude;
-		double x1 = (mapWidth*(x/mapLongitude));
-		double y1 =  (mapHeight*(y/mapLatitude));
-
-		return new Point3D(x1, y1);
-	}
-	public static Point3D ConvertorToScreen(double longitude ,double latitude) {
+	public static Point3D ConvertorToScreen(double longitude ,double latitude,double pyHeighty,double pxwidth) {
 		double x =  leftup.x() -longitude ;
 		double y = rightup.y()-latitude;
-		double XScreen = ((x/Longitudedistance)*mapWidth);
-		double YScreen = ((y/Latitudedistance)*mapHeight);
-		
+		double XScreen = ((x/Longitudedistance)*pxwidth);
+		double YScreen = ((y/Latitudedistance)*pyHeighty);
 		return new Point3D(XScreen, YScreen);
-	}
-	public static  Point3D ConvertorFromScreen(double XScreen, double YScreen ) {
 
-		double longitude = leftup.x() -XScreen/mapHeight*Longitudedistance;
-		double latitude = rightup.y() -YScreen/mapWidth*Latitudedistance;
+	}
+
+	public static  Point3D ConvertorFromScreen(double XScreen, double YScreen ,double pyHeight , double pxwidth) {
+
+		double longitude = leftup.x() -XScreen/pxwidth*Longitudedistance;
+		double latitude = rightup.y() -YScreen/pyHeight*Latitudedistance;
 		return new Point3D(longitude, latitude);
 
 
 
 	}
-	public static Point3D pixToGps(double x1, double y1)
-	{
-		double y=(y1/mapHeight)*mapLatitude;
-		double x=(x1/mapWidth)*mapLongitude;
-		double longitude=x+mapLongitudeStart;
-		double latitude=mapLatitudeStart-y;
-		return new Point3D (latitude,longitude);
-	}
-	public static Point3D gpsToPix(double longitude, double latitude){
-		double x=  longitude - mapLongitudeStart;
-		double y = mapLatitudeStart-latitude;
-		double x1 = (mapWidth*(x/mapLongitude));
-		double y1 =  (mapHeight*(y/mapLatitude));
-		return new Point3D(x1, y1);
-	}
-	
+
 	public static void main(String[] args) {
 		Map a=new Map();
-		System.out.println(a.getPositionOnScreen( 35.20747075,32.10247755));
-		System.out.println(a.getgps(713.0,547.0));
+//		System.out.println(a.getPositionOnScreen( 35.20747075,32.10247755));
+//		System.out.println(a.getgps(713.0,547.0));
 
 	}
 

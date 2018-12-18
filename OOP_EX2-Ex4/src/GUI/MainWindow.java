@@ -3,7 +3,6 @@ package GUI;
 
 
 
-import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.Graphics;
 import java.awt.Menu;
@@ -47,8 +46,7 @@ public class MainWindow extends JFrame implements MouseListener
 	//ArrayList<Packman> pacman3 = new ArrayList<Packman>();
 	public BufferedImage myImage ,myImage1,myImage2;
 	Game GuiGame;
-	int isGamer=0;
-	int ispostion=0;
+	int inputstate=0;//packmen or fruit 
 	Map map;
 
 
@@ -99,7 +97,6 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Save game");
-				ispostion = 2;
 				writeFileDialog();
 			}
 		});
@@ -107,7 +104,7 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("load game");
-				ispostion = 3;
+				loadFile();
 				repaint();
 			}
 
@@ -116,7 +113,7 @@ public class MainWindow extends JFrame implements MouseListener
 		item4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				isGamer = 3;
+				inputstate = 1;
 				System.out.println("packman choose");
 
 			}
@@ -125,7 +122,7 @@ public class MainWindow extends JFrame implements MouseListener
 		item5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				isGamer = 4;
+				inputstate = 2;
 				System.out.println("Fruit choose");
 			}
 		});
@@ -134,11 +131,7 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GuiGame.runGame();
-				ispostion = 5;
 				repaint();
-
-
-
 			}
 		});
 		this.setMenuBar(menuBar);
@@ -153,9 +146,26 @@ public class MainWindow extends JFrame implements MouseListener
 	int x = -1;
 	int y = -1;
 
+	public void loadFile() {
+		Game newfile = new Game(readFileDialog());
+		Iterator<Packman> iterPac = newfile.getPack().iterator();
+		Iterator<Fruit> iterFruit =  newfile.getFruit().iterator();
+
+		while(iterPac.hasNext()) {
+			Packman f = iterPac.next();
+			GuiGame.getPack().add(f);
+			System.out.println(f.getIDpack());
+		}
+		while(iterFruit.hasNext()) {
+			Fruit f = iterFruit.next();
+			GuiGame.getFruit().add(f);
+
+		}
+
+		repaint();
+	}
 	public void paint(Graphics g)
 	{
-
 		g.drawImage(myImage, 0, 0,getWidth(),getHeight(), this);
 		try {
 			myImage1 = ImageIO.read(new File("packman.png"));
@@ -165,125 +175,53 @@ public class MainWindow extends JFrame implements MouseListener
 		catch (IOException e) {
 			e.printStackTrace();
 		}	
-		if(ispostion == 3) {
-			GuiGame = new Game(readFileDialog());
-			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
-			Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
+		Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+		Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
 
-			while(iterPac.hasNext()) {
-				Packman f = iterPac.next();
-				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
-				System.out.println("pixalX-Packman = "+ p.x());
-				System.out.println("pixalY-Packman  = " + p.y());
-				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
+		while(iterPac.hasNext()) {
+			Packman f = iterPac.next();
+			Point3D p = new Point3D(Map.ConvertorToScreen(f.getPointer_packmen().x(),f.getPointer_packmen().y(),this.getHeight(),this.getWidth()));
 
-				
-			}
-			while(iterFruit.hasNext()) {
-				Fruit f = iterFruit.next();
-				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
-				System.out.println("pixalX-Fruit= "+ p.x());
-				System.out.println("pixaly-Fruit= " + p.y());
-				g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
+			g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
 
-
-			}
-			ispostion = 0;
-		}
-		if(ispostion == 1) {
-			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
-			Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
-
-			while(iterPac.hasNext()) {
-				Packman f = iterPac.next();
-				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
-				System.out.println("pixalX-Packman= "+ p.x());
-				System.out.println("pixalY-Packman = " + p.y());
-				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
-
-
-			}
-			while(iterFruit.hasNext()) {
-				Fruit f = iterFruit.next();
-				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
-				System.out.println("pixalX-Fruit= "+ p.x());
-				System.out.println("pixalY-Fruit = " + p.y());
-				g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
-
-
-			}
 
 		}
-		if(ispostion == 5) {
-			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
-			Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
-
-			while(iterPac.hasNext()) {
-				Packman f = iterPac.next();
-				Point3D jh = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
-				System.out.println("pixalX-Packman = "+ jh.x());
-				System.out.println("pixalY-Packman  = " + jh.y());
-				g.drawImage(myImage1, (int)jh.x(), (int)jh.y(), 20,20,this);
-
-
-			}
-			while(iterFruit.hasNext()) {
-				Fruit f = iterFruit.next();
-				Point3D hh = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
-				System.out.println("pixalX-Fruit= "+ hh.x());
-				System.out.println("pixaly-Fruit= " + hh.y());
-				g.drawImage(myImage2, (int)hh.x(), (int)hh.y(), 20,20,this);
-
-			}
-			Iterator<Packman> pac = GuiGame.getPack().iterator();
-			while(pac.hasNext()) {
-				Packman p = pac.next();
-				Path s = new Path(p);
-				Iterator<Point3D> point = s.getEat().iterator();
-				System.out.println(s.getEat().size());
-				Point3D c=new Point3D(point.next());
-				while(point.hasNext()) {
-					Point3D b=new Point3D(point.next());	
-					g.setColor(Color.BLUE);
-					g.drawLine(c.ix(), c.iy(), b.ix(), b.iy());
-					System.out.println("endgame");
-				}
-				
-				
-
-			}
+		while(iterFruit.hasNext()) {
+			Fruit f = iterFruit.next();
+			Point3D p = new Point3D(Map.ConvertorToScreen(f.getPointer_fruit().x(), f.getPointer_fruit().y(),this.getHeight(),this.getWidth()));
+			g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
 		}
 
 	}
 
 	public void mouseClicked(MouseEvent arg) {
-		if(isGamer == 3) {
-			int id = 1;
+		if(inputstate == 1) {
+			int id = 0;
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			p = Map.getgps(x, y);
+			p = Map.ConvertorFromScreen(x, y,this.getHeight(),this.getWidth());
 			Packman packi = new Packman();
-			packi.setPointer_packmen(p);
+						packi.setPointer_packmen(p);
 			if(GuiGame.getPack().size() == 0) {
 				packi.setIDpack(1);
 				id++;
 			}
 			else
-				packi.setIDpack(++id);
+				packi.setIDpack(id);
 			packi.setSpeed(1);
 			packi.setRadiuos(1);
 			GuiGame.getPack().add(packi);
 			packi.setType("P");
-			ispostion = 1;
+			System.out.println("hi");
 			repaint();
 		}
-		else if(isGamer == 4) {
+		else if(inputstate == 2) {
 			int id = 0;
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			p = Map.getgps(x, y);
+			p = Map.ConvertorFromScreen(x, y,this.getHeight(),this.getWidth());
 			Fruit fruti = new Fruit();
 			fruti.setPointer_fruit(p);
 			if(GuiGame.getPack().size() == 0) {
@@ -293,7 +231,6 @@ public class MainWindow extends JFrame implements MouseListener
 			else
 				fruti.setIdfruit(id);
 			GuiGame.getFruit().add(fruti);
-			ispostion = 1;
 			repaint();
 		}
 
@@ -343,7 +280,7 @@ public class MainWindow extends JFrame implements MouseListener
 		try {
 			FileWriter fw = new FileWriter(folder + fileName);
 			PrintWriter outs = new PrintWriter(fw);
-
+			//outs = MultiCsv.layer2csv(layer, output);
 			outs.close();
 			fw.close();
 		} catch (IOException ex) {
@@ -372,6 +309,7 @@ public class MainWindow extends JFrame implements MouseListener
 		window.setVisible(true);
 		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setTitle("MAROCO VS TUNIS");
 
 	}
 
