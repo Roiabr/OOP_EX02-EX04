@@ -73,7 +73,22 @@ public class Map {
 
 
 	}
-
+	public static Point3D pixToGps(double x1, double y1)
+	{
+		double y=(y1/mapHeight)*mapLatitude;
+		double x=(x1/mapWidth)*mapLongitude;
+		double longitude=x+mapLongitudeStart;
+		double latitude=mapLatitudeStart-y;
+		return new Point3D (latitude,longitude);
+	}
+	public static Point3D gpsToPix(double longitude, double latitude){
+		double x=  longitude - mapLongitudeStart;
+		double y = mapLatitudeStart-latitude;
+		double x1 = (mapWidth*(x/mapLongitude));
+		double y1 =  (mapHeight*(y/mapLatitude));
+		return new Point3D(x1, y1);
+	}
+	
 	public static void main(String[] args) {
 		Map a=new Map();
 		System.out.println(a.getPositionOnScreen( 35.20747075,32.10247755));

@@ -3,6 +3,7 @@ package GUI;
 
 
 
+import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.Graphics;
 import java.awt.Menu;
@@ -128,26 +129,18 @@ public class MainWindow extends JFrame implements MouseListener
 				System.out.println("Fruit choose");
 			}
 		});
-		//		item6.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent e) {
-		//				GisLayer lay = new GisLayer("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657.csv");
-		//
-		//				Iterator<Packman> iterPac2 = guigame.getPack().iterator();
-		//
-		//				while(iterPac2.hasNext()) {
-		//					Packman p = iterPac2.next();
-		//					System.out.println(p.getFruit().size());
-		//				}
-		//				
-		//
-		//				repaint();
-		//
-		//
-		//
-		//			}
-		//		});
+		item6.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GuiGame.runGame();
+				ispostion = 5;
+				repaint();
+
+
+
+			}
+		});
 		this.setMenuBar(menuBar);
 		try {
 			myImage = ImageIO.read(new File("Ariel1.png"));
@@ -162,7 +155,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
-		System.out.println(this.getHeight());
+
 		g.drawImage(myImage, 0, 0,getWidth(),getHeight(), this);
 		try {
 			myImage1 = ImageIO.read(new File("packman.png"));
@@ -179,22 +172,23 @@ public class MainWindow extends JFrame implements MouseListener
 
 			while(iterPac.hasNext()) {
 				Packman f = iterPac.next();
-				Point3D p = new Point3D(Map.getPositionOnScreen(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
+				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
 				System.out.println("pixalX-Packman = "+ p.x());
 				System.out.println("pixalY-Packman  = " + p.y());
 				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
 
-
+				
 			}
 			while(iterFruit.hasNext()) {
 				Fruit f = iterFruit.next();
-				Point3D p = new Point3D(Map.getPositionOnScreen(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
+				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
 				System.out.println("pixalX-Fruit= "+ p.x());
 				System.out.println("pixaly-Fruit= " + p.y());
 				g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
 
 
 			}
+			ispostion = 0;
 		}
 		if(ispostion == 1) {
 			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
@@ -202,7 +196,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 			while(iterPac.hasNext()) {
 				Packman f = iterPac.next();
-				Point3D p = new Point3D(Map.getPositionOnScreen(f.getPointer_packmen().x(),f.getPointer_packmen().y()));
+				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
 				System.out.println("pixalX-Packman= "+ p.x());
 				System.out.println("pixalY-Packman = " + p.y());
 				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
@@ -211,51 +205,76 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 			while(iterFruit.hasNext()) {
 				Fruit f = iterFruit.next();
-				Point3D p = new Point3D(Map.getPositionOnScreen(f.getPointer_fruit().x(), f.getPointer_fruit().y()));
-				System.out.println(p.x());
+				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
+				System.out.println("pixalX-Fruit= "+ p.x());
+				System.out.println("pixalY-Fruit = " + p.y());
 				g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
 
 
 			}
-			//			if(isGamer == 6) {
-			//				while(iterPac2.hasNext()) {
-			//
-			//					Packman p = iterPac2.next();
-			//					System.out.println(p.getFruit().size()+""+p.getFruit().size());
-			//					Path h = new Path(p);
-			//					//g.drawPolyline(h.getLoctionX(), h.getLoctionY(),(h.getLoctionX().length+h.getLoctionY().length));
-			//				}
-			//			}
+
+		}
+		if(ispostion == 5) {
+			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+			Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
+
+			while(iterPac.hasNext()) {
+				Packman f = iterPac.next();
+				Point3D jh = new Point3D(Map.gpsToPix(f.getPointer_packmen().y(),f.getPointer_packmen().x()));
+				System.out.println("pixalX-Packman = "+ jh.x());
+				System.out.println("pixalY-Packman  = " + jh.y());
+				g.drawImage(myImage1, (int)jh.x(), (int)jh.y(), 20,20,this);
 
 
+			}
+			while(iterFruit.hasNext()) {
+				Fruit f = iterFruit.next();
+				Point3D hh = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(), f.getPointer_fruit().x()));
+				System.out.println("pixalX-Fruit= "+ hh.x());
+				System.out.println("pixaly-Fruit= " + hh.y());
+				g.drawImage(myImage2, (int)hh.x(), (int)hh.y(), 20,20,this);
+
+			}
+			Iterator<Packman> pac = GuiGame.getPack().iterator();
+			while(pac.hasNext()) {
+				Packman p = pac.next();
+				Path s = new Path(p);
+				Iterator<Point3D> point = s.getEat().iterator();
+				System.out.println(s.getEat().size());
+				Point3D c=new Point3D(point.next());
+				while(point.hasNext()) {
+					Point3D b=new Point3D(point.next());	
+					g.setColor(Color.BLUE);
+					g.drawLine(c.ix(), c.iy(), b.ix(), b.iy());
+					System.out.println("endgame");
+				}
+				
+				
+
+			}
 		}
 
 	}
 
 	public void mouseClicked(MouseEvent arg) {
 		if(isGamer == 3) {
-			int id = 0;
+			int id = 1;
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			System.out.println(p.x());
-			System.out.println(p.y());
 			p = Map.getgps(x, y);
 			Packman packi = new Packman();
-			System.out.println(p.x());
-			System.out.println(p.y());
 			packi.setPointer_packmen(p);
 			if(GuiGame.getPack().size() == 0) {
 				packi.setIDpack(1);
 				id++;
 			}
 			else
-				packi.setIDpack(id);
+				packi.setIDpack(++id);
 			packi.setSpeed(1);
 			packi.setRadiuos(1);
 			GuiGame.getPack().add(packi);
 			packi.setType("P");
-			System.out.println("hi");
 			ispostion = 1;
 			repaint();
 		}
@@ -264,12 +283,8 @@ public class MainWindow extends JFrame implements MouseListener
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			System.out.println(p.x());
-			System.out.println(p.y());
 			p = Map.getgps(x, y);
 			Fruit fruti = new Fruit();
-			System.out.println(p.x());
-			System.out.println(p.y());
 			fruti.setPointer_fruit(p);
 			if(GuiGame.getPack().size() == 0) {
 				fruti.setIdfruit(1);
@@ -278,7 +293,6 @@ public class MainWindow extends JFrame implements MouseListener
 			else
 				fruti.setIdfruit(id);
 			GuiGame.getFruit().add(fruti);
-			System.out.println("hi");
 			ispostion = 1;
 			repaint();
 		}
@@ -311,7 +325,7 @@ public class MainWindow extends JFrame implements MouseListener
 		GisLayer layer =  MultiCsv.Csv2Layer(folder + fileName);
 		System.out.println(layer.get_Meta_data());
 		return layer;
-		
+
 	}
 	public void writeFileDialog() {
 		//		 try write to the file

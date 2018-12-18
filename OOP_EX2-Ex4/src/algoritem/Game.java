@@ -10,6 +10,7 @@ import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GisLayer;
+import Geom.Point3D;
 
 
 public class Game extends MultiCsv {
@@ -45,12 +46,9 @@ public class Game extends MultiCsv {
 
 
 	}
-	public  void runGame(GisLayer lay) {
-		Game ga = new Game(lay);
-		//algo = new ShortestPathAlg(ga);
-		ShortestPathAlg g = new ShortestPathAlg();
+	public void runGame(){
 
-
+		ShortestPathAlg g = new ShortestPathAlg(this);
 	}
 
 	public static int getCounter() {
@@ -78,9 +76,15 @@ public class Game extends MultiCsv {
 	}
 
 	public static void main (String[] args ) {
-		GisLayer layer =  MultiCsv.Csv2Layer("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data\\game_1543684662657.csv");
+		GisLayer layer =  MultiCsv.Csv2Layer("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data\\test.csv");
 		Game g = new Game(layer);
-		System.out.println(g.getPack().size());
+		g.runGame();
+		Iterator<Packman> pac = g.getPack().iterator();
+		while(pac.hasNext()) {
+			Packman p = pac.next();
+			Path s = new Path(p);
+			System.out.println(s.getEat().size());
+			}
 	}
 
 }
