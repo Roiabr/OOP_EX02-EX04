@@ -5,86 +5,86 @@ package algoritem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import javax.swing.JFrame;
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GisLayer;
+import GUI.MainWindow;
 import Geom.Point3D;
 
-
+/**
+ * This class represents a the Game.
+ * @author Roi Abramovitch && Gal haddida
+ */
 public class Game extends MultiCsv {
-	static int counter;
-	ArrayList<Packman> pack= new ArrayList<Packman>();
-	ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
-	ShortestPathAlg algo;
 
-	public Game() {
-		// TODO Auto-generated constructor stub
-	}
+	private ArrayList<Packman> pack= new ArrayList<Packman>();
+	private ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
 
-	public Game(GIS_layer lay) {
-
-		Packman p = new Packman();
-		Fruit f = new Fruit();
+	/**
+	 * a constructor for the class and make a the game(layer) from csv file
+	 * @param lay - a leyer from a csv file
+	 */
+	public Game(GIS_layer lay) 
+	{
 		Iterator<GIS_element> g = lay.iterator();
 		while(g.hasNext()) {
 			GIS_element ele = g.next();
 
 			if(ele.getData().getType().equals("P")) {
-				p = new Packman(ele);
+				Packman p = new Packman(ele);
 				pack.add(p);
 			}
 			else if(ele.getData().getType().equals("F"))
 			{
-				f = new Fruit(ele);
+				Fruit f = new Fruit(ele);
 				Fruit.add(f);
 			}
-			else 
-				System.out.println("warning");
 		}
-
-
 	}
-	public void runGame(){
-
-		ShortestPathAlg g = new ShortestPathAlg(this);
+	public Game() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public static int getCounter() {
-		return counter;
+	/**
+	 * the method active the game and run it
+	 */
+	public void runGame()
+	{
+		ShortestPathAlg algo = new ShortestPathAlg();
+		algo.ShortestPathAlgToPath(this);
+	
 	}
 
-
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
-
-
+	///////////////////// GETTER&SETTER //////////////////////////////
+	
+	/**
+	 * the method get the array List with the packmans
+	 * @return pack - the list
+	 */
 	public  ArrayList<Packman> getPack() {
 		return pack;
 	}
-	public void setPack(ArrayList<Packman> pack) {
-		this.pack = pack;
-	}
+
+	/**
+	 * the method get the array List with the fruits
+	 * @return Fruit - the list
+	 */
 	public  ArrayList<Fruit> getFruit() {
 		return Fruit;
 	}
 
-	public void setFruit(ArrayList<Fruit> fruit) {
-		Fruit = fruit;
+	////////////////////////test///////////////////////
+	public static void main (String[] args ) {
+
+		MainWindow h = new MainWindow();
+		h.setVisible(true);
+		h.setSize(h.myImage.getWidth(),h.myImage.getHeight());
+		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		h.setTitle("MAROCO VasdS TUNIS");
 	}
 
-	public static void main (String[] args ) {
-		GisLayer layer =  MultiCsv.Csv2Layer("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data\\test.csv");
-		Game g = new Game(layer);
-		g.runGame();
-		Iterator<Packman> pac = g.getPack().iterator();
-		while(pac.hasNext()) {
-			Packman p = pac.next();
-			Path s = new Path(p);
-			System.out.println(s.getEat().size());
-			}
-	}
+
 
 }

@@ -8,6 +8,7 @@ public class Point3D implements Geom_element, Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private double _x,_y,_z;
+	private String time;
 
 	public Point3D(double x,double y,double z) 
 	{
@@ -16,11 +17,27 @@ public class Point3D implements Geom_element, Serializable
 		_z=z;
 	}
 
+	public Point3D(double x,double y,double z,String time) 
+	{
+		_x=x;
+		_y=y;
+		_z=z;
+		this.setTime(time);
+	}
 	public Point3D(Point3D p) 
 	{
 		_x=p.x();
 		_y=p.y();
 		_z=p.z();
+		
+	}
+	public Point3D(Point3D p,String time) 
+	{
+		_x=p.x();
+		_y=p.y();
+		_z=p.z();
+		this.setTime(time);
+		
 	}
 	public Point3D(double x,double y) 
 	{this(x,y,0);}
@@ -248,5 +265,13 @@ public final static int DOWN = 6, UP = 7;
 	public void setNewpoint(Point3D p1) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

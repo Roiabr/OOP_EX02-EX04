@@ -1,89 +1,197 @@
 package algoritem;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.xml.crypto.Data;
 
+import com.sun.swing.internal.plaf.metal.resources.metal;
 
 import Coords.MyCoords;
+import GIS.MetaDataElementFurit;
+import GIS.MetaDataElementPuckman;
+import Geom.Point3D;
+import sun.security.jca.GetInstance.Instance;
 
 public class ShortestPathAlg extends MyCoords {
+
 
 
 	public ShortestPathAlg() {
 		// TODO Auto-generated constructor stub
 
 	}
-	public  ShortestPathAlg(Game gamerun) {
-		double timeold=1000000;
-		int totalFruit =0;
-		int fruiteated=0;
-		Iterator<Fruit> Tofruit = gamerun.getFruit().iterator();
 
-		while(Tofruit.hasNext()) {
-			Fruit f=Tofruit.next();
-
-			totalFruit++;
+	public void ShortestPathAlgToPath(Game gamerun) {
+		// TODO Auto-generated method stub
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String strDate = format.format(cal.getTime());
+		Iterator<Packman> packclibarte = gamerun.getPack().iterator(); //Iterator for packman
+		while(packclibarte.hasNext()) {
+			Packman p = packclibarte.next();
+			p.setFirst(p.getFirstPointCor());
+			p.setTime2(strDate);
+			Point3D point = new Point3D(p.getFirst(),p.getTime2());
+			p.getPathOfPacman().add(point);
 		}
-		double timetotal = 0;
 
+
+		double timeold=1000000;
+		int fruiteated=0;
+		int totalFruit=gamerun.getFruit().size();
 
 
 		while(totalFruit!=fruiteated)
 		{	
-
 			Iterator<Packman> pack = gamerun.getPack().iterator(); //Iterator for packman
+			while(pack.hasNext()) 
+			{
+				Packman P = pack.next();//  Packman 
+				Fruit f = WhoIsClosetFruit(P,gamerun);
 
-			while(pack.hasNext()) {
+				if(f!=null)
+				{					
+					if((P.getIDpack()==WhoIsClosetPackman(f,gamerun).getIDpack()) && (f.isLife()==true))
 
+					{
+						
+						double distancenextpackmen =  ((distance3d(P.getFirstPointCor(), f.getPointer_fruit())-P.getRadiuos())/P.getSpeed());
+						double totaltime = distancenextpackmen +P.getTime();
+						P.getFruiteat().add(f);
+						f.setLife(false);
+						f.setNatoTime(distancenextpackmen);
+						fruiteated++;
+						P.setFirstPointCor(f.getPointer_fruit());
+						P.setTime(totaltime); 
+						System.out.println(P.getIDpack()+"eat"+f.getIdfruit());
 
-				timeold = 10000000;
-				Packman P = pack.next();
-				Iterator<Fruit> fru = gamerun.getFruit().iterator();//Iterator for fruits
+						
 
-				while(fru.hasNext()) 
-				{
-					Fruit f=fru.next();
-					double timenow = (distance3d(P.pointer_packmen, f.pointer_fruit))/(P.getSpeed()) + P.getTime(); //calculte the time that take to get to the fruit 
-
-					if(timenow<=timeold && f.isLife()==true) {
-						timeold=timenow;
-						boolean  battlepa=false;
-						Iterator<Packman> packmenbattle = gamerun.getPack().iterator();
-
-						//	double timebattleold;
-						while(packmenbattle.hasNext()) {
-							Packman battlepack = packmenbattle.next();
-							double timebattle=(distance3d(battlepack.pointer_packmen, f.pointer_fruit))/(battlepack.getSpeed())+battlepack.getTime();
-							if(timeold>timebattle) {
-								battlepa=true;
-								//timebattleold=timebattle;
-							}
-							else if(timeold==timebattle) {
-								battlepa=false;
-
-							}
-						}					
-
-						if(battlepa==false &&f.isLife()==true) {
-							P.getFruit().add(f);
-							f.setLife(false);
-							fruiteated++;
-							P.setTime(P.getTime()+timeold); 
-							timetotal=+timeold;
-
-							System.out.println(P.getIDpack()+"eat"+f.getIdfruit());
-
-						}
-
-
+						
+						Calendar c = Calendar.getInstance();
+						int hd =(int)totaltime;
+						c.add(cal.SECOND,hd);
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String strDate2 = sdf.format(c.getTime());
+						f.setTimeStamp(strDate2);
+						Point3D pointFruit = new Point3D(f.getPointer_fruit(), f.getTimeStamp());
+						P.getPathOfPacman().add(pointFruit);
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 					}
 				}
 			}
+		} //end of the while
+
+		Iterator<Packman> packtime = gamerun.getPack().iterator(); //Iterator for packman
+		double maxtime =0;
+		while(packtime.hasNext()) {
+			Packman p = packtime.next();
+			if(p.getTime()>maxtime) {
+				maxtime=p.getTime();
+			}
+
 		}
-		System.out.println(timetotal);
+		System.out.println(maxtime);
+
+
+		///////////
+		Iterator<Packman> calibrate = gamerun.getPack().iterator(); //Iterator for packman
+		while(calibrate.hasNext()) {
+			Packman p = calibrate.next();
+			p.setFirstPointCor(p.getPointer_packmen());
+
+		}
 
 	}
+	
+	
+	public Fruit WhoIsClosetFruit(Packman P,Game gamerun ) {
+		Iterator<Fruit> fru = gamerun.getFruit().iterator();//Iterator for fruits
+		double idfruit=-4;
+		double distancebest=111111110;
+		double distancenew=0;
+		while(fru.hasNext()) 
+		{
+			Fruit f = fru.next();
+			distancenew = ((distance3d(P.getFirstPointCor(), f.getPointer_fruit())-P.getRadiuos())/P.getSpeed())+P.getTime();
+			if((f.isLife()==true)&& (distancenew<distancebest)) {
+				idfruit=f.getIdfruit();
+				distancebest=distancenew;
+			}
+		}
+		Iterator<Fruit> findthebest = gamerun.getFruit().iterator();//Iterator for fruits
+
+		while(findthebest.hasNext()) 
+		{
+			Fruit closerF= findthebest.next();
+			if(closerF.getIdfruit()==idfruit)
+				return closerF;
+
+		}
+		return null;
+
+	}
+	
+	
+	
+	
+	
+	public Packman WhoIsClosetPackman(Fruit f,Game gamerun ) {
+		Iterator<Packman> pack = gamerun.getPack().iterator();//Iterator for fruits
+		double idpackmen=10000;
+		double distancebest=111111110;
+		double distancenew=0;
+		while(pack.hasNext()) 
+		{
+			Packman P = pack.next();
+			distancenew = ((distance3d(P.getFirstPointCor(), f.getPointer_fruit())-P.getRadiuos())/P.getSpeed())+P.getTime();
+			if((f.isLife()==true)&& (distancenew<distancebest)) {
+				idpackmen=P.getIDpack();
+				distancebest=distancenew;
+			}
+		}
+
+		Iterator<Packman> findthebest = gamerun.getPack().iterator();//Iterator for fruits
+
+		while(findthebest.hasNext()) 
+		{
+			Packman closerp= findthebest.next();
+			if(closerp.getIDpack()==idpackmen)
+				return closerp;
+
+		}
+		return null;
+	}
+
+
+
+
 
 }
 

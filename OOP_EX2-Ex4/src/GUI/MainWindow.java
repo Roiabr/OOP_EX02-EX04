@@ -3,6 +3,7 @@ package GUI;
 
 
 
+
 import java.awt.FileDialog;
 import java.awt.Graphics;
 import java.awt.Menu;
@@ -24,13 +25,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import algoritem.Map;
 import algoritem.Fruit;
 import algoritem.Game;
 import algoritem.Packman;
-import algoritem.Path;
+import algoritem.RunPackmen;
+import algoritem.ShortestPathAlg;
 import File_format.*;
 import Geom.*;
+import Map.Map;
 import GIS.*;
 
 
@@ -46,9 +48,16 @@ public class MainWindow extends JFrame implements MouseListener
 	//ArrayList<Packman> pacman3 = new ArrayList<Packman>();
 	public BufferedImage myImage ,myImage1,myImage2;
 	Game GuiGame;
-	int inputstate=0;//packmen or fruit 
-	Map map;
+	int inputstate=0;
+	int packmen_furit=0;//packmen or fruit 
+	boolean run=false;
 
+	Map map;
+	ShortestPathAlg spa;
+
+	RunPackmen runi;
+
+	boolean isendGame = false;
 
 
 	public MainWindow() 
@@ -72,6 +81,7 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem item4 = new MenuItem("Add Packman");
 		MenuItem item5 = new MenuItem("Add Fruit");
 		MenuItem item6 = new MenuItem("Run");
+		MenuItem item7 = new MenuItem("kml");
 
 		//     menuItem /////
 		menu1.add(item1);
@@ -80,6 +90,7 @@ public class MainWindow extends JFrame implements MouseListener
 		menu2.add(item4);
 		menu2.add(item5);
 		menu3.add(item6);
+		menu3.add(item7);
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		menuBar.add(menu3);
@@ -104,6 +115,8 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("load game");
+				GuiGame.getPack().removeAll(GuiGame.getPack());
+				GuiGame.getFruit().removeAll(GuiGame.getFruit());
 				loadFile();
 				repaint();
 			}
@@ -113,7 +126,7 @@ public class MainWindow extends JFrame implements MouseListener
 		item4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				inputstate = 1;
+				packmen_furit = 1;
 				System.out.println("packman choose");
 
 			}
@@ -122,7 +135,7 @@ public class MainWindow extends JFrame implements MouseListener
 		item5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				inputstate = 2;
+				packmen_furit = 2;
 				System.out.println("Fruit choose");
 			}
 		});
@@ -131,9 +144,23 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GuiGame.runGame();
+				run=true;
 				repaint();
 			}
 		});
+		item7.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					MultiCsv.Game2Kml(GuiGame);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		this.setMenuBar(menuBar);
 		try {
 			myImage = ImageIO.read(new File("Ariel1.png"));
@@ -146,26 +173,9 @@ public class MainWindow extends JFrame implements MouseListener
 	int x = -1;
 	int y = -1;
 
-	public void loadFile() {
-		Game newfile = new Game(readFileDialog());
-		Iterator<Packman> iterPac = newfile.getPack().iterator();
-		Iterator<Fruit> iterFruit =  newfile.getFruit().iterator();
-
-		while(iterPac.hasNext()) {
-			Packman f = iterPac.next();
-			GuiGame.getPack().add(f);
-			System.out.println(f.getIDpack());
-		}
-		while(iterFruit.hasNext()) {
-			Fruit f = iterFruit.next();
-			GuiGame.getFruit().add(f);
-
-		}
-
-		repaint();
-	}
 	public void paint(Graphics g)
 	{
+
 		g.drawImage(myImage, 0, 0,getWidth(),getHeight(), this);
 		try {
 			myImage1 = ImageIO.read(new File("packman.png"));
@@ -174,66 +184,113 @@ public class MainWindow extends JFrame implements MouseListener
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
-		}	
-		Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+		}
 		Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
+		while(iterFruit.hasNext()) {		//All the time paint the fruit
+			Fruit f = iterFruit.next();
+			Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(),f.getPointer_fruit().x(),this.getHeight(),this.getWidth()));
+			g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
+		}	
 
-		while(iterPac.hasNext()) {
-			Packman f = iterPac.next();
-			Point3D p = new Point3D(Map.ConvertorToScreen(f.getPointer_packmen().x(),f.getPointer_packmen().y(),this.getHeight(),this.getWidth()));
 
-			g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
+		if(run==false) ///for any position change the packman by the real location
+		{
+			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+			while(iterPac.hasNext()) {
+				Packman pac = iterPac.next();
+				Point3D p = new Point3D(Map.gpsToPix(pac.getFirstPointCor().y(),pac.getFirstPointCor().x(),this.getHeight(),this.getWidth()));
 
+				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
+			}
 
 		}
-		while(iterFruit.hasNext()) {
-			Fruit f = iterFruit.next();
-			Point3D p = new Point3D(Map.ConvertorToScreen(f.getPointer_fruit().x(), f.getPointer_fruit().y(),this.getHeight(),this.getWidth()));
-			g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
+
+		if(run==true)//just for create thread one time 
+		{
+			Iterator<Packman> timetoeat = GuiGame.getPack().iterator();
+			while(timetoeat.hasNext()) {
+				Packman p = timetoeat.next();
+				RunPackmen sh= new RunPackmen();
+				sh.runpackmen(this, p);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+//			RunPackmen gs = new RunPackmen(this,GuiGame);
+//			
+			run=false;
 		}
 
 	}
 
+
+	
 	public void mouseClicked(MouseEvent arg) {
-		if(inputstate == 1) {
-			int id = 0;
+		int idPackman = 1;
+		int idFruit = 1;
+		if((GuiGame.getPack().size() != 0) && (GuiGame.getFruit().size() != 0)) {
+			idPackman = GuiGame.getPack().get(GuiGame.getPack().size()-1).getIDpack()+1;
+			idFruit = GuiGame.getFruit().get(GuiGame.getFruit().size()-1).getIdfruit()+1;
+		}
+		else {
+			idPackman = idPackman++;
+			idFruit = idFruit++;
+		}
+		if(packmen_furit == 1) {
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			p = Map.ConvertorFromScreen(x, y,this.getHeight(),this.getWidth());
+			p = Map.pixToGps(x, y,this.getHeight(),this.getWidth());
+			System.out.println(p);
 			Packman packi = new Packman();
-						packi.setPointer_packmen(p);
-			if(GuiGame.getPack().size() == 0) {
-				packi.setIDpack(1);
-				id++;
-			}
-			else
-				packi.setIDpack(id);
-			packi.setSpeed(1);
-			packi.setRadiuos(1);
-			GuiGame.getPack().add(packi);
+			packi.setPointer_packmen(p);
+			packi.setFirstPointCor(p);
 			packi.setType("P");
-			System.out.println("hi");
+			packi.setIDpack(idPackman);
+			idPackman++;
+			packi.setRadiuos(1);
+			packi.setSpeed(1);
+			GuiGame.getPack().add(packi);
 			repaint();
 		}
-		else if(inputstate == 2) {
-			int id = 0;
+		else if(packmen_furit == 2) {
 			x = arg.getX();
 			y = arg.getY();
 			Point3D p = new Point3D(x, y);
-			p = Map.ConvertorFromScreen(x, y,this.getHeight(),this.getWidth());
+			p = Map.pixToGps(x, y,this.getHeight(),this.getWidth());
 			Fruit fruti = new Fruit();
+			fruti.setType("F");
+			fruti.setIdfruit(idFruit);
+			idFruit++;
 			fruti.setPointer_fruit(p);
-			if(GuiGame.getPack().size() == 0) {
-				fruti.setIdfruit(1);
-				id++;
-			}
-			else
-				fruti.setIdfruit(id);
+			fruti.setLife(true);
+			fruti.setSpeed(1);
 			GuiGame.getFruit().add(fruti);
 			repaint();
 		}
 
+	}
+	public void loadFile() {
+		Game newfile = new Game(readFileDialog());
+		Iterator<Packman> iterPac = newfile.getPack().iterator();
+		Iterator<Fruit> iterFruit =  newfile.getFruit().iterator();
+
+		while(iterPac.hasNext()) {
+			Packman f = iterPac.next();
+			GuiGame.getPack().add(f);
+		}
+		while(iterFruit.hasNext()) {
+			Fruit f = iterFruit.next();
+			GuiGame.getFruit().add(f);
+
+		}
+
+		repaint();
 	}
 
 	public GisLayer readFileDialog() {
@@ -267,11 +324,11 @@ public class MainWindow extends JFrame implements MouseListener
 	public void writeFileDialog() {
 		//		 try write to the file
 		FileDialog fd = new FileDialog(this, "Save the text file", FileDialog.SAVE);
-		fd.setFile("*.txt");
+		fd.setFile("*.csv");
 		fd.setFilenameFilter(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
-				return name.endsWith(".txt");
+				return name.endsWith(".csv");
 			}
 		});
 		fd.setVisible(true);
@@ -279,13 +336,14 @@ public class MainWindow extends JFrame implements MouseListener
 		String fileName = fd.getFile();
 		try {
 			FileWriter fw = new FileWriter(folder + fileName);
-			PrintWriter outs = new PrintWriter(fw);
-			//outs = MultiCsv.layer2csv(layer, output);
+			PrintWriter outs = new PrintWriter(MultiCsv.Game2csv(GuiGame,folder + fileName));
+
 			outs.close();
 			fw.close();
 		} catch (IOException ex) {
 			System.out.print("Error writing file  " + ex);
 		}
+
 
 	}
 
@@ -303,15 +361,6 @@ public class MainWindow extends JFrame implements MouseListener
 		// TODO Auto-generated method stub	
 	}
 
-	public static void main(String[] args)
-	{
-		MainWindow window = new MainWindow();
-		window.setVisible(true);
-		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setTitle("MAROCO VS TUNIS");
-
-	}
 
 
 }

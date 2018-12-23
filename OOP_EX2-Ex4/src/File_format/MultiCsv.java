@@ -7,15 +7,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-
 import GIS.GIS_element;
 import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
+import Geom.Point3D;
+import algoritem.Fruit;
+import algoritem.Game;
+import algoritem.Packman;
 
 
 
@@ -156,6 +157,164 @@ public class MultiCsv {
 
 
 	}
+	/**
+	 * the method get a game and make from him a csv file
+	 * @param game - the game we played
+	 * @param fileName - the name for the game
+	 * @return pw - a print Writer
+	 */
+	public static PrintWriter Game2csv(Game game,String fileName) {
+
+		PrintWriter pw = null;
+
+		try 
+		{
+			pw = new PrintWriter(new File(fileName));
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+
+		}
+		StringBuilder sb = new StringBuilder();
+		Iterator <Packman> iter = game.getPack().iterator();
+		Iterator <Fruit> iter2 = game.getFruit().iterator();
+		sb.append("Type");
+		sb.append(',');
+		sb.append("id");
+		sb.append(',');
+		sb.append("lat");
+		sb.append(',');
+		sb.append("lon");
+		sb.append(',');
+		sb.append("alt");
+		sb.append(',');
+		sb.append("Speed/Weight");
+		sb.append(',');
+		sb.append("Radius");
+		sb.append('\n');
+
+		while(iter.hasNext()) {
+			Packman p1 = iter.next();
+			sb.append(p1.getType());
+			sb.append(',');
+			sb.append(p1.getIDpack());
+			sb.append(',');
+			sb.append(p1.getPointer_packmen().x());
+			sb.append(',');
+			sb.append(p1.getPointer_packmen().y());
+			sb.append(',');
+			sb.append(p1.getPointer_packmen().z());
+			sb.append(',');
+			sb.append(p1.getSpeed());
+			sb.append(',');
+			sb.append(p1.getRadiuos());
+			sb.append('\n');
+		}
+
+		while(iter2.hasNext()) {
+			Fruit f1 = iter2.next();
+			sb.append(f1.getType());
+			sb.append(',');
+			sb.append(f1.getIdfruit());
+			sb.append(',');
+			sb.append(f1.getPointer_fruit().x());
+			sb.append(',');
+			sb.append(f1.getPointer_fruit().y());
+			sb.append(',');
+			sb.append(f1.getPointer_fruit().z());
+			sb.append(',');
+			sb.append(f1.getSpeed());
+			sb.append('\n');
+		}
+		pw.write(sb.toString());
+		pw.close();
+		System.out.println("done!");
+		return pw;
+
+	}
+
+	/**
+	 * the method turning a game to kml file
+	 * @param game - the game 
+	 * @throws IOException
+	 */
+	public static void Game2Kml(Game game) throws IOException
+	{
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"+"<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"+
+				"<Document>\n"+"<Style id=\"yellow\"><IconStyle><Icon><href>"
+				+"http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png</href>" 
+				+"</Icon></IconStyle></Style>" + "\n"
+				+ "<Style id=\"red\"><IconStyle><Icon><href>" 
+				+"http://maps.google.com/mapfiles/kml/paddle/red-stars.png</href>"
+				+ "</Icon></IconStyle></Style>" + "\n"
+				+"<Style id=\"pac\"><IconStyle><Icon><href>"
+				+" C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04---Copy\\packman.png "+"</href>"
+				+"</Icon></IconStyle></Style>");
+
+
+		Iterator<Fruit>  fruit = game.getFruit().iterator();
+		while(fruit.hasNext())
+		{
+
+			Fruit fru = new Fruit(fruit.next());
+			sb.append("<Placemark>\n"
+					+"<name>" + fru.getType() +"</name>\n"
+					+"<description>" + "ID: " + fru.getIdfruit() +"\n"+
+					fru.getSpeed() + "\n"+
+					"</description>"
+					+"<styleUrl>#red</styleUrl>\n"+"<Point>\n"+
+					"<coordinates>"+fru.getPointer_fruit().y()+","+fru.getPointer_fruit().x()+"</coordinates></Point>\n"+
+					"</Placemark>\n");	
+		}	
+
+		sb.append("<Folder>");
+		Iterator <Packman> packman = game.getPack().iterator();
+		while(packman.hasNext()) {
+			Packman p1 = packman.next();
+			Iterator <Point3D> Path = p1.getPathOfPacman().iterator();
+			Point3D pointPath1 = Path.next();
+			sb.append("<Placemark>"+"<styleUrl>#pac</styleUrl>\n"+"<TimeStamp><when>"+Time2Kml(pointPath1.getTime())+"</when></TimeStamp>"
+					+
+					"<Point><coordinates>"+p1.getFirstPointCor().y()+","+p1.getFirstPointCor().x()+"</coordinates></Point>"+
+					" </Placemark>");
+
+
+			while(Path.hasNext())
+			{
+				Point3D pointPath = Path.next();
+				sb.append("<Placemark>"+"<styleUrl>#pac</styleUrl>\n"+"<TimeStamp><when>"+Time2Kml(pointPath.getTime())+"</when></TimeStamp>"
+						+
+						"<Point><coordinates>"+pointPath.y()+","+pointPath.x()+"</coordinates></Point>"+
+						" </Placemark>");
+				System.out.println(pointPath.getTime());
+				System.out.println(Time2Kml(pointPath.getTime()));
+			}
+		}
+
+		sb.append("</Folder></Document></kml>");
+		PrintWriter pw = null;
+		String fileName ="GameKml.kml";
+		try {
+			pw = new PrintWriter(new FileWriter(fileName));
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+		pw.write(sb.toString());
+		pw.close();
+		System.out.println("done");
+	}
+
+	/**
+	 * the method get a layer and make from him a csv file
+	 * @param layer - the layer
+	 * @param output - the palce we write the csv file
+	 */
 	public static void layer2csv(GisLayer layer,String output) {
 		String fileName = output + ".csv";
 		PrintWriter pw = null;
@@ -167,7 +326,7 @@ public class MultiCsv {
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-			return;
+
 		}
 		StringBuilder sb = new StringBuilder();
 		Iterator <GIS_element> iter = layer.iterator();
@@ -222,13 +381,16 @@ public class MultiCsv {
 		pw.write(sb.toString());
 		pw.close();
 		System.out.println("done!");
-	}
 
-	public static void main(String[] args) throws IOException {
-		//File currentDir = new File("C:\\Users\\Gal\\Desktop\\nykv nubjv\\data\\game_1543684662657"); // current directory
-		GisLayer layer = Csv2Layer("C:\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data\\game_1543684662657.csv");
-		layer2csv(layer, "C:\\\\Users\\Roi Abramovitch\\Documents\\לימודים מדעי המחשב\\מדמ''ח שנה ב' סמסטר א\\מונחה עצמים\\מטלות\\מטלה 3\\Ex3\\data"); 
 	}
-
+	/**
+	 * the method get a string of time and change it to timestamp kml format
+	 * @param time - the time
+	 * @return time - the timestamp kml format
+	 */
+	public static String Time2Kml(String time) {
+		time = time.substring(0, 10) + "T" + time.substring(11,19) + "Z";
+		return time;
+	}
 
 }
