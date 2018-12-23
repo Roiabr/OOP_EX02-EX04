@@ -1,4 +1,4 @@
-package algoritem;
+package Game;
 
 
 
@@ -12,6 +12,7 @@ import GIS.GIS_layer;
 import GIS.GisLayer;
 import GUI.MainWindow;
 import Geom.Point3D;
+import algoritem.ShortestPathAlg;
 
 /**
  * This class represents a the Game.

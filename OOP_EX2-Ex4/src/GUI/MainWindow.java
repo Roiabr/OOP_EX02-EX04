@@ -25,15 +25,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import algoritem.Fruit;
-import algoritem.Game;
-import algoritem.Packman;
-import algoritem.RunPackmen;
+
 import algoritem.ShortestPathAlg;
 import File_format.*;
 import Geom.*;
 import Map.Map;
+import Threads.RunPackmen;
 import GIS.*;
+import Game.Fruit;
+import Game.Game;
+import Game.Packman;
 
 
 

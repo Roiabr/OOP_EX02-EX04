@@ -13,10 +13,10 @@ import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
+import Game.Fruit;
+import Game.Game;
+import Game.Packman;
 import Geom.Point3D;
-import algoritem.Fruit;
-import algoritem.Game;
-import algoritem.Packman;
 
 
 

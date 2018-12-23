@@ -1,7 +1,9 @@
-package algoritem;
+package Threads;
 
 import java.util.ArrayList;
 import GUI.MainWindow;
+import Game.Fruit;
+import Game.Packman;
 import Geom.Point3D;
 
 /**

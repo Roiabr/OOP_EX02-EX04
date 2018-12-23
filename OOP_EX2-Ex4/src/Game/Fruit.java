@@ -1,4 +1,4 @@
-package algoritem;
+package Game;
 
 
 import GIS.GIS_element;
