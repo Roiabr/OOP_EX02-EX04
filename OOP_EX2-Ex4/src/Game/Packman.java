@@ -23,11 +23,14 @@ public class Packman {
 	private String type;
 	private double time;
 	private String timeStamp;
-	
+
+	/**
+	 * a default constructor for the class
+	 */
 	public Packman() {
-		
+
 	}
-	
+
 	/**
 	 * a constructor for the class and make a packman from csv file
 	 * @param element - the element from csv file
@@ -57,9 +60,9 @@ public class Packman {
 		this.radiuos = next.radiuos;
 		this.time = 0;
 	}
-	
 
-	
+
+
 
 	///////////////////// GETTER&SETTER //////////////////////////////
 	/**
@@ -124,12 +127,16 @@ public class Packman {
 		this.radiuos = radiuos;
 	}
 	/**
-	 * the method get t
+	 * the method get time in double 
 	 * @return time - the time
 	 */
 	public double getTime() {
 		return time;
 	}
+	/**
+	 * the method set time in double 
+	 * @param time - a time in double
+	 */
 	public void setTime(double time) {
 		this.time = time;
 	}
@@ -147,32 +154,55 @@ public class Packman {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	public String getTime2() {
-		return timeStamp;
-	}
-	public void setTime2(String time2) {
-		this.timeStamp = time2;
-	}
-	
+
+	/**
+	 * the method set the tempory point for the calculete
+	 * @param firstPointCor - the point in 3d
+	 */
 	public void setFirstPointCor(Point3D firstPointCor) {
 		this.firstPointCor = firstPointCor;
 	}
+	/**
+	 * the method get the tempory point for the calculete
+	 * @return firstPointCor - a point 3d
+	 */
 	public Point3D getFirstPointCor() {
 		return firstPointCor;
-		
+
 	}
+	/**
+	 * the method return an array list with the fruits the packman ate
+	 * @return fruiteat - the array list
+	 */
 	public ArrayList<Fruit> getFruiteat() {
 		return fruiteat;
 	}
-
+	/**
+	 * the method get the first coordinates of packman in the bigining of the game
+	 * @return first - the first coordinates of packman
+	 */
 	public Point3D getFirst() {
 		return first;
 	}
-
+	/**
+	 * the method set the first coordinates of packman in the bigining of the game
+	 * @param first - a point 3d
+	 */
 	public void setFirst(Point3D first) {
 		this.first = first;
 	}
-
-	
+	/**
+	 * the method get the time stamp of a packman
+	 * @return timeStamp - the time stamp
+	 */
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+	/**
+	 * the method set the time stamp of a packman
+	 * @param timeStamp - a time stamp in string
+	 */
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 }

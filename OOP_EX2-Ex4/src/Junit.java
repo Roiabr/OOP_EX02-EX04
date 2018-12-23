@@ -16,6 +16,7 @@ class Junit {
 		Point3D p3 = new Point3D(0, 0, 0);
 		MyCoords  C1  = new MyCoords();
 		Point3D vector = C1.vector3D(p1, p2);
+		System.out.println(vector);
 		p3 = C1.add(p1, vector);
 		assertEquals(p2.toString(), p3.toString());
 	}
@@ -27,6 +28,7 @@ class Junit {
 		MyCoords  C1  = new MyCoords();
 		C1.distance3d(p1, p2);
 		assertEquals(493.0523316830263, C1.distance3d(p1, p2));
+		
 	}
 
 	@Test

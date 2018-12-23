@@ -5,7 +5,6 @@ import GIS.GIS_element;
 import GIS.GisToElement;
 import Geom.Point3D;
 
-
 /**
  * This class represents a Fruit in the game.
  */

@@ -9,19 +9,24 @@ import javax.swing.JFrame;
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
-import GIS.GisLayer;
 import GUI.MainWindow;
-import Geom.Point3D;
 import algoritem.ShortestPathAlg;
 
 /**
  * This class represents a the Game.
- * @author Roi Abramovitch && Gal haddida
+ * @author Roi Abramovitch && Gal Hadida
  */
 public class Game extends MultiCsv {
 
 	private ArrayList<Packman> pack= new ArrayList<Packman>();
 	private ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
+
+	/**
+	 * a default constructor for the class
+	 */
+	public Game() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * a constructor for the class and make a the game(layer) from csv file
@@ -43,9 +48,6 @@ public class Game extends MultiCsv {
 				Fruit.add(f);
 			}
 		}
-	}
-	public Game() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -81,11 +83,8 @@ public class Game extends MultiCsv {
 
 		MainWindow h = new MainWindow();
 		h.setVisible(true);
-		h.setSize(h.myImage.getWidth(),h.myImage.getHeight());
+		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
 		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		h.setTitle("MAROCO VasdS TUNIS");
+		h.setTitle("MAROCO Vs TUNIS");
 	}
-
-
-
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Style id="yellow"><IconStyle><Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png</href></Icon></IconStyle></Style>
+<Style id="red"><IconStyle><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-stars.png</href></Icon></IconStyle></Style>
+<Style id="pac"><IconStyle><Icon><href> C:\Users\Roi Abramovitch\eclipse-workspace\OOP_EX02-EX04---Copy\packman.png </href></Icon></IconStyle></Style><Placemark>
+<name>F</name>
+<description>ID: 30
+1
+</description><styleUrl>#red</styleUrl>
+<Point>
+<coordinates>35.20674934,32.10441982</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>F</name>
+<description>ID: 29
+1
+</description><styleUrl>#red</styleUrl>
+<Point>
+<coordinates>35.20709657,32.10415012</coordinates></Point>
+</Placemark>
+<Placemark>
+<name>F</name>
+<description>ID: 31
+1
+</description><styleUrl>#red</styleUrl>
+<Point>
+<coordinates>35.20638557,32.10463247</coordinates></Point>
+</Placemark>
+<Folder><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:25:51Z</when></TimeStamp><Point><coordinates>35.20758436,32.10404121</coordinates></Point> </Placemark><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:25:51Z</when></TimeStamp><Point><coordinates>35.20758436,32.103813</coordinates></Point> </Placemark><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:25:51Z</when></TimeStamp><Point><coordinates>35.20724539,32.10394266</coordinates></Point> </Placemark><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:26:16Z</when></TimeStamp><Point><coordinates>35.20709657,32.10415012</coordinates></Point> </Placemark><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:27:00Z</when></TimeStamp><Point><coordinates>35.20674934,32.10441982</coordinates></Point> </Placemark><Placemark><styleUrl>#pac</styleUrl>
+<TimeStamp><when>2018-12-23T23:27:40Z</when></TimeStamp><Point><coordinates>35.20638557,32.10463247</coordinates></Point> </Placemark></Folder></Document></kml>

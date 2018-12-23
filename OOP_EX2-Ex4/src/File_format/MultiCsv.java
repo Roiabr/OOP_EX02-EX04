@@ -19,7 +19,11 @@ import Game.Packman;
 import Geom.Point3D;
 
 
-
+/**
+ * This class represents a file foramt for copule options.
+ * @author Roi Abramovitch & Gal Hadida
+ *
+ */
 public class MultiCsv {
 
 	/**
@@ -275,13 +279,6 @@ public class MultiCsv {
 		while(packman.hasNext()) {
 			Packman p1 = packman.next();
 			Iterator <Point3D> Path = p1.getPathOfPacman().iterator();
-//			Point3D pointPath1 = Path.next();
-//			sb.append("<Placemark>"+"<styleUrl>#pac</styleUrl>\n"+"<TimeStamp><when>"+Time2Kml(pointPath1.getTime())+"</when></TimeStamp>"
-//					+
-//					"<Point><coordinates>"+p1.getFirst().y()+","+p1.getFirst().x()+"</coordinates></Point>"+
-//					" </Placemark>");
-
-
 			while(Path.hasNext())
 			{
 				Point3D pointPath = Path.next();
@@ -289,8 +286,7 @@ public class MultiCsv {
 						+
 						"<Point><coordinates>"+pointPath.y()+","+pointPath.x()+"</coordinates></Point>"+
 						" </Placemark>");
-				System.out.println(pointPath.getTime());
-				System.out.println(Time2Kml(pointPath.getTime()));
+				
 			}
 		}
 

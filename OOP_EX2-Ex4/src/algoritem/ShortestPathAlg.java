@@ -9,29 +9,37 @@ import Game.Fruit;
 import Game.Game;
 import Game.Packman;
 import Geom.Point3D;
+import Map.Map;
 
-
+/**
+ * This class represents an algortiom for eating fruits by packmans in the game.
+ * @author Roi Abramovitch & Gal Hadida
+ */
 public class ShortestPathAlg extends MyCoords {
 
-
-
+	/**
+	 * a defuelt constructor for the class
+	 */
 	public ShortestPathAlg() {
 		// TODO Auto-generated constructor stub
-
 	}
 
+	/**
+	 * the method get a game and calculete the ways all pacman should eat the fruits.
+	 * @param gamerun - the game that we run the algo on him
+	 */
 	public void ShortestPathAlgToPath(Game gamerun) {
 		// TODO Auto-generated method stub
-		
+
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String strDate = format.format(cal.getTime());
 		Iterator<Packman> packclibarte = gamerun.getPack().iterator(); //Iterator for packman
-		while(packclibarte.hasNext()) {
+		while(packclibarte.hasNext()) {//run over the packmans and init the first time
 			Packman p = packclibarte.next();
 			p.setFirst(p.getFirstPointCor());
-			p.setTime2(strDate);
-			Point3D point = new Point3D(p.getFirst(),p.getTime2());
+			p.setTimeStamp(strDate);
+			Point3D point = new Point3D(p.getFirst(),p.getTimeStamp());
 			p.getPathOfPacman().add(point);
 		}
 
@@ -54,7 +62,7 @@ public class ShortestPathAlg extends MyCoords {
 					if((P.getIDpack()==WhoIsClosetPackman(f,gamerun).getIDpack()) && (f.isLife()==true))
 
 					{
-						
+
 						double distancenextpackmen =  ((distance3d(P.getFirstPointCor(), f.getPointer_fruit())-P.getRadiuos())/P.getSpeed());
 						double totaltime = distancenextpackmen +P.getTime();
 						P.getFruiteat().add(f);
@@ -65,9 +73,9 @@ public class ShortestPathAlg extends MyCoords {
 						P.setTime(totaltime); 
 						System.out.println(P.getIDpack()+"eat"+f.getIdfruit());
 
-						
 
-						
+
+
 						Calendar c = Calendar.getInstance();
 						int hd =(int)totaltime;
 						c.add(cal.SECOND,hd);
@@ -76,26 +84,10 @@ public class ShortestPathAlg extends MyCoords {
 						f.setTimeStamp(strDate2);
 						Point3D pointFruit = new Point3D(f.getPointer_fruit(), f.getTimeStamp());
 						P.getPathOfPacman().add(pointFruit);
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
 					}
 				}
 			}
 		} //end of the while
-
 		Iterator<Packman> packtime = gamerun.getPack().iterator(); //Iterator for packman
 		double maxtime =0;
 		while(packtime.hasNext()) {
@@ -105,10 +97,7 @@ public class ShortestPathAlg extends MyCoords {
 			}
 
 		}
-		System.out.println(maxtime);
-
-
-		///////////
+		
 		Iterator<Packman> calibrate = gamerun.getPack().iterator(); //Iterator for packman
 		while(calibrate.hasNext()) {
 			Packman p = calibrate.next();
@@ -117,8 +106,13 @@ public class ShortestPathAlg extends MyCoords {
 		}
 
 	}
-	
-	
+
+	/**
+	 * the method check which fruit is the clossest fruit the the packman
+	 * @param P - a packman
+	 * @param gamerun - the game
+	 * @return closerF - the fruit the close to packman 
+	 */
 	public Fruit WhoIsClosetFruit(Packman P,Game gamerun ) {
 		Iterator<Fruit> fru = gamerun.getFruit().iterator();//Iterator for fruits
 		double idfruit=-4;
@@ -143,13 +137,14 @@ public class ShortestPathAlg extends MyCoords {
 
 		}
 		return null;
-
 	}
-	
-	
-	
-	
-	
+
+	/**
+	 * the method run over all the packmans and check who is the closses to the fruit
+	 * @param f - a fruit
+	 * @param gamerun - the game
+	 * @return closerp - the closes packman
+	 */
 	public Packman WhoIsClosetPackman(Fruit f,Game gamerun ) {
 		Iterator<Packman> pack = gamerun.getPack().iterator();//Iterator for fruits
 		double idpackmen=10000;
@@ -176,11 +171,9 @@ public class ShortestPathAlg extends MyCoords {
 		}
 		return null;
 	}
-
-
-
-
-
+	public static void main(String[] arg) {
+	
+	}
 }
 
 
