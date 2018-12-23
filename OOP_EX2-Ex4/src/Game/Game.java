@@ -85,6 +85,6 @@ public class Game extends MultiCsv {
 		h.setVisible(true);
 		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
 		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		h.setTitle("MAROCO Vs TUNIS");
+		h.setTitle("Packmans in ariel");
 	}
 }
