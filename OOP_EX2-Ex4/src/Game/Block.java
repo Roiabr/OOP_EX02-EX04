@@ -43,5 +43,6 @@ public class Block {
 		this.point_BlockStart = new Point3D(bl.point_BlockStart);
 		this.point_BlockEnd = new Point3D(bl.point_BlockEnd);
 		this.IDBloack = bl.IDBloack;
+		
 	}
 }

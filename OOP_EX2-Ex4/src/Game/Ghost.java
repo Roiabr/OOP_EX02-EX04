@@ -51,6 +51,7 @@ public class Ghost {
 		this.speed = gh.speed;
 		this.radiuos = gh.radiuos;
 		this.time = 0;
+		
 	}
 	public Point3D getPoint_Ghost() {
 		return point_Ghost;

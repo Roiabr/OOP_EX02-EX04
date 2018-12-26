@@ -22,7 +22,7 @@ public class Game extends MultiCsv {
 	private ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
 	private ArrayList<Ghost> ghost= new ArrayList<Ghost>();
 	private ArrayList<Block> block= new ArrayList<Block>();
-
+	
 
 	/**
 	 * a default constructor for the class
