@@ -41,8 +41,8 @@ public class Packman {
 		this.IDpack=Integer.parseInt(ele[1]);
 		this.pointer_packmen = element.getGeom().getNewpoint();
 		firstPointCor =  element.getGeom().getNewpoint();
-		this.speed = Integer.parseInt(ele[5]);
-		this.radiuos = Integer.parseInt(ele[6]);
+//		this.speed = Integer.parseInt(ele[5]);
+//		this.radiuos = Integer.parseInt(ele[6]);
 		this.time = 0;
 	}
 	/**

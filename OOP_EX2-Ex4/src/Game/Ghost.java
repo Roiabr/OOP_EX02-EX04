@@ -10,6 +10,7 @@ import Geom.Point3D;
 public class Ghost {
 	
 	private int IDGhost;
+	
 	private String [] ele;
 	private Point3D point_Ghost,firstPointCor,first;
 	private int speed,radiuos;
@@ -33,8 +34,8 @@ public class Ghost {
 		this.IDGhost=Integer.parseInt(ele[1]);
 		this.point_Ghost = element.getGeom().getNewpoint();
 		this.firstPointCor =  element.getGeom().getNewpoint();
-		this.speed = Integer.parseInt(ele[5]);
-		this.radiuos = Integer.parseInt(ele[6]);
+//		this.speed = Integer.parseInt(ele[5]);
+//		this.radiuos = Integer.parseInt(ele[6]);
 		this.time = 0;
 	}
 	/**
@@ -100,5 +101,8 @@ public class Ghost {
 	}
 	public Point3D getFirstPointCor() {
 		return firstPointCor;
+	}
+	public void setIDGhost(int iDGhost) {
+		IDGhost = iDGhost;
 	}
 }
