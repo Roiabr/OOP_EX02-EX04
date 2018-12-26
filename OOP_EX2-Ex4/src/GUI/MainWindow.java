@@ -31,13 +31,14 @@ import Threads.RunPackmen;
 import GIS.*;
 import Game.Fruit;
 import Game.Game;
+import Game.Ghost;
 import Game.Packman;
 
 
 public class MainWindow extends JFrame implements MouseListener 
 {
 
-	private BufferedImage myImage ,myImage1,myImage2;
+	private BufferedImage myImage ,myImage1,myImage2,myImage3,myImage4;
 	private Game GuiGame;
 	private int packmen_furit=0;//packmen or fruit 
 	private boolean run=false; //for run the game 
@@ -62,26 +63,26 @@ public class MainWindow extends JFrame implements MouseListener
 		Menu menu2 = new Menu("Input");
 		Menu menu3 = new Menu("Edit");
 
-		MenuItem item1 = new MenuItem("NewGame");
-		MenuItem item2 = new MenuItem("Save Game");
-		MenuItem item3 = new MenuItem("Load Game");
-		MenuItem item4 = new MenuItem("Add Packman");
-		MenuItem item5 = new MenuItem("Add Fruit");
+		MenuItem newgame = new MenuItem("NewGame");
+		MenuItem save = new MenuItem("Save Game");
+		MenuItem load = new MenuItem("Load Game");
+		MenuItem Packman = new MenuItem("Add Packman");
+		MenuItem fruit = new MenuItem("Add Fruit");
 		MenuItem item6 = new MenuItem("Run");
 		MenuItem item7 = new MenuItem("kml");
 
 		//  menuItem /////
-		menu1.add(item1);
-		menu1.add(item2);
-		menu1.add(item3);
-		menu2.add(item4);
-		menu2.add(item5);
+		menu1.add(newgame);
+		menu1.add(save);
+		menu1.add(load);
+		menu2.add(Packman);
+		menu2.add(fruit);
 		menu3.add(item6);
 		menu3.add(item7);
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		menuBar.add(menu3);
-		item1.addActionListener(new ActionListener() {
+		newgame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("New Game");
@@ -91,14 +92,14 @@ public class MainWindow extends JFrame implements MouseListener
 
 			}
 		});
-		item2.addActionListener(new ActionListener() {
+		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) { 
 				System.out.println("Save game");
 				writeFileDialog();
 			}
 		});
-		item3.addActionListener(new ActionListener() {  //reset all the arraylist and loadfile csv
+		load.addActionListener(new ActionListener() {  //reset all the arraylist and loadfile csv
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("load game"); 
@@ -110,7 +111,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 		});
-		item4.addActionListener(new ActionListener() {
+		Packman.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				packmen_furit = 1;
@@ -119,7 +120,7 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 		});
 
-		item5.addActionListener(new ActionListener() {
+		fruit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				packmen_furit = 2;
@@ -172,7 +173,8 @@ public class MainWindow extends JFrame implements MouseListener
 		try {
 			myImage1 = ImageIO.read(new File("packman.png"));
 			myImage2 = ImageIO.read(new File("apple.png"));
-
+			myImage3 = ImageIO.read(new File("ghost.png"));
+			myImage4 = ImageIO.read(new File("apple.png"));
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -182,7 +184,14 @@ public class MainWindow extends JFrame implements MouseListener
 			Fruit f = iterFruit.next();
 			Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(),f.getPointer_fruit().x(),this.getHeight(),this.getWidth()));
 			g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
-		}	
+		}
+//		Iterator<Ghost> iterGhost =  GuiGame.getGhost().iterator();
+//		while(iterGhost.hasNext()) {
+//			Ghost ghost = iterGhost.next();
+//			Point3D p = new Point3D(Map.gpsToPix(ghost.getPoint_Ghost().y(),ghost.getPoint_Ghost().x(),this.getHeight(),this.getWidth()));
+//			g.drawImage(myImage3, (int)p.x(), (int)p.y(), 20,20,this);
+//		}
+		
 
 
 		if(run==false) ///for any position change the packman by the real location
@@ -193,6 +202,7 @@ public class MainWindow extends JFrame implements MouseListener
 				Point3D p = new Point3D(Map.gpsToPix(pac.getFirstPointCor().y(),pac.getFirstPointCor().x(),this.getHeight(),this.getWidth()));
 				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
 			}
+			
 
 		}
 

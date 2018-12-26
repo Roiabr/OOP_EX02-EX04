@@ -49,13 +49,12 @@ public class RunPackmen extends Thread {
 
 						mw.repaint();
 						try {
-							Thread.sleep(100);
+							Thread.sleep(((long) f.getNatoTime())*3);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 							System.out.println("exception move packmen");
 						}
-						System.out.println(ps.toString());
 					}
 					eatfruit.remove(); //do inside packman when eats the fruit
 				}

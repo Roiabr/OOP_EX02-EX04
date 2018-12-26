@@ -92,12 +92,21 @@ public class Map {
 		MyCoords m = new MyCoords();
 
 		Point3D gps1 = pixToGps(pixel1.x(),pixel1.y(),pyHeighty,pxwidth);
+		System.out.println(gps1);
 		Point3D gps2 = pixToGps(pixel2.x(),pixel2.y(),pyHeighty,pxwidth);
+		System.out.println(gps2);
 
 		double ans[]=m.azimuth_elevation_dist(gps1,gps2);
 		double answer=ans[1];
+		System.out.println(answer);
 
 		return answer;
+	}
+	public static void main(String[] arg) {
+		Point3D pix1 = new Point3D(268.34568202642083,1191.7543815661488,680);
+		Point3D pix2 = new Point3D(248.90936222180926,483.6648734482664,650);
+		Map map = new Map();
+		System.out.println(map.pixelangel(pix1, pix2, 1433,642));
 	}
 
 }

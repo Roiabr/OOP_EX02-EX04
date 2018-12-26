@@ -10,8 +10,8 @@ class JuintMap {
 	
 	Point3D cor1 = new Point3D(35.2066832, 32.10256305);
 	Point3D cor2 = new Point3D(35.20638557,32.10463247);
-	Point3D pix1 = new Point3D(268.34568202642083,1191.7543815661488);
-	Point3D pix2 = new Point3D(248.90936222180926,483.6648734482664);
+	Point3D pix1 = new Point3D(268.34568202642083,1191.7543815661488,650);
+	Point3D pix2 = new Point3D(248.90936222180926,483.6648734482664,680);
 	
 
 	@Test
@@ -44,6 +44,5 @@ class JuintMap {
 		System.out.println(azi);
 		assertEquals("231.81044808891687", ""+ azi);
 	}
-	
 
 }

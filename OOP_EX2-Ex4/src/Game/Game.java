@@ -13,13 +13,16 @@ import GUI.MainWindow;
 import algoritem.ShortestPathAlg;
 
 /**
- * This class represents a the Game.
+ * This class represents a Game.
  * @author Roi Abramovitch && Gal Hadida
  */
 public class Game extends MultiCsv {
 
 	private ArrayList<Packman> pack= new ArrayList<Packman>();
 	private ArrayList<Fruit> Fruit= new ArrayList<Fruit>();
+	private ArrayList<Ghost> ghost= new ArrayList<Ghost>();
+	private ArrayList<Block> block= new ArrayList<Block>();
+
 
 	/**
 	 * a default constructor for the class
@@ -34,9 +37,9 @@ public class Game extends MultiCsv {
 	 */
 	public Game(GIS_layer lay) 
 	{
-		Iterator<GIS_element> g = lay.iterator();
-		while(g.hasNext()) {
-			GIS_element ele = g.next();
+		Iterator<GIS_element> gis = lay.iterator();
+		while(gis.hasNext()) {
+			GIS_element ele = gis.next();
 
 			if(ele.getData().getType().equals("P")) {
 				Packman p = new Packman(ele);
@@ -46,6 +49,14 @@ public class Game extends MultiCsv {
 			{
 				Fruit f = new Fruit(ele);
 				Fruit.add(f);
+			}
+			else if(ele.getData().getType().equals("G")) {
+				Ghost g = new Ghost(ele);
+				ghost.add(g);
+			}
+			else {
+				Block bl = new Block(ele);
+				block.add(bl);
 			}
 		}
 	}
@@ -77,6 +88,14 @@ public class Game extends MultiCsv {
 	public  ArrayList<Fruit> getFruit() {
 		return Fruit;
 	}
+	/**
+	 * the method get the array List with the Ghost
+	 * @return Ghost - the list
+	 */
+	public ArrayList<Ghost> getGhost() {
+		return ghost;
+	}
+
 
 	////////////////////////test///////////////////////
 	public static void main (String[] args ) {

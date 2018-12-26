@@ -32,7 +32,7 @@ public class PointOnVector {
 	 */
 	public ArrayList<Point3D> parts(Packman P ,Fruit F)
 	{
-		double time = 0.05;
+		double time =0.05;
 		double distancex = F.getPointer_fruit().x()-P.getFirstPointCor().x();
 		double distancey = F.getPointer_fruit().y()-P.getFirstPointCor().y();
 		double distance = Math.sqrt(distancex*distancex+distancey*distancey);

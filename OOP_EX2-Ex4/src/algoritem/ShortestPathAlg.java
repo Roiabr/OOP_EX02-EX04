@@ -71,11 +71,7 @@ public class ShortestPathAlg extends MyCoords {
 						fruiteated++;
 						P.setFirstPointCor(f.getPointer_fruit());
 						P.setTime(totaltime); 
-						System.out.println(P.getIDpack()+"eat"+f.getIdfruit());
-
-
-
-
+						
 						Calendar c = Calendar.getInstance();
 						int hd =(int)totaltime;
 						c.add(cal.SECOND,hd);
