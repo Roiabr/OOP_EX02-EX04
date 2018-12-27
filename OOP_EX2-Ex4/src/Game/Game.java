@@ -3,11 +3,9 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.JFrame;
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
-import GUI.MainWindow;
 import Geom.Point3D;
 import Robot.Play;
 import algoritem.ShortestPathAlg;
@@ -56,7 +54,7 @@ public class Game extends MultiCsv {
 				ghost.add(g);
 			}
 			else {
-				Block bl = new Block(ele);
+				Block bl = new Block();
 				block.add(bl);
 			}
 		}
@@ -83,10 +81,10 @@ public class Game extends MultiCsv {
 				Packman p1 = new Packman();
 				p1.setType(line[0]);
 				p1.setIDpack(Integer.parseInt(line[1]));
-				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[2])), 0.0);
+				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
 				p1.setFirstPointCor(point);
-				p1.setRadiuos(Integer.parseInt(line[6]));
-				p1.setSpeed(Integer.parseInt(line[5]));
+				//p1.setRadiuos(Integer.parseInt(line[6]));
+				//p1.setSpeed(Integer.parseInt(line[5]));
 				pack.add(p1);
 			}
 			else if(line[0].equals("F"))
@@ -94,20 +92,36 @@ public class Game extends MultiCsv {
 				Fruit f1 = new Fruit();
 				f1.setType(line[0]);
 				f1.setIdfruit(Integer.parseInt(line[1]));
-				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[2])), 0.0);
+				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
 				f1.setPointer_fruit(point);
-				f1.setSpeed(Integer.parseInt(line[5]));
+				//f1.setSpeed(Integer.parseInt(line[5]));
 				Fruit.add(f1);
 			}
 			else if(line[0].equals("G")) {
 				Ghost g1 = new Ghost();
 				g1.setType(line[0]);
 				g1.setIDGhost(Integer.parseInt(line[1]));
-				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[2])), 0.0);
+				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
 				g1.setPoint_Ghost(point);
-				g1.setSpeed(Integer.parseInt(line[5]));
-				g1.setRadiuos(Integer.parseInt(line[6]));
+				//g1.setSpeed(Integer.parseInt(line[5]));
+				//g1.setRadiuos(Integer.parseInt(line[6]));
 				ghost.add(g1);
+			}
+			else if(line[0].equals("B")) {
+				Block b1 = new Block();
+				b1.setType(line[0]);
+				b1.setIDBloack(Integer.parseInt(line[1]));
+				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
+				Point3D point2 = new Point3D(Double.parseDouble(line[5]),(Double.parseDouble(line[6])), 0.0);
+				System.out.println("pointc2 " +point);
+				System.out.println("pointc1 " +  point2);
+				Point3D pointStart = new Point3D(point2.x(),point.y(),0.0);
+				b1.setPoint_BlockTop(point2);
+				b1.setPoint_BlockDown(point);
+				b1.setPoint_BlockStart(pointStart);
+				//g1.setSpeed(Integer.parseInt(line[5]));
+				//g1.setRadiuos(Integer.parseInt(line[6]));
+				block.add(b1);
 			}
 		}
 	}
@@ -153,17 +167,5 @@ public class Game extends MultiCsv {
 	 */
 	public ArrayList<Block> getBlock() {
 		return block;
-	}
-
-
-
-	////////////////////////test///////////////////////
-	public static void main (String[] args ) {
-
-		MainWindow h = new MainWindow();
-		h.setVisible(true);
-		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
-		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		h.setTitle("Packmans in ariel");
 	}
 }

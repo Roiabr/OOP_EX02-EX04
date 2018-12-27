@@ -28,14 +28,13 @@ public class Ex4_Main_Example {
 		// 1) Create a "play" from a file (attached to Ex4)
 		String file_name = "data/Ex4_OOP_example8.csv";
 		Play play1 = new Play(file_name);
-		//Game g1 = new Game(play1);
 		MainWindow h = new MainWindow();
 		h.setVisible(true);
 		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
 		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		h.setTitle("Packmans in ariel");
 		// 2) Set your ID's - of all the group members
-		play1.setIDs(1111,2222,3333);
+		play1.setIDs(311505481,208);
 		
 		// 3)Get the GPS coordinates of the "arena"
 		String map_data = play1.getBoundingBox();

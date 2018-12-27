@@ -27,8 +27,11 @@ import javax.swing.JFrame;
 import File_format.*;
 import Geom.*;
 import Map.Map;
+import Robot.Play;
 import Threads.RunPackmen;
+import jdk.nashorn.internal.ir.WithNode;
 import GIS.*;
+import Game.Block;
 import Game.Fruit;
 import Game.Game;
 import Game.Ghost;
@@ -38,11 +41,11 @@ import Game.Packman;
 public class MainWindow extends JFrame implements MouseListener 
 {
 
-	private BufferedImage myImage ,myImage1,myImage2,myImage3,myImage4;
+	private BufferedImage myImage ,myImage1,myImage2,myImage3;
 	private Game GuiGame;
 	private int packmen_furit=0;//packmen or fruit 
 	private boolean run=false; //for run the game 
-	
+
 
 
 
@@ -58,6 +61,15 @@ public class MainWindow extends JFrame implements MouseListener
 	private void initGUI() 
 	{
 
+		try {
+			myImage1 = ImageIO.read(new File("packman.png"));
+			myImage2 = ImageIO.read(new File("apple.png"));
+			myImage3 = ImageIO.read(new File("ghost.png"));
+			//myImage4 = ImageIO.read(new File("apple.png"));
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		MenuBar menuBar = new MenuBar(); 
 		Menu menu1 = new Menu("File");
 		Menu menu2 = new Menu("Input");
@@ -88,6 +100,8 @@ public class MainWindow extends JFrame implements MouseListener
 				System.out.println("New Game");
 				GuiGame.getPack().removeAll(GuiGame.getPack());
 				GuiGame.getFruit().removeAll(GuiGame.getFruit());
+				GuiGame.getGhost().removeAll(GuiGame.getGhost());
+				GuiGame.getBlock().removeAll(GuiGame.getBlock());
 				repaint();
 
 			}
@@ -103,8 +117,6 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("load game"); 
-				GuiGame.getPack().removeAll(GuiGame.getPack());
-				GuiGame.getFruit().removeAll(GuiGame.getFruit());
 				loadFile();
 				repaint();
 			}
@@ -160,8 +172,6 @@ public class MainWindow extends JFrame implements MouseListener
 
 	int x = -1;
 	int y = -1;
-
-
 	/**
 	 *paint the background and create 
 	 *convert coordinates to pixel and draws packmen and fruit on the screen
@@ -170,57 +180,58 @@ public class MainWindow extends JFrame implements MouseListener
 	{
 
 		g.drawImage(getMyImage(), 0, 0,getWidth(),getHeight(), this);
-		try {
-			myImage1 = ImageIO.read(new File("packman.png"));
-			myImage2 = ImageIO.read(new File("apple.png"));
-			myImage3 = ImageIO.read(new File("ghost.png"));
-			myImage4 = ImageIO.read(new File("apple.png"));
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
-		while(iterFruit.hasNext()) {		//All the time paint the fruit
-			Fruit f = iterFruit.next();
-			Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(),f.getPointer_fruit().x(),this.getHeight(),this.getWidth()));
-			g.drawImage(myImage2, (int)p.x(), (int)p.y(), 20,20,this);
-		}
-//		Iterator<Ghost> iterGhost =  GuiGame.getGhost().iterator();
-//		while(iterGhost.hasNext()) {
-//			Ghost ghost = iterGhost.next();
-//			Point3D p = new Point3D(Map.gpsToPix(ghost.getPoint_Ghost().y(),ghost.getPoint_Ghost().x(),this.getHeight(),this.getWidth()));
-//			g.drawImage(myImage3, (int)p.x(), (int)p.y(), 20,20,this);
-//		}
-		
-
-
-		if(run==false) ///for any position change the packman by the real location
-		{
-			Iterator<Packman> iterPac = GuiGame.getPack().iterator();
-			while(iterPac.hasNext()) {
-				Packman pac = iterPac.next();
-				Point3D p = new Point3D(Map.gpsToPix(pac.getFirstPointCor().y(),pac.getFirstPointCor().x(),this.getHeight(),this.getWidth()));
-				g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
+		if(GuiGame.getBlock() != null) {
+			Iterator<Block> iterBlock =  GuiGame.getBlock().iterator();
+			while(iterBlock.hasNext()) {
+				Block bl = iterBlock.next();
+				
+				System.out.println("Hught: " + bl.getHeight(bl, this));
+				System.out.println("width: " +bl.getwidth(bl,this));
+				Point3D start = (Map.gpsToPix(bl.getPoint_BlockStart().y(),bl.getPoint_BlockStart().x(),this.getHeight(),this.getWidth()));
+				System.out.println("pointStarrt:" +start);
+				g.fillRect(start.ix(), start.iy(), (int)bl.getwidth(bl, this), (int) bl.getHeight(bl, this));
 			}
-			
-
-		}
-
-		if(run==true)//just for create thread one time 
-		{
-			Iterator<Packman> timetoeat = GuiGame.getPack().iterator();
-			while(timetoeat.hasNext()) {
-				Packman p = timetoeat.next();
-				RunPackmen threadrun= new RunPackmen();
-				threadrun.runpackmen(this, p);
+			Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
+			while(iterFruit.hasNext()) {	//All the time paint the fruit
+				Fruit f = iterFruit.next();
+				Point3D p = new Point3D(Map.gpsToPix(f.getPointer_fruit().y(),f.getPointer_fruit().x(),this.getHeight(),this.getWidth()));
+				g.drawImage(myImage2, p.ix(), (int)p.iy(), 20,20,this);
 			}
-		
+			Iterator<Ghost> iterGhost =  GuiGame.getGhost().iterator();
+			while(iterGhost.hasNext()) {
+				Ghost ghost = iterGhost.next();
+				Point3D p = new Point3D(Map.gpsToPix(ghost.getPoint_Ghost().y(),ghost.getPoint_Ghost().x(),this.getHeight(),this.getWidth()));
+				g.drawImage(myImage3,p.ix(),p.iy(),40,40,this);
+			}
 
-			run=false;
+			if(run==false) ///for any position change the packman by the real location before the game starts
+			{
+				Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+				while(iterPac.hasNext()) {
+					Packman pac = iterPac.next();
+					Point3D p = new Point3D(Map.gpsToPix(pac.getFirstPointCor().y(),pac.getFirstPointCor().x(),this.getHeight(),this.getWidth()));
+					g.drawImage(myImage1, (int)p.x(), (int)p.y(), 20,20,this);
+				}
+
+
+			}
+
+			if(run==true)//just for create thread one time 
+			{
+				Iterator<Packman> timetoeat = GuiGame.getPack().iterator();
+				while(timetoeat.hasNext()) {
+					Packman p = timetoeat.next();
+					RunPackmen threadrun= new RunPackmen();
+					threadrun.runpackmen(this, p);
+				}
+
+
+				run=false;
+			}
+
 		}
-		
 	}
-	
+
 
 	/**
 	 * get pixel for x,y and convert to coordinates for packmen or fruit.
@@ -243,6 +254,8 @@ public class MainWindow extends JFrame implements MouseListener
 		if(packmen_furit == 1) { //create packman by click on the screen
 			x = arg.getX();
 			y = arg.getY();
+			System.out.println(x);
+			System.out.println(y);
 			Point3D p = new Point3D(x, y);
 			p = Map.pixToGps(x, y,this.getHeight(),this.getWidth());
 			System.out.println(p);
@@ -279,19 +292,31 @@ public class MainWindow extends JFrame implements MouseListener
 	 * Inserts to the current list of packmen || fruit.
 	 */
 	public void loadFile() {
-		Game newfile = new Game(readFileDialog());
-		Iterator<Packman> iterPac = newfile.getPack().iterator();
-		Iterator<Fruit> iterFruit =  newfile.getFruit().iterator();
-
-		while(iterPac.hasNext()) {
-			Packman f = iterPac.next();
-			GuiGame.getPack().add(f);
-		}
-		while(iterFruit.hasNext()) {
-			Fruit f = iterFruit.next();
-			GuiGame.getFruit().add(f);
-
-		}
+		GuiGame = new Game(readFileDialogString());
+		//		Iterator<Packman> iterPac = GuiGame.getPack().iterator();
+		//		Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
+		//		Iterator<Ghost> iterGhsot = GuiGame.getGhost().iterator();
+		//		Iterator<Block> iterBlock = GuiGame.getBlock().iterator();
+		//		while(iterPac.hasNext()) {
+		//			Packman f = iterPac.next();
+		//			GuiGame.getPack().add(f);
+		//		}
+		//		while(iterFruit.hasNext()) {
+		//			Fruit f = iterFruit.next();
+		//			GuiGame.getFruit().add(f);
+		//
+		//		}
+		//		while(iterGhsot.hasNext()) {
+		//			Ghost g = iterGhsot.next();
+		//			GuiGame.getGhost().add(g);
+		//
+		//		}
+		//		while(iterBlock.hasNext()) {
+		//			Block b = iterBlock.next();
+		//			GuiGame.getBlock().add(b);
+		//
+		//		}
+		//
 
 		repaint();
 	}
@@ -327,6 +352,39 @@ public class MainWindow extends JFrame implements MouseListener
 		GisLayer layer =  MultiCsv.Csv2Layer(folder + fileName);
 		System.out.println(layer.get_Meta_data());
 		return layer;
+
+	}
+	/**
+	 * read csv file and return the file in a String
+	 * @return All - the String diraction for the big file
+	 */
+	public Play readFileDialogString() {
+		Play play;
+		//		try read from the file
+		FileDialog fd = new FileDialog(this, "Open text file", FileDialog.LOAD);
+		fd.setFile("*.csv");
+		fd.setDirectory("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data");
+		fd.setFilenameFilter(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".csv");
+			}
+		});
+		fd.setVisible(true);
+		String folder = fd.getDirectory();
+		String fileName = fd.getFile();
+		try {
+			FileReader fr = new FileReader(folder + fileName);
+			BufferedReader br = new BufferedReader(fr);
+			br.close();
+			fr.close();
+		} catch (IOException ex) {
+			System.out.print("Error reading file " + ex);
+			System.exit(2);
+		}
+		String All = folder + fileName;
+		play = new Play(All);
+		return play;
 
 	}
 	/**
@@ -380,7 +438,6 @@ public class MainWindow extends JFrame implements MouseListener
 	public void setMyImage(BufferedImage myImage) {
 		this.myImage = myImage;
 	}
-
 
 
 }

@@ -19,7 +19,7 @@ public class Packman {
 	private int IDpack;
 	private String [] ele;
 	private Point3D pointer_packmen,firstPointCor,first;
-	private int speed,radiuos;
+	private double speed,radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
@@ -103,27 +103,27 @@ public class Packman {
 	 * the method get the speed of a pacman
 	 * @return speed 
 	 */
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 	/**
 	 * the method set the speed of a packman
 	 * @param speed - the speed
 	 */
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 	/**
 	 * the method get the Radius of a packman
 	 * @param radiuos - the Radius
 	 */
-	public int getRadiuos() {
+	public double getRadiuos() {
 		return radiuos;
 	}
 	/**
 	 * the method set the Radius of a packman
 	 */
-	public void setRadiuos(int radiuos) {
+	public void setRadiuos(double radiuos) {
 		this.radiuos = radiuos;
 	}
 	/**
