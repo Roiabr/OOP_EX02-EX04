@@ -105,4 +105,8 @@ public class Ghost {
 	public void setIDGhost(int iDGhost) {
 		IDGhost = iDGhost;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git

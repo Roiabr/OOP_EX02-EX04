@@ -107,4 +107,8 @@ public class Block {
 	public void setPoint_BlockStart(Point3D point_BlockStart) {
 		this.point_BlockStart = point_BlockStart;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git

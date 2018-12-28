@@ -3,13 +3,19 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+<<<<<<< HEAD
 
 import javax.swing.JFrame;
 
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
+<<<<<<< HEAD
 import GUI.MainWindow;
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 import Geom.Point3D;
 import Robot.Play;
 import algoritem.ShortestPathAlg;
@@ -25,6 +31,7 @@ public class Game extends MultiCsv {
 	private ArrayList<Ghost> ghost= new ArrayList<Ghost>();
 	private ArrayList<Block> block= new ArrayList<Block>();
 	ArrayList<String> GameServer = new ArrayList<String>();
+<<<<<<< HEAD
 	public Packmen_me player = new Packmen_me();
 
 	public Packmen_me getPlayer() {
@@ -34,6 +41,8 @@ public class Game extends MultiCsv {
 	public void setPlayer(Packmen_me player) {
 		this.player = player;
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 
 	/**
 	 * a default constructor for the class
@@ -85,12 +94,16 @@ public class Game extends MultiCsv {
 		pack.removeAll(pack);
 		Fruit.removeAll(Fruit);
 		ghost.removeAll(ghost);
+<<<<<<< HEAD
 		block.remove(block);
 		
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 
 		while(gis.hasNext()) {
 			String All  = gis.next();
 			line = All.split(cvsSplitBy);
+<<<<<<< HEAD
 			if(line[0].equals("M")) {
 
 				Packmen_me p1= new Packmen_me();
@@ -103,6 +116,8 @@ public class Game extends MultiCsv {
 				//p1.setRadiuos(Integer.parseInt(line[6]));
 				//p1.setSpeed(Integer.parseInt(line[5]));
 			}
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 			if(line[0].equals("P")) {
 
 				Packman p1 = new Packman();
@@ -194,6 +209,7 @@ public class Game extends MultiCsv {
 	 */
 	public ArrayList<Block> getBlock() {
 		return block;
+<<<<<<< HEAD
 	}
 	public static void main(String[]args) {
 		MainWindow h = new MainWindow();
@@ -201,5 +217,7 @@ public class Game extends MultiCsv {
 		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
 		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		h.setTitle("Packmans in aasd");
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 	}
 }
