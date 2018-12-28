@@ -4,6 +4,7 @@ package Game;
 import GUI.MainWindow;
 import Geom.Point3D;
 import Map.Map;
+
 /**
  * This class represents a Black blocks in the game.
  * @author Roi Abramovitch & Gal Hadida
@@ -15,6 +16,7 @@ public class Block {
 	private Point3D point_BlockStart;
 	private int IDBloack;
 	private String type;
+	private int cheack;
 	
 	
 	/**

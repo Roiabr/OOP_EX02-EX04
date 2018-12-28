@@ -16,7 +16,7 @@ public class Packmen_me {
 	private String type;
 	private double time;
 	private String timeStamp;
-	private String check;
+	private String sd;
 	
 	public Packmen_me() {
 		this.firstPointCor=null;

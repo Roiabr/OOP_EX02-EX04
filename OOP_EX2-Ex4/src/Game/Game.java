@@ -26,6 +26,7 @@ public class Game extends MultiCsv {
 	private ArrayList<Block> block= new ArrayList<Block>();
 	ArrayList<String> GameServer = new ArrayList<String>();
 	public Packmen_me player = new Packmen_me();
+	int check;
 	/**
 	 * a default constructor for the class
 	 */

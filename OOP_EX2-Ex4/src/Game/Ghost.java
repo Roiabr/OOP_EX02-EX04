@@ -17,6 +17,7 @@ public class Ghost {
 	private String type;
 	private double time;
 	private String timeStamp;
+	int check;
 	
 	/**
 	 * a default constructor for the class

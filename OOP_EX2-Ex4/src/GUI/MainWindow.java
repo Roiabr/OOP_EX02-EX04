@@ -43,7 +43,7 @@ public class MainWindow extends JFrame implements MouseListener
 	private Play play1;
 	private MyCoords my;
 	private Point3D oldclick;
-	private boolean run=false; //for run the game 
+
 	private boolean PlacePlayerFirstTime=false;
 	private boolean AfterPlaceThePlayer=false;
 	private double angle;
