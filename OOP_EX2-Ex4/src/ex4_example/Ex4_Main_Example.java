@@ -1,10 +1,8 @@
 package ex4_example;
+
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
 import GUI.MainWindow;
-import Game.Game;
 import Robot.Play;
 /**
  * This is the basic example of how to work with the Ex4 "server" like system:
