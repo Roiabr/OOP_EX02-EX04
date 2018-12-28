@@ -1,9 +1,5 @@
 package GUI;
 
-
-
-
-
 import java.awt.FileDialog;
 import java.awt.Graphics;
 import java.awt.Menu;
@@ -25,15 +21,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-
 import Coords.MyCoords;
 import File_format.*;
 import Geom.*;
 import Map.Map;
 import Robot.Play;
-import Threads.RunPackmen;
-import jdk.jfr.internal.OldObjectSample;
-import jdk.nashorn.internal.ir.WithNode;
 import GIS.*;
 import Game.Block;
 import Game.Fruit;
