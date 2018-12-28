@@ -86,6 +86,7 @@ public class Game extends MultiCsv {
 		Fruit.removeAll(Fruit);
 		ghost.removeAll(ghost);
 		block.remove(block);
+		
 
 		while(gis.hasNext()) {
 			String All  = gis.next();
@@ -97,6 +98,8 @@ public class Game extends MultiCsv {
 				p1.setIDpack(Integer.parseInt(line[1]));
 				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
 				p1.setFirstPointCor(point);
+				player=p1;
+				
 				//p1.setRadiuos(Integer.parseInt(line[6]));
 				//p1.setSpeed(Integer.parseInt(line[5]));
 			}
