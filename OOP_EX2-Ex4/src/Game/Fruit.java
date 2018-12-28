@@ -46,9 +46,9 @@ public class Fruit {
 	public Fruit(GIS_element gep) {
 		this.ele = ((GisToElement) gep).getGis();
 		this.type = ele[0];
-		this.idfruit = Integer.parseInt(ele[1]);
+//		this.idfruit = Integer.parseInt(ele[1]);
 		this.pointer_fruit = gep.getGeom().getNewpoint();
-		this.speed = Integer.parseInt(ele[5]);
+//		this.speed = Integer.parseInt(ele[5]);
 		this.timeStamp = "";
 
 	}

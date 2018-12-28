@@ -1,66 +1,49 @@
 package Game;
 
-
 import java.util.ArrayList;
-
 
 import GIS.GIS_element;
 import GIS.GisToElement;
 import Geom.Point3D;
 
-/**
- *  This class represents a Fruit in the game.
- * @author Roi Abramovitch & Gal Hadida
- */
-public class Packman {
-
+public class Packmen_me {
 	private ArrayList<Fruit> fruiteat= new ArrayList<Fruit>();
 	private ArrayList<Point3D> pathOfPacman = new ArrayList<Point3D>();
 	private int IDpack;
 	private String [] ele;
 	private Point3D pointer_packmen,firstPointCor,first;
-	private double speed,radiuos;
+	private int speed,radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
-
-	/**
-	 * a default constructor for the class
-	 */
-	public Packman() {
-		// TODO Auto-generated constructor stub
+	
+	public Packmen_me() {
+		this.firstPointCor=null;
+		this.pointer_packmen=null;
+		this.type="M";
+		
 	}
+	
 
 	/**
 	 * a constructor for the class and make a packman from csv file
 	 * @param element - the element from csv file
 	 */
-	public Packman(GIS_element element) {
+	public Packmen_me(GIS_element element) {
 		this.ele= ((GisToElement) element).getGis();
 		this.type= ele[0];
 		this.IDpack=Integer.parseInt(ele[1]);
 		this.pointer_packmen = element.getGeom().getNewpoint();
 		firstPointCor =  element.getGeom().getNewpoint();
-//		this.speed = Integer.parseInt(ele[5]);
-//		this.radiuos = Integer.parseInt(ele[6]);
+		this.speed = Integer.parseInt(ele[5]);
+		this.radiuos = Integer.parseInt(ele[6]);
 		this.time = 0;
 	}
 	/**
 	 * a constructor for the class and make a packman from pacman
 	 * @param next - the packman
 	 */
-	public Packman(Packman next) {
-		// TODO Auto-generated constructor stub
-
-		this.type= next.type;
-		this.IDpack=next.IDpack;
-		this.pointer_packmen = new Point3D(next.pointer_packmen);
-		firstPointCor = new Point3D(next.pointer_packmen);
-		this.speed = next.speed;
-		this.radiuos = next.radiuos;
-		this.time = 0;
-	}
-
+	
 
 
 
@@ -103,27 +86,27 @@ public class Packman {
 	 * the method get the speed of a pacman
 	 * @return speed 
 	 */
-	public double getSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
 	/**
 	 * the method set the speed of a packman
 	 * @param speed - the speed
 	 */
-	public void setSpeed(double speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 	/**
 	 * the method get the Radius of a packman
 	 * @param radiuos - the Radius
 	 */
-	public double getRadiuos() {
+	public int getRadiuos() {
 		return radiuos;
 	}
 	/**
 	 * the method set the Radius of a packman
 	 */
-	public void setRadiuos(double radiuos) {
+	public void setRadiuos(int radiuos) {
 		this.radiuos = radiuos;
 	}
 	/**
@@ -206,3 +189,6 @@ public class Packman {
 		this.timeStamp = timeStamp;
 	}
 }
+
+
+
