@@ -3,9 +3,13 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JFrame;
+
 import File_format.MultiCsv;
 import GIS.GIS_element;
 import GIS.GIS_layer;
+import GUI.MainWindow;
 import Geom.Point3D;
 import Robot.Play;
 import algoritem.ShortestPathAlg;
@@ -21,8 +25,7 @@ public class Game extends MultiCsv {
 	private ArrayList<Ghost> ghost= new ArrayList<Ghost>();
 	private ArrayList<Block> block= new ArrayList<Block>();
 	ArrayList<String> GameServer = new ArrayList<String>();
-
-	/**
+	public Packmen_me player = new Packmen_me();	/**
 	 * a default constructor for the class
 	 */
 	public Game() {
@@ -72,10 +75,23 @@ public class Game extends MultiCsv {
 		pack.removeAll(pack);
 		Fruit.removeAll(Fruit);
 		ghost.removeAll(ghost);
+		block.remove(block);
 
 		while(gis.hasNext()) {
 			String All  = gis.next();
 			line = All.split(cvsSplitBy);
+			if(line[0].equals("M")) {
+
+				Packmen_me p1= new Packmen_me();
+				p1.setType(line[0]);
+				p1.setIDpack(Integer.parseInt(line[1]));
+				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
+				p1.setFirstPointCor(point);
+				player=p1;
+
+				//p1.setRadiuos(Integer.parseInt(line[6]));
+				//p1.setSpeed(Integer.parseInt(line[5]));
+			}
 			if(line[0].equals("P")) {
 
 				Packman p1 = new Packman();
@@ -126,7 +142,7 @@ public class Game extends MultiCsv {
 		}
 	}
 
-	
+
 	/**
 	 * the method active the game and run it
 	 */
@@ -167,5 +183,20 @@ public class Game extends MultiCsv {
 	 */
 	public ArrayList<Block> getBlock() {
 		return block;
+	}
+	public Packmen_me getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Packmen_me player) {
+		this.player = player;
+	}
+
+	public static void main(String[]args) {
+		MainWindow h = new MainWindow();
+		h.setVisible(true);
+		h.setSize(h.getMyImage().getWidth(),h.getMyImage().getHeight());
+		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		h.setTitle("Packmans in aasd");
 	}
 }
