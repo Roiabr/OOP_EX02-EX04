@@ -1,7 +1,6 @@
 package Game;
 
-import GIS.GIS_element;
-import GIS.GisToElement;
+
 import GUI.MainWindow;
 import Geom.Point3D;
 import Map.Map;

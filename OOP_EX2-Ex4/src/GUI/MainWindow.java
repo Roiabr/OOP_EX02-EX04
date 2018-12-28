@@ -131,8 +131,6 @@ public class MainWindow extends JFrame implements MouseListener
 				loadFile();
 				repaint();
 			}
-
-
 		});
 		Packman.addActionListener(new ActionListener() {
 			@Override
@@ -177,7 +175,6 @@ public class MainWindow extends JFrame implements MouseListener
 				System.out.println("Place The player");
 
 				PlacePlayerFirstTime=true;
-
 
 			}
 		});

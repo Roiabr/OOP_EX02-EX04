@@ -25,7 +25,8 @@ public class Game extends MultiCsv {
 	private ArrayList<Ghost> ghost= new ArrayList<Ghost>();
 	private ArrayList<Block> block= new ArrayList<Block>();
 	ArrayList<String> GameServer = new ArrayList<String>();
-	public Packmen_me player = new Packmen_me();	/**
+	public Packmen_me player = new Packmen_me();
+	/**
 	 * a default constructor for the class
 	 */
 	public Game() {
@@ -42,7 +43,7 @@ public class Game extends MultiCsv {
 		Iterator<GIS_element> gis = lay.iterator();
 		while(gis.hasNext()) {
 			GIS_element ele = gis.next();
-
+			
 			if(ele.getData().getType().equals("P")) {
 				Packman p = new Packman(ele);
 				pack.add(p);
@@ -75,7 +76,7 @@ public class Game extends MultiCsv {
 		pack.removeAll(pack);
 		Fruit.removeAll(Fruit);
 		ghost.removeAll(ghost);
-		block.remove(block);
+		block.removeAll(block);
 
 		while(gis.hasNext()) {
 			String All  = gis.next();

@@ -24,6 +24,7 @@ public class Ghost {
 	public Ghost() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	/**
 	 * a constructor for the class and make a Ghost from csv file
 	 * @param element - the element from csv file
