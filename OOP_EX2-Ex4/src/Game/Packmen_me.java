@@ -16,7 +16,10 @@ public class Packmen_me {
 	private String type;
 	private double time;
 	private String timeStamp;
+<<<<<<< HEAD
 	private String sd;
+=======
+>>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
 	
 	public Packmen_me() {
 		this.firstPointCor=null;
