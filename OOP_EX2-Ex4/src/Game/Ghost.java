@@ -1,5 +1,7 @@
 package Game;
 
+import java.awt.image.BufferedImage;
+
 import GIS.GIS_element;
 import GIS.GisToElement;
 import Geom.Point3D;
@@ -10,10 +12,10 @@ import Geom.Point3D;
 public class Ghost {
 	
 	private int IDGhost;
-	
+	private BufferedImage image;
 	private String [] ele;
 	private Point3D point_Ghost,firstPointCor,first;
-	private int speed,radiuos;
+	private double speed,radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
@@ -26,26 +28,12 @@ public class Ghost {
 		// TODO Auto-generated constructor stub
 	}
 	
-	/**
-	 * a constructor for the class and make a Ghost from csv file
-	 * @param element - the element from csv file
-	 */
-	public Ghost(GIS_element element) {
-		this.ele= ((GisToElement) element).getGis();
-		this.type= ele[0];
-		this.IDGhost=Integer.parseInt(ele[1]);
-		this.point_Ghost = element.getGeom().getNewpoint();
-		this.firstPointCor =  element.getGeom().getNewpoint();
-//		this.speed = Integer.parseInt(ele[5]);
-//		this.radiuos = Integer.parseInt(ele[6]);
-		this.time = 0;
-	}
+	
 	/**
 	 * a constructor for the class and make a packman from pacman
 	 * @param gh - the diffrent ghost
 	 */
 	public Ghost(Ghost gh) {
-		// TODO Auto-generated constructor stub
 
 		this.type= gh.type;
 		this.IDGhost=gh.IDGhost;
@@ -68,16 +56,16 @@ public class Ghost {
 	public void setFirst(Point3D first) {
 		this.first = first;
 	}
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
-	public int getRadiuos() {
+	public double getRadiuos() {
 		return radiuos;
 	}
-	public void setRadiuos(int radiuos) {
+	public void setRadiuos(double radiuos) {
 		this.radiuos = radiuos;
 	}
 	public String getType() {
@@ -106,5 +94,19 @@ public class Ghost {
 	}
 	public void setIDGhost(int iDGhost) {
 		IDGhost = iDGhost;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 }

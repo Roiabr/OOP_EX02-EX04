@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import GIS.GIS_element;
@@ -12,14 +13,14 @@ public class Packmen_me {
 	private int IDpack;
 	private String [] ele;
 	private Point3D pointer_packmen,firstPointCor,first;
-	private int speed,radiuos;
+	private double speed;
+	double radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
-<<<<<<< HEAD
-	private String sd;
-=======
->>>>>>> branch 'master' of https://github.com/Roiabr/OOP_EX02-EX04---Copy.git
+	private BufferedImage myImage;
+
+
 	
 	public Packmen_me() {
 		this.firstPointCor=null;
@@ -90,28 +91,28 @@ public class Packmen_me {
 	 * the method get the speed of a pacman
 	 * @return speed 
 	 */
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 	/**
 	 * the method set the speed of a packman
-	 * @param speed - the speed
+	 * @param d - the speed
 	 */
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed(double d) {
+		this.speed = d;
 	}
 	/**
 	 * the method get the Radius of a packman
 	 * @param radiuos - the Radius
 	 */
-	public int getRadiuos() {
+	public double getRadiuos() {
 		return radiuos;
 	}
 	/**
 	 * the method set the Radius of a packman
 	 */
-	public void setRadiuos(int radiuos) {
-		this.radiuos = radiuos;
+	public void setRadiuos(double d) {
+		this.radiuos = d;
 	}
 	/**
 	 * the method get time in double 
@@ -191,6 +192,22 @@ public class Packmen_me {
 	 */
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+
+
+	/**
+	 * @return the myImage
+	 */
+	public BufferedImage getMyImage() {
+		return myImage;
+	}
+
+
+	/**
+	 * @param myImage the myImage to set
+	 */
+	public void setMyImage(BufferedImage myImage) {
+		this.myImage = myImage;
 	}
 }
 

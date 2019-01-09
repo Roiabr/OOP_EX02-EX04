@@ -1,11 +1,8 @@
 package Game;
 
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
-
-import GIS.GIS_element;
-import GIS.GisToElement;
 import Geom.Point3D;
 
 /**
@@ -17,12 +14,12 @@ public class Packman {
 	private ArrayList<Fruit> fruiteat= new ArrayList<Fruit>();
 	private ArrayList<Point3D> pathOfPacman = new ArrayList<Point3D>();
 	private int IDpack;
-	private String [] ele;
 	private Point3D pointer_packmen,firstPointCor,first;
 	private double speed,radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
+	private BufferedImage myImage1;
 
 	/**
 	 * a default constructor for the class
@@ -30,28 +27,11 @@ public class Packman {
 	public Packman() {
 		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * a constructor for the class and make a packman from csv file
-	 * @param element - the element from csv file
-	 */
-	public Packman(GIS_element element) {
-		this.ele= ((GisToElement) element).getGis();
-		this.type= ele[0];
-		this.IDpack=Integer.parseInt(ele[1]);
-		this.pointer_packmen = element.getGeom().getNewpoint();
-		firstPointCor =  element.getGeom().getNewpoint();
-//		this.speed = Integer.parseInt(ele[5]);
-//		this.radiuos = Integer.parseInt(ele[6]);
-		this.time = 0;
-	}
 	/**
 	 * a constructor for the class and make a packman from pacman
 	 * @param next - the packman
 	 */
 	public Packman(Packman next) {
-		// TODO Auto-generated constructor stub
-
 		this.type= next.type;
 		this.IDpack=next.IDpack;
 		this.pointer_packmen = new Point3D(next.pointer_packmen);
@@ -59,12 +39,11 @@ public class Packman {
 		this.speed = next.speed;
 		this.radiuos = next.radiuos;
 		this.time = 0;
+		
 	}
 
-
-
-
 	///////////////////// GETTER&SETTER //////////////////////////////
+	
 	/**
 	 * the method get the id of the packman
 	 * @return IDpack - the id
@@ -204,5 +183,17 @@ public class Packman {
 	 */
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+	/**
+	 * @return the myImage1
+	 */
+	public BufferedImage getMyImage1() {
+		return myImage1;
+	}
+	/**
+	 * @param myImage1  - the myImage1 to set
+	 */
+	public void setMyImage1(BufferedImage myImage1) {
+		this.myImage1 = myImage1;
 	}
 }

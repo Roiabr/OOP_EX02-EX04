@@ -1,10 +1,12 @@
 package File_format;
 
+import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -13,10 +15,12 @@ import GIS.GIS_layer;
 import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
+import GUI.MainWindow;
 import Game.Fruit;
 import Game.Game;
 import Game.Packman;
 import Geom.Point3D;
+import Robot.Play;
 
 
 /**
@@ -25,6 +29,13 @@ import Geom.Point3D;
  *
  */
 public class MultiCsv {
+	private Game game;
+	private MainWindow main;
+	
+	public MultiCsv(MainWindow win,Game ga) {
+		this.game = ga;
+		this.main  = win;
+	}
 
 	/**
 	 * this method get a csv file and formet it to a leyer object
@@ -146,7 +157,7 @@ public class MultiCsv {
 		sB.append( "</Document>\n");
 		sB.append("</kml>");
 		PrintWriter pw = null;
-		String fileName = output + "ProjectKml" + ".kml";
+		String fileName = output + "Project" + ".kml";
 		try {
 			pw = new PrintWriter(new FileWriter(fileName));
 		}
@@ -379,6 +390,101 @@ public class MultiCsv {
 		System.out.println("done!");
 
 	}
+
+	/**
+	 * read csv file 
+	 * @return gis_layer that include list of elements 
+	 * any elements is packmen or fruit 
+	 */
+
+	public GisLayer readFileDialog() {
+		//		try read from the file
+		FileDialog fd = new FileDialog(main, "Open text file", FileDialog.LOAD);
+		fd.setFile("*.csv");
+		fd.setDirectory("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data");
+		fd.setFilenameFilter(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".csv");
+			}
+		});
+		fd.setVisible(true);
+		String folder = fd.getDirectory();
+		String fileName = fd.getFile();
+		try {
+			FileReader fr = new FileReader(folder + fileName);
+			BufferedReader br = new BufferedReader(fr);
+			br.close();
+			fr.close();
+		} catch (IOException ex) {
+			System.out.print("Error reading file " + ex);
+			System.exit(2);
+		}
+		GisLayer layer =  MultiCsv.Csv2Layer(folder + fileName);
+		System.out.println(layer.get_Meta_data());
+		return layer;
+
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Play readFileDialogString() {
+		Play play;
+		//		try read from the file
+		FileDialog fd = new FileDialog(main, "Open text file", FileDialog.LOAD);
+		fd.setFile("*.csv");
+		fd.setDirectory("C:\\Users\\Roi Abramovitch\\eclipse-workspace\\OOP_EX02-EX04 - Copy\\data");
+		fd.setFilenameFilter(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".csv");
+			}
+		});
+		fd.setVisible(true);
+		String folder = fd.getDirectory();
+		String fileName = fd.getFile();
+		try {
+			FileReader fr = new FileReader(folder + fileName);
+			BufferedReader br = new BufferedReader(fr);
+			br.close();
+			fr.close();
+		} catch (IOException ex) {
+			System.out.print("Error reading file " + ex);
+			System.exit(2);
+		}
+		String All = folder + fileName;
+		play = new Play(All);
+		return play;
+
+	}
+	/**
+	 * this method let to save files on the computer
+	 */
+	public void writeFileDialog() {
+		//		 try write to the file
+		FileDialog fd = new FileDialog(main, "Save the text file", FileDialog.SAVE);
+		fd.setFile("*.csv");
+		fd.setFilenameFilter(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".csv");
+			}
+		});
+		fd.setVisible(true);
+		String folder = fd.getDirectory();
+		String fileName = fd.getFile();
+		try {
+			FileWriter fw = new FileWriter(folder + fileName);
+			PrintWriter outs = new PrintWriter(MultiCsv.Game2csv(game,folder + fileName));
+
+			outs.close();
+			fw.close();
+		} catch (IOException ex) {
+			System.out.print("Error writing file  " + ex);
+		}
+	}
+
 	/**
 	 * the method get a string of time and change it to timestamp kml format
 	 * @param time - the time

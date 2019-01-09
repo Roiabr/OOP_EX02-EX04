@@ -1,5 +1,11 @@
 package Map;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import Coords.MyCoords;
 import Geom.Point3D;
 
@@ -9,7 +15,7 @@ import Geom.Point3D;
  *
  */
 public class Map {
-
+	private static BufferedImage myImage1;
 	static final int mapWidth = 1433, mapHeight = 642;
 	// offsets
 	static final double mapLongitudeStart = 35.202574, mapLatitudeStart = 32.106046;
@@ -26,7 +32,13 @@ public class Map {
 
 	public Map()
 	{
-
+		try {
+			Map.myImage1 = ImageIO.read(new File("Ariel1.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 	}
 	/**
 	 * the method get points in Coordinates and change it to pixel on the screen
@@ -90,23 +102,16 @@ public class Map {
 	public static double pixelangel (Point3D pixel1, Point3D pixel2,double pyHeighty,double pxwidth) {
 
 		MyCoords m = new MyCoords();
-
 		Point3D gps1 = pixToGps(pixel1.x(),pixel1.y(),pyHeighty,pxwidth);
-		System.out.println(gps1);
 		Point3D gps2 = pixToGps(pixel2.x(),pixel2.y(),pyHeighty,pxwidth);
-		System.out.println(gps2);
-
 		double ans[]=m.azimuth_elevation_dist(gps1,gps2);
 		double answer=ans[1];
-		System.out.println(answer);
-
 		return answer;
 	}
-	public static void main(String[] arg) {
-		Point3D pix1 = new Point3D(268.34568202642083,1191.7543815661488,680);
-		Point3D pix2 = new Point3D(248.90936222180926,483.6648734482664,650);
-		Map map = new Map();
-		System.out.println(map.pixelangel(pix1, pix2, 1433,642));
+	/**
+	 * @return the myImage1
+	 */
+	public BufferedImage getMyImage1() {
+		return myImage1;
 	}
-
 }

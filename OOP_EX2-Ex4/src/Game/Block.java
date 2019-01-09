@@ -11,17 +11,16 @@ import Map.Map;
  *
  */
 public class Block {
-	
+
 	private Point3D point_BlockTop,point_BlockDown;
 	private Point3D point_BlockStart;
 	private int IDBloack;
 	private String type;
-	private int cheack;
-	
-	
-	
+
+
+
 	/**
-	 * a default constructor for the class
+	 * a constractur for the  block
 	 */
 	public Block() {
 		// TODO Auto-generated constructor stub
@@ -31,12 +30,6 @@ public class Block {
 		this.IDBloack = 0;
 		this.type = "";
 	}
-	
-	/**
-	 * a constructor for the class and make a Block from csv file
-	 * @param element - the element from csv file
-	 */
-
 	/**
 	 * a constructor for the class and make a Block anther Block
 	 * @param Block - the diffrent block
@@ -47,15 +40,27 @@ public class Block {
 		this.point_BlockDown = new Point3D(bl.point_BlockDown);
 		this.setPoint_BlockStart(new Point3D(bl.getPoint_BlockTop().y(),bl.getPoint_BlockDown().x()));
 		this.IDBloack = bl.IDBloack;
-		
+
 	}
 	///////////methods/////////////////////////
+	/**
+	 * the method get a block from the game and the gui and calculte the width of the rectangle
+	 * @param bl - the block
+	 * @param M - the gui
+	 * @return width - the width of the rectangle
+	 */
 	public double getwidth(Block bl,MainWindow M){
 		Point3D pT = Map.gpsToPix(bl.getPoint_BlockTop().y(),bl.getPoint_BlockTop().x(),M.getHeight(),M.getWidth());
 		Point3D pD = Map.gpsToPix(bl.getPoint_BlockDown().y(),bl.getPoint_BlockDown().x(),M.getHeight(),M.getWidth());
 		int width = (int)(pT.x() - pD.x());
 		return width;
 	}
+	/**
+	 * the method get a block from the game and the gui and calculte the Height of the rectangle
+	 * @param bl - the block
+	 * @param M - the gui
+	 * @return height - Height of the rectangle
+	 */
 	public double getHeight(Block bl,MainWindow M){
 		Point3D pT = (Map.gpsToPix(bl.getPoint_BlockTop().y(),bl.getPoint_BlockTop().x(),M.getHeight(),M.getWidth()));
 		Point3D pD = (Map.gpsToPix(bl.getPoint_BlockDown().y(),bl.getPoint_BlockDown().x(),M.getHeight(),M.getWidth()));
@@ -67,12 +72,10 @@ public class Block {
 	 * the method get the cordinates of the block
 	 * @return point_BlockStart
 	 */
-	
-	
 	public Point3D getPoint_BlockTop() {
 		return point_BlockTop;
 	}
-	
+
 
 	public Point3D getPoint_BlockDown() {
 		return point_BlockDown;

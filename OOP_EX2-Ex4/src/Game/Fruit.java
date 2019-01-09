@@ -1,8 +1,9 @@
 package Game;
 
 
-import GIS.GIS_element;
-import GIS.GisToElement;
+
+import java.awt.image.BufferedImage;
+
 import Geom.Point3D;
 
 /**
@@ -13,10 +14,10 @@ public class Fruit {
 	private Point3D pointer_fruit;
 	private String type;
 	private int idfruit;
-	private String[] ele;
-	private int speed;
+	private double speed;
 	private double NatoTime;
 	private String timeStamp;
+	private BufferedImage myImage;
 	
 	/**
 	 * a constructor for the class and make a full copy of fruit
@@ -30,8 +31,6 @@ public class Fruit {
 	 * @param f - a diffrent fruit 
 	 */
 	public Fruit(Fruit f) {
-	// TODO Auto-generated constructor stub
-		
 		this.type = f.getType();
 		this.idfruit = f.getIdfruit();
 		this.pointer_fruit = new Point3D(f.getPointer_fruit());
@@ -39,24 +38,8 @@ public class Fruit {
 		this.timeStamp = f.getTimeStamp();
 	}
 	
-	/**
-	 * a constructor for the class and make a fruit from a csv file
-	 * @param f - an element from a csv file
-	 */
-	public Fruit(GIS_element gep) {
-		this.ele = ((GisToElement) gep).getGis();
-		this.type = ele[0];
-//		this.idfruit = Integer.parseInt(ele[1]);
-		this.pointer_fruit = gep.getGeom().getNewpoint();
-//		this.speed = Integer.parseInt(ele[5]);
-		this.timeStamp = "";
-
-	}
-	
 	
 	///////////////////// GETTER&SETTER //////////////////////////////
-	
-	
 
 	/**
 	 * the method check if the fruit is alive
@@ -129,15 +112,15 @@ public class Fruit {
 	 * the method get the the speed of the fruit
 	 * @return idfruit - fruit
 	 */
-	public int getSpeed() {
+	public double getSpeed() {
 		// TODO Auto-generated method stub
 		return speed;
 	}
 	/**
 	 * the method set the the speed of the fruit
 	 */
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed(double d) {
+		this.speed = d;
 	}
 	/**
 	 * the method get the natoTime of fruit
@@ -152,6 +135,21 @@ public class Fruit {
 	 */
 	public void setNatoTime(double natoTime) {
 		NatoTime = natoTime;
+	}
+
+	/**
+	 * 
+	 * @return the myImage
+	 */
+	public BufferedImage getMyImage() {
+		return myImage;
+	}
+
+	/**
+	 * @param myImage the myImage to set
+	 */
+	public void setMyImage(BufferedImage myImage) {
+		this.myImage = myImage;
 	}
 
 }
