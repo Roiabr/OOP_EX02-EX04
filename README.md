@@ -11,13 +11,22 @@ In this mode your packman and the packman will eat all the fruit automatic, and 
 Description
 
 • Include 6 packages such as:
-1.Algo - the algoritiom for the packman in the auto mode that Decide the best way to eat the fruit.
-2.Game – include 6 classes as the main Game and all the objects of the game like the packman the fruits the ghost and the blocks on the map
-3.Coords – include a myCoords class that has all the Calculations for coordination’s
-4.Fileformat – a package that create a csv file and convert from csv file to code .
-5.Gui – the Gui for the game
-6.map – This class represents a Calculations on the map of the gui in the game.
-Built With • Eclipse - integrated development environment (IDE) used in computer programming built by Oracle
+
+    1.Algo - the algoritiom for the packman in the auto mode that Decide the best way to eat the fruit.
+
+    2.Game – include 6 classes as the main Game and all the objects of the game like the packman the fruits the ghost and the blocks on       the map
+
+    3.Coords – include a myCoords class that has all the Calculations for coordination’s
+
+    4.Fileformat – a package that create a csv file and convert from csv file to code .
+
+    5.Gui – the Gui for the game
+
+    6.map – This class represents a Calculations on the map of the gui in the game.
+
+Built With
+
+• Eclipse - integrated development environment (IDE) used in computer programming built by Oracle
 
 Contributing
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
