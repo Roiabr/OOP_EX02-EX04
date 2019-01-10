@@ -26,6 +26,7 @@ public class Game  {
 	private ArrayList<Block> block= new ArrayList<Block>();
 	ArrayList<String> GameServer = new ArrayList<String>();
 	public Packmen_me player = new Packmen_me();
+	
 	/**
 	 * a default constructor for the class
 	 */
@@ -124,14 +125,15 @@ public class Game  {
 				Point3D point = new Point3D(Double.parseDouble(line[2]),(Double.parseDouble(line[3])), 0.0);
 				Point3D point2 = new Point3D(Double.parseDouble(line[5]),(Double.parseDouble(line[6])), 0.0);
 				Point3D pointStart = new Point3D(point2.x(),point.y(),0.0);
-				b1.setPoint_BlockTop(point2);
-				b1.setPoint_BlockDown(point);
-				b1.setPoint_BlockStart(pointStart);
+				Point3D point3 = new Point3D(point.x(), point2.y());
+				b1.setpoint_BlockTopRight(point2);
+				b1.setpoint_BlockDownleft(point);
+				b1.setpoint_BlockTopLeft(pointStart);
+				b1.setPoint_BlockDownRight(point3);
 				block.add(b1);
 			}
 		}
 	}
-
 
 	/**
 	 * the method active the game and run it
@@ -184,10 +186,10 @@ public class Game  {
 
 	public static void main(String[]args) {
 		MainWindow h = new MainWindow();
-		Map nap = new Map();
+		Map map = new Map();
 		h.setVisible(true);
-		h.setSize(nap.getMyImage1().getWidth(),nap.getMyImage1().getHeight());
+		h.setSize(map.getMyImage1().getWidth(),map.getMyImage1().getHeight());
 		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		h.setTitle("Packmans in aasd");
+		h.setTitle("Packman");
 	}
 }

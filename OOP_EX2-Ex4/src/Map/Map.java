@@ -29,7 +29,8 @@ public class Map {
 	static final Point3D rightdown = new Point3D(32.10232073464449, 35.212430);
 	static final double Latitudedistance = rightup.y()-leftup.y();
 	static double Longitudedistance = leftup.x()-leftdown.x();
-
+	public static Point3D Start = new Point3D(35.202574,32.106046);
+	public static Point3D End = new Point3D(35.212405,32.101858);
 	public Map()
 	{
 		try {
@@ -40,6 +41,7 @@ public class Map {
 		}
 		 
 	}
+	
 	/**
 	 * the method get points in Coordinates and change it to pixel on the screen
 	 * @param longitude - the longtude of the map
@@ -55,6 +57,17 @@ public class Map {
 		double y1 =  (pyHeighty*(y/mapLatitude));
 		return new Point3D(x1, y1);
 	}
+	public static Point3D toPixel(Point3D gps){
+		Map map = new Map();
+		double Width =  End.x()-Start.x();
+		double high = Start.y()-End.y();
+		double x = gps.x()-Start.x();
+		double y = Start.y()-gps.y();
+		x = (map.getMyImage1().getWidth())*(y/Width);
+		y = (map.getMyImage1().getHeight())*(x/high);    
+		return new Point3D( (int)x,  (int)y);
+	}
+
 	/**
 	 * the method get points in pixel and change it to Coordinates on the screen
 	 * @param x1
@@ -63,7 +76,7 @@ public class Map {
 	 * @param pxwidth
 	 * @return Point3D - point in Coordinates
 	 */
-	public static  Point3D pixToGps(double x1, double y1,double pyHeighty,double pxwidth)
+	public static Point3D pixToGps(double x1, double y1,double pyHeighty,double pxwidth)
 	{
 		double y=(y1/pyHeighty)*mapLatitude;
 		double x=(x1/pxwidth)*mapLongitude;

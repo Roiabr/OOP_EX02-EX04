@@ -1,6 +1,8 @@
 package Game;
 
 
+import java.util.ArrayList;
+
 import GUI.MainWindow;
 import Geom.Point3D;
 import Map.Map;
@@ -12,8 +14,8 @@ import Map.Map;
  */
 public class Block {
 
-	private Point3D point_BlockTop,point_BlockDown;
-	private Point3D point_BlockStart;
+	private Point3D point_BlockTopRight,point_BlockDownleft,Point_BlockDownRight;
+	private Point3D point_BlockTopLeft;
 	private int IDBloack;
 	private String type;
 
@@ -24,9 +26,9 @@ public class Block {
 	 */
 	public Block() {
 		// TODO Auto-generated constructor stub
-		this.point_BlockTop = null;
-		this.point_BlockDown = null;
-		this.setPoint_BlockStart(null);
+		this.point_BlockTopRight = null;
+		this.point_BlockDownleft = null;
+		this.setpoint_BlockTopLeft(null);
 		this.IDBloack = 0;
 		this.type = "";
 	}
@@ -36,9 +38,10 @@ public class Block {
 	 */
 	public Block(Block bl) {
 		this.type = bl.type;
-		this.point_BlockTop = new Point3D(bl.point_BlockTop);
-		this.point_BlockDown = new Point3D(bl.point_BlockDown);
-		this.setPoint_BlockStart(new Point3D(bl.getPoint_BlockTop().y(),bl.getPoint_BlockDown().x()));
+		this.point_BlockTopRight = new Point3D(bl.point_BlockTopRight);
+		this.point_BlockDownleft = new Point3D(bl.point_BlockDownleft);
+		this.setpoint_BlockTopLeft(new Point3D(bl.getpoint_BlockTopRight().y(),bl.getpoint_BlockDownleft().x()));
+		this.setPoint_BlockDownRight(new Point3D(bl.getpoint_BlockDownleft().y(),bl.getpoint_BlockTopRight().x()));
 		this.IDBloack = bl.IDBloack;
 
 	}
@@ -50,8 +53,8 @@ public class Block {
 	 * @return width - the width of the rectangle
 	 */
 	public double getwidth(Block bl,MainWindow M){
-		Point3D pT = Map.gpsToPix(bl.getPoint_BlockTop().y(),bl.getPoint_BlockTop().x(),M.getHeight(),M.getWidth());
-		Point3D pD = Map.gpsToPix(bl.getPoint_BlockDown().y(),bl.getPoint_BlockDown().x(),M.getHeight(),M.getWidth());
+		Point3D pT = Map.gpsToPix(bl.getpoint_BlockTopRight().y(),bl.getpoint_BlockTopRight().x(),M.getHeight(),M.getWidth());
+		Point3D pD = Map.gpsToPix(bl.getpoint_BlockDownleft().y(),bl.getpoint_BlockDownleft().x(),M.getHeight(),M.getWidth());
 		int width = (int)(pT.x() - pD.x());
 		return width;
 	}
@@ -62,31 +65,45 @@ public class Block {
 	 * @return height - Height of the rectangle
 	 */
 	public double getHeight(Block bl,MainWindow M){
-		Point3D pT = (Map.gpsToPix(bl.getPoint_BlockTop().y(),bl.getPoint_BlockTop().x(),M.getHeight(),M.getWidth()));
-		Point3D pD = (Map.gpsToPix(bl.getPoint_BlockDown().y(),bl.getPoint_BlockDown().x(),M.getHeight(),M.getWidth()));
+		Point3D pT = (Map.gpsToPix(bl.getpoint_BlockTopRight().y(),bl.getpoint_BlockTopRight().x(),M.getHeight(),M.getWidth()));
+		Point3D pD = (Map.gpsToPix(bl.getpoint_BlockDownleft().y(),bl.getpoint_BlockDownleft().x(),M.getHeight(),M.getWidth()));
 		int height = (int)(pD.y() - pT.y());
 		return height;
+	}
+	
+	/**
+	 * the method get all the vertex of a block
+	 * @param bl - a block
+	 * @return pivot - an arraylist with the vertexs
+	 */
+	public ArrayList<Point3D> getVertex(Block bl) {
+		ArrayList<Point3D> pivot = new ArrayList<Point3D>();
+		pivot.add(bl.getpoint_BlockTopLeft());
+		pivot.add(bl.getpoint_BlockTopRight());
+		pivot.add(bl.getPoint_BlockDownRight());
+		pivot.add(bl.getpoint_BlockDownleft());
+		return pivot;
 	}
 	///////getter and Setter///////////////////
 	/**
 	 * the method get the cordinates of the block
 	 * @return point_BlockStart
 	 */
-	public Point3D getPoint_BlockTop() {
-		return point_BlockTop;
+	public Point3D getpoint_BlockTopRight() {
+		return point_BlockTopRight;
+	}
+	
+
+	public Point3D getpoint_BlockDownleft() {
+		return point_BlockDownleft;
 	}
 
-
-	public Point3D getPoint_BlockDown() {
-		return point_BlockDown;
+	public void setpoint_BlockTopRight(Point3D point_BlockTop) {
+		this.point_BlockTopRight = point_BlockTop;
 	}
 
-	public void setPoint_BlockTop(Point3D point_BlockTop) {
-		this.point_BlockTop = point_BlockTop;
-	}
-
-	public void setPoint_BlockDown(Point3D point_BlockEnd) {
-		this.point_BlockDown = point_BlockEnd;
+	public void setpoint_BlockDownleft(Point3D point_BlockDownleft) {
+		this.point_BlockDownleft = point_BlockDownleft;
 	}
 
 	public int getIDBloack() {
@@ -105,11 +122,23 @@ public class Block {
 		this.type = type;
 	}
 
-	public Point3D getPoint_BlockStart() {
-		return point_BlockStart;
+	public Point3D getpoint_BlockTopLeft() {
+		return point_BlockTopLeft;
 	}
 
-	public void setPoint_BlockStart(Point3D point_BlockStart) {
-		this.point_BlockStart = point_BlockStart;
+	public void setpoint_BlockTopLeft(Point3D point_BlockTopLeft) {
+		this.point_BlockTopLeft = point_BlockTopLeft;
+	}
+	/**
+	 * @return the point_BlockDownRight
+	 */
+	public Point3D getPoint_BlockDownRight() {
+		return Point_BlockDownRight;
+	}
+	/**
+	 * @param point_BlockDownRight the point_BlockDownRight to set
+	 */
+	public void setPoint_BlockDownRight(Point3D point_BlockDownRight) {
+		Point_BlockDownRight = point_BlockDownRight;
 	}
 }

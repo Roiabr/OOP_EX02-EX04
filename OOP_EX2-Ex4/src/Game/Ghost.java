@@ -13,28 +13,23 @@ public class Ghost {
 	
 	private int IDGhost;
 	private BufferedImage image;
-	private String [] ele;
 	private Point3D point_Ghost,firstPointCor,first;
 	private double speed,radiuos;
 	private String type;
 	private double time;
 	private String timeStamp;
-	int check;
 	
 	/**
 	 * a default constructor for the class
 	 */
-	public Ghost() {
-		// TODO Auto-generated constructor stub
-	}
-	
+	public Ghost() {}
 	
 	/**
 	 * a constructor for the class and make a packman from pacman
 	 * @param gh - the diffrent ghost
 	 */
 	public Ghost(Ghost gh) {
-
+		
 		this.type= gh.type;
 		this.IDGhost=gh.IDGhost;
 		this.point_Ghost = new Point3D(gh.point_Ghost);
@@ -44,12 +39,24 @@ public class Ghost {
 		this.time = 0;
 		
 	}
+	//////////////////GETTER AND SETTER///////////////////
+	/**
+	 * @return point_Ghost - get the point of the ghost
+	 */
 	public Point3D getPoint_Ghost() {
 		return point_Ghost;
 	}
+	/**
+	 * set a ghost a point 
+	 * @param point_Ghost - a point 3d
+	 */
 	public void setPoint_Ghost(Point3D point_Ghost) {
 		this.point_Ghost = point_Ghost;
 	}
+	/**
+	 * this get the first locition of the ghost
+	 * @return first -  first locition of the ghost
+	 */
 	public Point3D getFirst() {
 		return first;
 	}

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import GIS.GIS_element;
 import GIS.GIS_layer;
@@ -16,8 +17,10 @@ import GIS.GisLayer;
 import GIS.GisProject;
 import GIS.GisToElement;
 import GUI.MainWindow;
+import Game.Block;
 import Game.Fruit;
 import Game.Game;
+import Game.Ghost;
 import Game.Packman;
 import Geom.Point3D;
 import Robot.Play;
@@ -192,8 +195,11 @@ public class MultiCsv {
 
 		}
 		StringBuilder sb = new StringBuilder();
+	
 		Iterator <Packman> iter = game.getPack().iterator();
 		Iterator <Fruit> iter2 = game.getFruit().iterator();
+		Iterator <Ghost> ghost = game.getGhost().iterator();
+		Iterator <Block> block = game.getBlock().iterator();
 		sb.append("Type");
 		sb.append(',');
 		sb.append("id");
@@ -240,6 +246,36 @@ public class MultiCsv {
 			sb.append(f1.getPointer_fruit().z());
 			sb.append(',');
 			sb.append(f1.getSpeed());
+			sb.append('\n');
+		}
+		while(ghost.hasNext()) {
+			Ghost f1 = ghost.next();
+			sb.append(f1.getType());
+			sb.append(',');
+			sb.append(f1.getIDGhost());
+			sb.append(',');
+			sb.append(f1.getPoint_Ghost().x());
+			sb.append(',');
+			sb.append(f1.getPoint_Ghost().y());
+			sb.append(',');
+			sb.append(f1.getPoint_Ghost().z());
+			sb.append(',');
+			sb.append(f1.getSpeed());
+			sb.append('\n');
+		}
+		while(block.hasNext()) {
+			Block f1 = block.next();
+			sb.append(f1.getType());
+			sb.append(',');
+			sb.append(f1.getIDBloack());
+			sb.append(',');
+			sb.append(f1.getpoint_BlockTopRight().x());
+			sb.append(',');
+			sb.append(f1.getpoint_BlockTopRight().y());
+			sb.append(',');
+			sb.append(f1.getpoint_BlockDownleft().x());
+			sb.append(',');
+			sb.append(f1.getpoint_BlockDownleft().y());
 			sb.append('\n');
 		}
 		pw.write(sb.toString());

@@ -25,7 +25,6 @@ public class Fruit {
 	public Fruit() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	/**
 	 * a constructor for the class and make a full copy of fruit
 	 * @param f - a diffrent fruit 
@@ -138,7 +137,7 @@ public class Fruit {
 	}
 
 	/**
-	 * 
+	 * get the image of the object
 	 * @return the myImage
 	 */
 	public BufferedImage getMyImage() {
@@ -146,7 +145,7 @@ public class Fruit {
 	}
 
 	/**
-	 * @param myImage the myImage to set
+	 * @param myImage - to set the image of the object
 	 */
 	public void setMyImage(BufferedImage myImage) {
 		this.myImage = myImage;

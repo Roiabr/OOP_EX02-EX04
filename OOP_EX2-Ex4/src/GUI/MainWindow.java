@@ -3,7 +3,9 @@ package GUI;
 
 import java.awt.FileDialog;
 import java.awt.Graphics;
-import java.awt.GridLayout;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -19,15 +21,12 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import Coords.MyCoords;
 import File_format.*;
 import Geom.*;
 import Map.Map;
 import Robot.Play;
+import algoritem.AlgoDijxestra;
 import GIS.*;
 import Game.Block;
 import Game.Fruit;
@@ -46,7 +45,7 @@ public class MainWindow extends JFrame implements MouseListener
 	private boolean PlaceMyPackmen=false;
 	private double angle;
 	private boolean GameRun=false;
-
+	private boolean AutoRunMode=false;
 
 
 	public MainWindow() 
@@ -59,36 +58,36 @@ public class MainWindow extends JFrame implements MouseListener
 
 	private void initGUI() 
 	{
+		///////////MenuBar/////////////
+		MenuBar menuBar = new MenuBar(); 
 
-	
-		
-		JPanel northPanel = new JPanel(new GridLayout(6,2)); //deteminte the long of space beetween the panel user name 
+		/////////////Menu///////////////
+		Menu menu1 = new Menu("File");
+		Menu Player = new Menu("Player");
+		Menu Game = new Menu("Game");
 
-		JMenuBar menuBar = new JMenuBar(); 
-		JMenu menu1 = new JMenu("File");
-
-		JMenu Player = new JMenu("Player");
-		JMenuBar P = new JMenuBar();
-		JMenuItem newgame = new JMenuItem("NewGame");
-		JMenuItem save = new JMenuItem("Save Game");
-		JMenuItem load = new JMenuItem("Load Game");
-
-		JMenuItem placeme = new JMenuItem("Place me");
-		JMenuItem runserver = new JMenuItem("Run manual");
-		JMenuItem AutoRun = new JMenuItem("Auto Run");
-		JMenuItem end = new JMenuItem("end");
+		/////////////////MenuItem//////////////////
+		MenuItem newgame = new MenuItem("NewGame");
+		MenuItem save = new MenuItem("Save Game");
+		MenuItem load = new MenuItem("Load Game");
+		MenuItem placeme = new MenuItem("Place me");
+		MenuItem runserver = new MenuItem("Run manual");
+		MenuItem AutoRun = new MenuItem("Auto Run");
+		MenuItem end = new MenuItem("end");
 
 
-		//  menuItem /////
+
 		menu1.add(newgame);
+		menu1.add(save);
 		menu1.add(load);
-	
-		Player.add(end);
-		Player.add(runserver);
 		Player.add(placeme);
-		Player.add(AutoRun);
+		Game.add(runserver);
+		Game.add(AutoRun);
+		Game.add(end);
 		menuBar.add(menu1);
 		menuBar.add(Player);
+		menuBar.add(Game);
+
 		newgame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -110,7 +109,7 @@ public class MainWindow extends JFrame implements MouseListener
 				repaint();
 			}
 		});
-		
+
 		placeme.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -138,22 +137,30 @@ public class MainWindow extends JFrame implements MouseListener
 				play1.start();
 				GameRun=true;
 				repaint();
-		}
+			}
 		});
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("save game");
+				writeFileDialog();
+			}
+		});
+		AutoRun.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AutoRunMode = true;
+			}
+		});
+		this.setMenuBar(menuBar);
 
-
-		this.setJMenuBar(menuBar);
 		try {
 			setMyImage(ImageIO.read(new File("Ariel1.png")));
-			myImage1 = ImageIO.read(new File("packman.png"));
-			myImage2 = ImageIO.read(new File("apple.png"));
-			myImage3 = ImageIO.read(new File("ghost.png"));
-			myImage4 = ImageIO.read(new File("apple.png"));
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}		
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 	int x = -1;
 	int y = -1;
@@ -165,16 +172,17 @@ public class MainWindow extends JFrame implements MouseListener
 	public void paint(Graphics g)
 	{
 		g.drawImage(getMyImage(), 0, 0,getWidth(),getHeight(), this);
-		
+
 		Iterator<Ghost> iterGhost =  GuiGame.getGhost().iterator();
 		Iterator<Block> iterBlock =  GuiGame.getBlock().iterator();
 		while(iterBlock.hasNext()) {
 			Block bl = iterBlock.next();
-			Point3D start = (Map.gpsToPix(bl.getPoint_BlockStart().y(),bl.getPoint_BlockStart().x(),this.getHeight(),this.getWidth()));
-			g.fillRect(start.ix(), start.iy(), (int)bl.getwidth(bl, this), (int) bl.getHeight(bl, this));
+			Point3D start = (Map.gpsToPix(bl.getpoint_BlockTopLeft().y(),bl.getpoint_BlockTopLeft().x(),this.getHeight(),this.getWidth()));
+			g.fillRect(start.ix()+10, start.iy(), (int)bl.getwidth(bl, this), (int) bl.getHeight(bl, this));
+
 		}
 
-		
+
 		Iterator<Fruit> iterFruit =  GuiGame.getFruit().iterator();
 		Iterator<Packman> iterPackman = GuiGame.getPack().iterator();
 
@@ -193,12 +201,12 @@ public class MainWindow extends JFrame implements MouseListener
 			Point3D p = new Point3D(Map.gpsToPix(ghost.getPoint_Ghost().y(),ghost.getPoint_Ghost().x(),this.getHeight(),this.getWidth()));
 			g.drawImage(ghost.getImage(), (int)p.x(), (int)p.y(), 50,50,this);
 		}
-		
+
 		if(BeforeTheGameStarted==true)
 		{
 			Point3D p = new Point3D(Map.gpsToPix(GuiGame.getPlayer().getFirstPointCor().y(),GuiGame.getPlayer().getFirstPointCor().x(),this.getHeight(),this.getWidth()));
 			g.drawImage(GuiGame.getPlayer().getMyImage(), (int)p.x(), (int)p.y(), 30,30,this);
-			
+
 		}
 		if(GameRun==true)
 		{
@@ -208,13 +216,26 @@ public class MainWindow extends JFrame implements MouseListener
 			if(play1.isRuning()) 
 			{
 				String[] info = play1.getStatistics().split(",");
-				System.out.println(info[1]);
 				update();
 
 			}
 			else {
 				String info = play1.getStatistics();
 				System.out.println(info);	
+			}
+			if(AutoRunMode) {
+				Iterator<Point3D> path = AlgoDijxestra.getPath().iterator();
+				while(path.hasNext()) {
+					Point3D point = path.next();
+					MyCoords gal = new MyCoords();
+					angle = gal.azimuth_elevation_dist(GuiGame.getPlayer().getFirstPointCor(), point)[0];
+					play1.rotate(angle);
+
+					if(GuiGame.getPlayer().getFirstPointCor() == AlgoDijxestra.getPath().get(AlgoDijxestra.getPath().size())) {
+						updateAuto();
+					}
+
+				}
 			}
 		}
 	}
@@ -229,6 +250,11 @@ public class MainWindow extends JFrame implements MouseListener
 		}
 		repaint();
 	}
+	public void updateAuto() {
+		AlgoDijxestra algo = new AlgoDijxestra(GuiGame);
+
+	}
+
 
 
 	/**
