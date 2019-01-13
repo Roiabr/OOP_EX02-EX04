@@ -81,7 +81,6 @@ public class Game  {
 				try {
 					p1.setMyImage1(ImageIO.read(new File("packman.png")));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 				pack.add(p1);
@@ -97,7 +96,6 @@ public class Game  {
 				try {
 					f1.setMyImage(ImageIO.read(new File("apple.png")));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				Fruit.add(f1);

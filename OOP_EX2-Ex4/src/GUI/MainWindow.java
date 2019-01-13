@@ -44,8 +44,11 @@ public class MainWindow extends JFrame implements MouseListener
 	private boolean BeforeTheGameStarted=false;
 	private boolean PlaceMyPackmen=false;
 	private double angle;
-	private boolean GameRun=false;
+	private boolean ManualRun=false;
 	private boolean AutoRunMode=false;
+	private boolean AftertheAutoModeStart=false;
+	public  int IntMove=0;
+	public static Point3D tempoint;
 
 
 	public MainWindow() 
@@ -126,7 +129,6 @@ public class MainWindow extends JFrame implements MouseListener
 			public void actionPerformed(ActionEvent e) {
 				play1.stop();
 				String info = play1.getStatistics();
-				System.out.println(info);
 			}
 		});
 		runserver.addActionListener(new ActionListener() {
@@ -135,7 +137,7 @@ public class MainWindow extends JFrame implements MouseListener
 			public void actionPerformed(ActionEvent e) {
 				play1.setIDs(311505481,205516321);
 				play1.start();
-				GameRun=true;
+				ManualRun=true;
 				repaint();
 			}
 		});
@@ -149,7 +151,9 @@ public class MainWindow extends JFrame implements MouseListener
 		AutoRun.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AutoRunMode = true;
+				AftertheAutoModeStart = true;
+				AutoRunMode=true;
+				repaint();
 			}
 		});
 		this.setMenuBar(menuBar);
@@ -178,7 +182,7 @@ public class MainWindow extends JFrame implements MouseListener
 		while(iterBlock.hasNext()) {
 			Block bl = iterBlock.next();
 			Point3D start = (Map.gpsToPix(bl.getpoint_BlockTopLeft().y(),bl.getpoint_BlockTopLeft().x(),this.getHeight(),this.getWidth()));
-			g.fillRect(start.ix()+10, start.iy(), (int)bl.getwidth(bl, this), (int) bl.getHeight(bl, this));
+			g.fillRect(start.ix()+5, start.iy()+10, (int)bl.getwidth(bl, this), (int) bl.getHeight(bl, this));
 
 		}
 
@@ -202,13 +206,13 @@ public class MainWindow extends JFrame implements MouseListener
 			g.drawImage(ghost.getImage(), (int)p.x(), (int)p.y(), 50,50,this);
 		}
 
-		if(BeforeTheGameStarted==true)
+		if(BeforeTheGameStarted==true) 
 		{
 			Point3D p = new Point3D(Map.gpsToPix(GuiGame.getPlayer().getFirstPointCor().y(),GuiGame.getPlayer().getFirstPointCor().x(),this.getHeight(),this.getWidth()));
 			g.drawImage(GuiGame.getPlayer().getMyImage(), (int)p.x(), (int)p.y(), 30,30,this);
 
 		}
-		if(GameRun==true)
+		if(ManualRun==true) // for manual mode 
 		{
 			Point3D p = new Point3D(Map.gpsToPix(GuiGame.getPlayer().getFirstPointCor().y(),GuiGame.getPlayer().getFirstPointCor().x(),this.getHeight(),this.getWidth()));
 			g.drawImage(GuiGame.getPlayer().getMyImage(), (int)p.x(), (int)p.y(), 30,30,this);
@@ -223,37 +227,97 @@ public class MainWindow extends JFrame implements MouseListener
 				String info = play1.getStatistics();
 				System.out.println(info);	
 			}
-			if(AutoRunMode) {
-				Iterator<Point3D> path = AlgoDijxestra.getPath().iterator();
-				while(path.hasNext()) {
-					Point3D point = path.next();
-					MyCoords gal = new MyCoords();
-					angle = gal.azimuth_elevation_dist(GuiGame.getPlayer().getFirstPointCor(), point)[0];
-					play1.rotate(angle);
 
-					if(GuiGame.getPlayer().getFirstPointCor() == AlgoDijxestra.getPath().get(AlgoDijxestra.getPath().size())) {
-						updateAuto();
-					}
+		}
+		if(AftertheAutoModeStart) { //just for the begining
+			play1.setIDs(311505481,205516321);
+			play1.start();
+			GuiGame = new Game(play1);
+			new AlgoDijxestra(GuiGame);
+			//tempoint=GuiGame.getPlayer().getFirstPointCor();
+			//System.out.println("start");
+			AftertheAutoModeStart=false;
+			repaint();
+		}
+		if(AutoRunMode) {
+			if(GuiGame.getPlayer().getFirstPointCor()!=tempoint) 
+			{ 
+				play1.rotate(angle);
+				GuiGame = new Game(play1);
+				Ghost g1 = new Ghost();
+				for(int i = IntMove;i<AlgoDijxestra.getPath().size();i++)
+				{
+
+					Point3D point = AlgoDijxestra.getPath().get(i);
+					g.drawImage(g1.getImage(), (int)point.x(), (int)point.y(), 30,30,this);
 
 				}
+				NextNode();
 			}
+			else if(GuiGame.getPlayer().getFirstPointCor()==tempoint)
+			{
+				//NextNode();
+
+			}
+
+
+			if(GuiGame.getFruit().isEmpty()) {
+				play1.stop();
+				System.out.println(play1.getStatistics());
+			}
+			else {
+				Point3D p = new Point3D(Map.gpsToPix(GuiGame.getPlayer().getFirstPointCor().y(),GuiGame.getPlayer().getFirstPointCor().x(),this.getHeight(),this.getWidth()));
+				g.drawImage(GuiGame.getPlayer().getMyImage(), (int)p.x(), (int)p.y(), 30,30,this);
+				repaint();
+
+			}
+
+
+
 		}
 	}
 	public void update() {
 		GuiGame = new Game(play1);
 		try {
 
-			Thread.sleep(10);
+			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		repaint();
 	}
-	public void updateAuto() {
-		AlgoDijxestra algo = new AlgoDijxestra(GuiGame);
+	public void NextNode()
+	{
+		if(IntMove==AlgoDijxestra.getPath().size()) {
+			IntMove=0;
+			//System.out.println("algo again ");
+			AlgoDijxestra.getPath().clear();
+			new AlgoDijxestra(GuiGame);
+		}
 
+		for(int i = IntMove;i<AlgoDijxestra.getPath().size();i++)
+		{
+
+			Point3D point = AlgoDijxestra.getPath().get(i);
+			IntMove++;
+			tempoint = new Point3D(point);
+			//	System.out.println("the next stop in the path"+tempoint);
+			MyCoords gal = new MyCoords();
+			//	System.out.println(point.x());
+			angle = gal.azimuth_elevation_dist(GuiGame.getPlayer().getFirstPointCor(), point)[0];
+			play1.rotate(angle);
+			GuiGame = new Game(play1);
+			//AftertheAutoModeStart=true;
+//			if(IntMove==i) {
+//				IntMove=0;
+//				new AlgoDijxestra(GuiGame);
+//			}
+
+			repaint();	
+		}
 	}
+
 
 
 
@@ -274,7 +338,7 @@ public class MainWindow extends JFrame implements MouseListener
 			repaint();
 		}
 
-		if(play1.isRuning())
+		if(play1.isRuning() && ManualRun==true )
 		{
 			MyCoords gal = new MyCoords();
 			angle=gal.azimuth_elevation_dist(GuiGame.getPlayer().getFirstPointCor(), p)[0];
