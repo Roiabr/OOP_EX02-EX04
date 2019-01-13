@@ -1,4 +1,4 @@
-Game Of Packman
+# Game Of Packman
 
 This project represent a Packman game
 Getting Started
@@ -8,7 +8,7 @@ To move your packman click by mouse on the map in the direction you want.
 2) Automatic Mode – load the game and place your packman as in the manual mode, and click Auto run.
 In this mode your packman and the packman will eat all the fruit automatic, and your packman will avoid the blocks on the map.
 
-Description
+# Description
 
 • Include 6 packages such as:
 
@@ -24,14 +24,14 @@ Description
 
     6.map – This class represents a Calculations on the map of the gui in the game.
 
-Built With
+# Built With
 
 • Eclipse - integrated development environment (IDE) used in computer programming built by Oracle
 
 Contributing
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
-Authors
+# Authors
 
 • Gal hadida – 205516321
 
@@ -39,7 +39,7 @@ Authors
 
 • Sapir Gofshtein - 204544523
 
-Acknowledgments
+# Acknowledgments
 
 • https://developers.google.com/kml/documentation/time
 
