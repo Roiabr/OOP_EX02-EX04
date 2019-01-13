@@ -181,13 +181,4 @@ public class Game  {
 	public void setPlayer(Packmen_me player) {
 		this.player = player;
 	}
-
-	public static void main(String[]args) {
-		MainWindow h = new MainWindow();
-		Map map = new Map();
-		h.setVisible(true);
-		h.setSize(map.getMyImage1().getWidth(),map.getMyImage1().getHeight());
-		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		h.setTitle("Packman");
-	}
 }
