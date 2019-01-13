@@ -1,4 +1,5 @@
 # Game Of Packman
+![capture](https://user-images.githubusercontent.com/44756354/51089168-7e58c180-1771-11e9-9b36-a1f505a7b17f.PNG)
 
 This project represent a Packman game
 Getting Started
