@@ -28,9 +28,6 @@ In this mode your packman and the packman will eat all the fruit automatic, and 
 
 • Eclipse - integrated development environment (IDE) used in computer programming built by Oracle
 
-Contributing
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
-
 # Authors
 
 • Gal hadida – 205516321
